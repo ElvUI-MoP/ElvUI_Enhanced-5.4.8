@@ -26,6 +26,7 @@ end
 
 function M:Initialize()
 	self:AutoRelease();
+	self:LoadQuestReward()
 	self:WatchedFaction();
 	self:LoadMoverTransparancy()
 end

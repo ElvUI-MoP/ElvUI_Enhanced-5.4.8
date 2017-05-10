@@ -68,6 +68,7 @@ L["Tilled Soil"] = "開墾過的沃土"
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "當你獲得某個陣營的聲望時, 將自動追蹤此陣營的聲望至經驗值欄位." 
 L["Automatically release body when killed inside a battleground."] = "在戰場死亡後自動釋放靈魂."
+L["Automatically select the quest reward with the highest vendor sell value."] = "自動選取有最高賣價的任務獎勵物品"
 L["Changes the transparency of all the movers."] = "改變所有定位器的透明度"
 L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
@@ -75,6 +76,7 @@ L["Display quest levels at Quest Log."] = true;
 L["Mover Transparency"] = "定位器透明度"
 L["PvP Autorelease"] = "PVP自動釋放靈魂"
 L["Progression Info"] = true;
+L["Select Quest Reward"] = "自動選取任務獎勵"
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "聲望追蹤"
 

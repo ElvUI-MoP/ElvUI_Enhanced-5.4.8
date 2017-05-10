@@ -53,8 +53,16 @@ local function GeneralOptions()
 				get = function(info) return E.db.general.showQuestLevel; end,
 				set = function(info, value) E.db.general.showQuestLevel = value; end
 			},
-			moverTransparancy = {
+			selectQuestReward = {
 				order = 6,
+				type = "toggle",
+				name = L["Select Quest Reward"],
+				desc = L["Automatically select the quest reward with the highest vendor sell value."],
+				get = function(info) return E.private.general.selectQuestReward end,
+				set = function(info, value) E.private.general.selectQuestReward = value; end
+			},
+			moverTransparancy = {
+				order = 7,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],

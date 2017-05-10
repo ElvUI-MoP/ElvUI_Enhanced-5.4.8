@@ -9,5 +9,6 @@
 	<Script file="questLevel.lua"/>
 	<Script file="alreadyKnown.lua"/>
 	<Script file="trainAllButton.lua"/>
-	<Script file="undressButton.lua"/>	
+	<Script file="undressButton.lua"/>
+	<Script file="questReward.lua"/>
 </Ui>

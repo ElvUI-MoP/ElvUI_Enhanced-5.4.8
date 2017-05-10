@@ -68,6 +68,7 @@ L["Tilled Soil"] = "Terre labourée"
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Change automatiquement la réputation suivie sur la barre de réputation avec la faction que vous êtes en train de faire."
 L["Automatically release body when killed inside a battleground."] = "Libère automatiquement votre corps quand vous êtes tué en Champs de Bataille."
+L["Automatically select the quest reward with the highest vendor sell value."] = "Sélectionne automatiquement la récompense de quête qui vaut la plus chère chez le vendeur."
 L["Changes the transparency of all the movers."] = "Change la transparence des Ancres"
 L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
@@ -75,6 +76,7 @@ L["Display quest levels at Quest Log."] = true;
 L["Mover Transparency"] = "Transparence des Ancres"
 L["PvP Autorelease"] = "Libération automatique en PVP"
 L["Progression Info"] = true;
+L["Select Quest Reward"] = "Sélection de la récompense de quête"
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "Suivre la Réputation"
 

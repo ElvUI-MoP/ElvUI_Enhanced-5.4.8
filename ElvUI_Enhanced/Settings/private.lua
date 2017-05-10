@@ -1,5 +1,7 @@
 local E, L, V, P, G = unpack(ElvUI);
 
+V.general.selectQuestReward = true
+
 V.equipment = {
 	["durability"] = {
 		enable = true,

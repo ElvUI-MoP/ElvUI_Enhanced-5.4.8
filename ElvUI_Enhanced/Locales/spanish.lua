@@ -68,6 +68,7 @@ L["Tilled Soil"] = "Tierra labrada"
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = true;
 L["Automatically release body when killed inside a battleground."] = true;
+L["Automatically select the quest reward with the highest vendor sell value."] = true;
 L["Changes the transparency of all the movers."] = true;
 L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
@@ -75,6 +76,7 @@ L["Display quest levels at Quest Log."] = true;
 L["Mover Transparency"] = true;
 L["PvP Autorelease"] = true;
 L["Progression Info"] = true;
+L["Select Quest Reward"] = true;
 L["Show Quest Level"] = true;
 L["Track Reputation"] = true;
 
