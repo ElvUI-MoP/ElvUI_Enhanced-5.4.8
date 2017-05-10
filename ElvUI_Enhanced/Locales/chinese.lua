@@ -5,6 +5,7 @@ if not L then return end
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "您正在使用 |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r version %s%s|r."
 L["DURABILITY_DESC"] = "调整设置人物窗口装备耐久度显示."
+L["FARMER_DESC"] = "调整设置以便你在日歌农场更有效的耕作."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
@@ -45,6 +46,24 @@ L["Equipment"] = "自动换装"
 L["Enable/Disable the display of durability information on the character screen."] = "开启/关闭 人物窗口装备耐久度显示."
 L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Only show durabitlity information for items that are damaged."] = "只在装备受损时显示耐久度."
+
+-- Farmer
+L["Automatically drop tools from your bags when leaving the farming area."] = "当你离开农场范围时, 自动删除背包中的工具."
+L["Drop Tools"] = "删除工具"
+L["Enable/Disable the farmer bars."] = "开启/关闭 农夫快捷列."
+L["Farmer"] = "农夫"
+L["Farmer Bars"] = "农夫列"
+L["Farmer Portal Bar"] = "农夫列:传送"
+L["Farmer Seed Bar"] = "农夫列:种子"
+L["Farmer Tools Bar"] = "农夫列:工具"
+L["Only active buttons"] = "只显示有效的按钮"
+L["Only show the buttons for the seeds, portals, tools you have in your bags."] = "只显示你背包中有的种子, 传送门和工具."
+L["Right-click to drop the item."] = "右键点击需删除的项目."
+L["Seed Bar Direction"] = true
+L["Sunsong Ranch"] = "日歌农场"
+L["The direction of the seed bar buttons (Horizontal or Vertical)."] = true
+L["The Halfhill Market"] = "半山市集"
+L["Tilled Soil"] = "开垦过的土壤"
 
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "当你获得某个阵营的声望时, 将自动追踪此阵营的声望至经验栏位." 

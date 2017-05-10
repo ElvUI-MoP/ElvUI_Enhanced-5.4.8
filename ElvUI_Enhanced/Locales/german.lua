@@ -5,6 +5,7 @@ if not L then return end
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Sie verwenden |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r Version %s%s|r."
 L["DURABILITY_DESC"] = "Passen Sie die Einstellungen für die Haltbarkeit im Charakterfenster an."
+L["FARMER_DESC"] = "Einstellungen für alle Werkzeuge, die Sie effizienter auf Gehöft Sonnensang arbeiten lassen."
 L["ITEMLEVEL_DESC"] = "Passen Sie die Einstellungen für die Anzeige von Gegenstandsstufen im Charakterfenster an."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
@@ -45,6 +46,24 @@ L["Equipment"] = "Ausrüstung"
 L["Enable/Disable the display of durability information on the character screen."] = "Anzeige der Haltbarkeit im Charakterfenster."
 L["Enable/Disable the display of item levels on the character screen."] = "Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
 L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
+
+-- Farmer
+L["Automatically drop tools from your bags when leaving the farming area."] = "Beim Verlassen der Farm automatisch die Werkzeuge zerstören."
+L["Drop Tools"] = "Werkzeuge ablegen"
+L["Enable/Disable the farmer bars."] = "Aktivieren / Deaktivieren der Landwirtleisten"
+L["Farmer"] = "Landwirt"
+L["Farmer Bars"] = "Landwirt Aktionsleisten"
+L["Farmer Portal Bar"] = "Landwirt Portalleiste"
+L["Farmer Seed Bar"] = "Landwirt Saatleiste"
+L["Farmer Tools Bar"] = "Landwirt Werkzeugleiste"
+L["Only active buttons"] = "Nur aktive Buttons"
+L["Only show the buttons for the seeds, portals, tools you have in your bags."] = "Nur Buttons für Saat, Portale und Werkzeuge anzeigen, wenn diese in Ihrem Rucksack vorhanden sind."
+L["Right-click to drop the item."] = "Mit der rechten Maustaste klicken, um den Gegenstand abzulegen."
+L["Seed Bar Direction"] = "Richtung Saatleiste"
+L["Sunsong Ranch"] = "Gehöft Sonnensang"
+L["The direction of the seed bar buttons (Horizontal or Vertical)."] = "Die Ausbreitungsrichtung der Saatleiste (horizontal oder vertikal)"
+L["The Halfhill Market"] = "Der Halbhügelmarkt"
+L["Tilled Soil"] = "Gepflügtes Erdreich"
 
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Ändere automatisch die beobachtete Fraktion auf der Erfahrungsleiste zu der Fraktion für die Sie grade Rufpunkte erhalten haben."

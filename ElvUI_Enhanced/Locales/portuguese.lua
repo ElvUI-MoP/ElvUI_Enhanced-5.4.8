@@ -5,6 +5,7 @@ if not L then return end
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Você está a usar |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r versão %s%s|r."
 L["DURABILITY_DESC"] = "Ajuste as opções para a informação de durabilidade no ecrã de informação do personagem."
+L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more efficiently on Sunsong Ranch."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
@@ -45,6 +46,24 @@ L["Equipment"] = "Equipamento"
 L["Enable/Disable the display of durability information on the character screen."] = "Activar/desactivar a informação de durabilidade no ecrã de informação do personagem."
 L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Only show durabitlity information for items that are damaged."] = "Só mostrar informação de durabilidade para itens danificados."
+
+-- Farmer
+L["Automatically drop tools from your bags when leaving the farming area."] = true;
+L["Drop Tools"] = true;
+L["Enable/Disable the farmer bars."] = true;
+L["Farmer"] = true;
+L["Farmer Bars"] = true;
+L["Farmer Portal Bar"] = true;
+L["Farmer Seed Bar"] = true;
+L["Farmer Tools Bar"] = true;
+L["Only active buttons"] = true;
+L["Only show the buttons for the seeds, portals, tools you have in your bags."] = true;
+L["Right-click to drop the item."] = true;
+L["Seed Bar Direction"] = true;
+L["Sunsong Ranch"] = "Fazenda Sol Cantante"
+L["The direction of the seed bar buttons (Horizontal or Vertical)."] = true;
+L["The Halfhill Market"] = "Mercado da Meia Colina"
+L["Tilled Soil"] = "Terra Arada"
 
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Mudar automaticamente a facção controlada para a facção na qual acabou de ganhar pontos de reputação." 

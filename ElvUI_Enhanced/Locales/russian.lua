@@ -5,6 +5,7 @@ if not L then return end
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Вы используете |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r версии %s%s|r."
 L["DURABILITY_DESC"] = "Настройка параметров информации о прочности предметов в окне персонажа."
+L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more efficiently on Sunsong Ranch."
 L["ITEMLEVEL_DESC"] = "Настройка параметров информации об уровне предмета в окне персонажа."
 L["WATCHFRAME_DESC"] = "Настройте отображение списка заданий (квест лог) исходя из ваших личных предпочтений."
 
@@ -45,6 +46,24 @@ L["Equipment"] = "Экипировка"
 L["Enable/Disable the display of durability information on the character screen."] = "Включить/Выключить отображение информации о прочности предметов в окне персонажа."
 L["Enable/Disable the display of item levels on the character screen."] = "Включить/Выключить отображение уровня предмета в окне персонажа."
 L["Only show durabitlity information for items that are damaged."] = "Показывать уровень прочности только на поврежденных предметах."
+
+-- Farmer
+L["Automatically drop tools from your bags when leaving the farming area."] = true;
+L["Drop Tools"] = true;
+L["Enable/Disable the farmer bars."] = true;
+L["Farmer"] = true;
+L["Farmer Bars"] = true;
+L["Farmer Portal Bar"] = true;
+L["Farmer Seed Bar"] = true;
+L["Farmer Tools Bar"] = true;
+L["Only active buttons"] = true;
+L["Only show the buttons for the seeds, portals, tools you have in your bags."] = true;
+L["Right-click to drop the item."] = true;
+L["Seed Bar Direction"] = true;
+L["Sunsong Ranch"] = "Ферма Солнечной Песни"
+L["The direction of the seed bar buttons (Horizontal or Vertical)."] = true;
+L["The Halfhill Market"] = "Рынок Полугорья"
+L["Tilled Soil"] = "Возделанная земля"
 
 -- General
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Автоматическое изменение фракции на панели репутации на ту, очки репутации которой вы получили."

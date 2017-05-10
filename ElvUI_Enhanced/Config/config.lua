@@ -128,13 +128,18 @@ local function EquipmentOptions()
 		get = function(info) return E.private.equipment[ info[#info] ] end,
 		set = function(info, value) E.private.equipment[ info[#info] ] = value end,
 		args = {
-			intro = {
+			header = {
 				order = 1,
 				type = "header",
 				name = L["Equipment"],
 			},
-			durability = {
+			intro = {
 				order = 2,
+				type = "description",
+				name = L["DURABILITY_DESC"]
+			},
+			durability = {
+				order = 3,
 				type = "group",
 				name = DURABILITY,
 				guiInline = true,
@@ -157,7 +162,7 @@ local function EquipmentOptions()
 				}
 			},
 			itemlevel = {
-				order = 3,
+				order = 4,
 				type = "group",
 				name = STAT_AVERAGE_ITEM_LEVEL,
 				guiInline = true,
@@ -459,6 +464,84 @@ local function UnitFramesOptions()
 	};
 end
 
+-- Farmer
+local function FarmerOptions()
+	local F = E:GetModule("Farmer")
+
+	local config = {
+		order = 8,
+		type = "group",
+		name = L["Farmer"],
+		get = function(info) return E.private.farmer[ info[#info] ] end,
+		set = function(info, value) E.private.farmer[ info[#info] ] = value end,
+		args = {
+			header = {
+				order = 1,
+				type = "header",
+				name = L["Farmer"]
+			},
+			intro = {
+				order = 2,
+				type = "description",
+				name = L["FARMER_DESC"]
+			},
+			enabled = {
+				order = 3,
+				type = "toggle",
+				name = L["Enable"],
+				set = function(info, value) E.private.farmer.enabled = value E:StaticPopup_Show("PRIVATE_RL") end
+			},
+			farmbars = {
+				order = 4,
+				type = "group",
+				name = L["Farmer Bars"],
+				guiInline = true,
+				disabled = function() return not E.private.farmer.enabled end,
+				get = function(info) return E.private.farmer.farmbars[ info[#info] ] end,
+				set = function(info, value) E.private.farmer.farmbars[ info[#info] ] = value end,
+				args = {
+					enable = {
+						type = "toggle",
+						order = 1,
+						name = L["Enable"],
+						desc = L["Enable/Disable the farmer bars."],
+						set = function(info, value) E.private.farmer.farmbars.enable = value F:UpdateLayout() end
+					},
+					onlyactive = {
+						order = 2,
+						type = "toggle",
+						name = L["Only active buttons"],
+						desc = L["Only show the buttons for the seeds, portals, tools you have in your bags."],
+						set = function(info, value) E.private.farmer.farmbars.onlyactive = value F:UpdateLayout() end,
+						disabled = function() return not E.private.farmer.farmbars.enable end
+					},
+					droptools = {
+						order = 3,
+						type = "toggle",
+						name = L["Drop Tools"],
+						desc = L["Automatically drop tools from your bags when leaving the farming area."],
+						disabled = function() return not E.private.farmer.farmbars.enable end
+					},
+					seedbardirection = {
+						order = 4,
+						type = "select",
+						name = L["Seed Bar Direction"],
+						desc = L["The direction of the seed bar buttons (Horizontal or Vertical)."],
+						set = function(info, value) E.private.farmer.farmbars.seedbardirection = value F:UpdateLayout() end,
+						disabled = function() return not E.private.farmer.farmbars.enable end,
+						values = {
+							["VERTICAL"] = L["Vertical"],
+							["HORIZONTAL"] = L["Horizontal"]
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return config;
+end
+
 function addon:GetOptions()
 	UnitFramesOptions()
 
@@ -475,6 +558,7 @@ function addon:GetOptions()
 			minimapGroup = MinimapOptions(),
 			namePlatesGroup = NamePlatesOptions(),
 			watchFrameGroup = WatchFrameOptions(),
+			farmerOptions = FarmerOptions(),
 		}
 	};
 end

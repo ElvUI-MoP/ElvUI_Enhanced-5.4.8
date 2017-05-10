@@ -9,3 +9,13 @@ V.equipment = {
 		enable = true
 	}
 }
+
+V.farmer = {
+	["enabled"] = true,
+	["farmbars"] = {
+		["enable"] = true,
+		["onlyactive"] = true,
+		["droptools"] = true,
+		["seedbardirection"] = "VERTICAL"
+	}
+}
