@@ -127,8 +127,8 @@ function TT:INSPECT_ACHIEVEMENT_READY(event, GUID)
 	self:UnregisterEvent("INSPECT_ACHIEVEMENT_READY")
 end
 
-hooksecurefunc(TT, "ShowInspectInfo", function(self, tt, unit, level, r, g, b, numTries)
-	if not E.db.tooltip.progressInfo then return end
+hooksecurefunc(TT, "ShowInspectInfo", function(self, tt, unit, level)
+	if not E.db.enhanced.tooltip.progressInfo then return end
 	if not level or level < MAX_PLAYER_LEVEL then return end
 	if not (unit and CanInspect(unit)) then return end
 

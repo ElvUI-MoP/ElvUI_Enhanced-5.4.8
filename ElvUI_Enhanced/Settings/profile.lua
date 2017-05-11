@@ -61,17 +61,7 @@ P.enhanced = {
 		smoothSpeed = 0.3,
 	},
 	tooltip = {
-		progressInfo = {
-			enable = false,
-			checkPlayer = false,
-			modifier = "SHIFT",
-			tiers = {
-				["RS"] = false,
-				["ICC"] = true,
-				["TotC"] = false,
-				["Ulduar"] = false
-			}
-		}
+		progressInfo  = true
 	},
 	watchframe = {
 		enable = false,

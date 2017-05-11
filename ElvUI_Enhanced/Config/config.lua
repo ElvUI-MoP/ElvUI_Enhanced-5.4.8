@@ -42,8 +42,8 @@ local function GeneralOptions()
 				type = "toggle",
 				name = L["Progression Info"],
 				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
-				get = function(info) return E.db.tooltip.progressInfo; end,
-				set = function(info, value) E.db.tooltip.progressInfo = value; end
+				get = function(info) return E.db.enhanced.tooltip.progressInfo; end,
+				set = function(info, value) E.db.enhanced.tooltip.progressInfo = value; end
 			},
 			showQuestLevel = {
 				order = 5,
