@@ -19,7 +19,7 @@ local function GeneralOptions()
 			header = {
 				order = 1,
 				type = "header",
-				name = L["General"]
+				name = ColorizeSettingName(L["General"])
 			},
 			pvpAutoRelease = {
 				order = 2,
@@ -76,6 +76,49 @@ local function GeneralOptions()
 	return config;
 end
 
+-- Actionbars
+local function ActionbarOptions()
+	local ETAB = E:GetModule("Enhanced_TransparentActionbars");
+
+	local config = {
+		order = 1.5,
+		type = "group",
+		name = L["ActionBars"],
+		args = {
+			header = {
+				order = 1,
+				type = "header",
+				name = ColorizeSettingName(L["ActionBars"])
+			},
+			transparentActionbars = {
+				order = 2,
+				type = "group",
+				name = L["Transparent ActionBars"],
+				guiInline = true,
+				get = function(info) return E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] end,
+				set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; end,
+				args = {
+					transparentBackdrops = {
+						order = 1,
+						type = "toggle",
+						name = L["Transparent Backdrop"],
+						desc = L["Sets actionbars' backgrounds to transparent template."],
+						set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; ETAB:BarsBackdrop() end
+					},
+					transparentButtons = {
+						order = 2,
+						type = "toggle",
+						name = L["Transparent Buttons"],
+						desc = L["Sets actionbars buttons' backgrounds to transparent template."],
+						set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; ETAB:ButtonsBackdrop() end
+					}
+				}
+			}
+		}
+	}
+	return config;
+end
+
 -- Chat
 local function ChatOptions()
 	local config = {
@@ -86,7 +129,7 @@ local function ChatOptions()
 			header = {
 				order = 0,
 				type = "header",
-				name = L["Chat"]
+				name = ColorizeSettingName(L["Chat"])
 			},
 			dpsLinks = {
 				order = 1,
@@ -111,7 +154,7 @@ local function DataTextsOptions()
 			header = {
 				order = 0,
 				type = "header",
-				name = L["DataTexts"]
+				name = ColorizeSettingName(L["DataTexts"])
 			},
 			timeColorEnch = {
 				order = 1,
@@ -139,7 +182,7 @@ local function EquipmentOptions()
 			header = {
 				order = 1,
 				type = "header",
-				name = L["Equipment"],
+				name = ColorizeSettingName(L["Equipment"])
 			},
 			intro = {
 				order = 2,
@@ -204,7 +247,7 @@ local function MinimapOptions()
 			header = {
 				order = 1,
 				type = "header",
-				name = L["Minimap"]
+				name = ColorizeSettingName(L["Minimap"])
 			},
 			location = {
 				order = 2,
@@ -261,7 +304,7 @@ local function NamePlatesOptions()
 			header = {
 				order = 0,
 				type = "header",
-				name = L["NamePlates"]
+				name = ColorizeSettingName(L["NamePlates"])
 			},
 			cacheUnitClass = {
 				order = 1,
@@ -310,7 +353,7 @@ local function WatchFrameOptions()
 			header = {
 				order = 0,
 				type = "header",
-				name = L["Objective Frame"]
+				name = ColorizeSettingName(L["Objective Frame"])
 			},
 			intro = {
 				order = 1,
@@ -486,7 +529,7 @@ local function FarmerOptions()
 			header = {
 				order = 1,
 				type = "header",
-				name = L["Farmer"]
+				name = ColorizeSettingName(L["Farmer"])
 			},
 			intro = {
 				order = 2,
@@ -560,6 +603,7 @@ function addon:GetOptions()
 		name = ColorizeSettingName("Enhanced"),
 		args = {
 			generalGroup = GeneralOptions(),
+			actionbarGroup = ActionbarOptions(),
 			chatGroup = ChatOptions(),
 			datatextsGroup = DataTextsOptions(),
 			equipmentGroup = EquipmentOptions(),

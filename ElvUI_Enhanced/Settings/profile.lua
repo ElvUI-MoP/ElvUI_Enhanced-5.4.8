@@ -33,6 +33,12 @@ P.enhanced = {
 		autoRepChange = false,
 		moverTransparancy = 0.8
 	},
+	actionbars = {
+		transparentActionbars = {
+			transparentBackdrops = true,
+			transparentButtons = true
+		},
+	},
 	chat = {
 		dpsLinks = false,
 	},

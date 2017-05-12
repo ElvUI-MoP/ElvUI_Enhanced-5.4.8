@@ -9,6 +9,13 @@ L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more ef
 L["ITEMLEVEL_DESC"] = "Настройка параметров информации об уровне предмета в окне персонажа."
 L["WATCHFRAME_DESC"] = "Настройте отображение списка заданий (квест лог) исходя из ваших личных предпочтений."
 
+-- Actionbars
+L["Sets actionbars' backgrounds to transparent template."] = "Делает фон панелей команд прозрачным."
+L["Sets actionbars buttons' backgrounds to transparent template."] = "Делает кнопки панелей команд прозрачными"
+L["Transparent ActionBars"] = true;
+L["Transparent Backdrop"] = "Прозрачный фон"
+L["Transparent Buttons"] = "Прозрачные кнопки"
+
 -- Chat
 L["Replaces long reports from damage meters with a clickeble hyperlink to reduce chat spam."] = "Заменяет длинные отчеты от аддонов для измерения УВС на гиперссылку, сокращая уровень спама в чате."
 

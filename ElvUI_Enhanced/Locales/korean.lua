@@ -9,6 +9,13 @@ L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more ef
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
+-- Actionbars
+L["Sets actionbars' backgrounds to transparent template."] = true;
+L["Sets actionbars buttons' backgrounds to transparent template."] = true;
+L["Transparent ActionBars"] = true;
+L["Transparent Backdrop"] = true;
+L["Transparent Buttons"] = true;
+
 -- Chat
 L["Replaces long reports from damage meters with a clickeble hyperlink to reduce chat spam."] = true;
 

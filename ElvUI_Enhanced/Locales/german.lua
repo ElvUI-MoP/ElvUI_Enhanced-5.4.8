@@ -9,6 +9,13 @@ L["FARMER_DESC"] = "Einstellungen für alle Werkzeuge, die Sie effizienter auf G
 L["ITEMLEVEL_DESC"] = "Passen Sie die Einstellungen für die Anzeige von Gegenstandsstufen im Charakterfenster an."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
+-- Actionbars
+L["Sets actionbars' backgrounds to transparent template."] = "Setzt den Aktionsleisten Hintergrund transparent."
+L["Sets actionbars buttons' backgrounds to transparent template."] = "Setzt die Aktionsleisten Tasten transparent."
+L["Transparent ActionBars"] = true;
+L["Transparent Backdrop"] = "Transparenter Hintergrund"
+L["Transparent Buttons"] = "Transparente Tasten"
+
 -- Chat
 L["Replaces long reports from damage meters with a clickeble hyperlink to reduce chat spam."] = "Ersetzt lange Berichte von Damage Metern mit einem klickbaren Hyperlink um Chatspam zu vermeiden."
 
