@@ -78,11 +78,9 @@ L["Automatically release body when killed inside a battleground."] = "Gibt autom
 L["Automatically select the quest reward with the highest vendor sell value."] = "Wählt automatisch die Questbelohnung mit dem höchsten Wiederverkaufswert beim Händler"
 L["Changes the transparency of all the movers."] = "Konfiguriere die Einstellungen der Transparenz der Ankerpukte"
 L["Colorizes recipes, mounts & pets that are already known"] = true;
-L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
 L["Display quest levels at Quest Log."] = true;
 L["Mover Transparency"] = "Transparenz Ankerpunkte"
 L["PvP Autorelease"] = "Automatische Freigabe im PvP"
-L["Progression Info"] = true;
 L["Select Quest Reward"] = "Wähle Questbelohnung"
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "Ruf beobachten"
@@ -101,6 +99,18 @@ L["Location Panel"] = true;
 L["Number of digits for map location."] = "Anzahl der Nachkommastellen der Koordinaten."
 L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "Die Zeit vor dem wieder Einblenden der Minimap nach dem Kampf. (0 = deaktiviert)"
 L["Toggle Location Panel."] = true;
+
+-- Tooltip
+L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
+L["Enable Achievements"] = "Aktiviere Erfolge"
+L["Enable Items"] = "Aktiviere Gegenstände"
+L["Enable Spell"] = "Aktiviere Zauber"
+L["Progression Info"] = true;
+L["Show/Hides an Icon for Achievements on the Tooltip."] = "Icon für Erfolge am Tooltip anzeigen oder ausblenden."
+L["Show/Hides an Icon for Items on the Tooltip."] = "Icon für Gegenstände am Tooltip anzeigen oder ausblenden."
+L["Show/Hides an Icon for Spells on the Tooltip."] = "Icon für Zauber am Tooltip anzeigen oder ausblenden."
+L["Show/Hides an Icon for Spells and Items on the Tooltip."] = "Icon für Zauber oder Gegenstände am Tooltip anzeigen oder ausblenden."
+L["Tooltip Icon"] = true;
 
 -- Misc
 L["Undress"] = "Ausziehen"

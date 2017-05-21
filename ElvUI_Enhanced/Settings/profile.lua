@@ -3,9 +3,6 @@ local E, L, V, P, G = unpack(ElvUI);
 -- Minimap
 P.general.minimap.locationText = "ABOVE"
 
--- Tooltip
-P.tooltip.progressInfo = "true";
-
 -- Unitframes
 P["unitframe"]["hideroleincombat"] = false
 P["unitframe"]["units"]["target"]["classicon"] = {
@@ -67,7 +64,13 @@ P.enhanced = {
 		smoothSpeed = 0.3,
 	},
 	tooltip = {
-		progressInfo  = true
+		progressInfo  = true,
+		tooltipIcon = {
+			enable = false,
+			tooltipIconSpells  = true,
+			tooltipIconItems  = true,
+			tooltipIconAchievements  = true
+		}
 	},
 	watchframe = {
 		enable = false,

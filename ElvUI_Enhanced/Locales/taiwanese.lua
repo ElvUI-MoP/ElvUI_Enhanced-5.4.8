@@ -78,11 +78,9 @@ L["Automatically release body when killed inside a battleground."] = "在戰場�
 L["Automatically select the quest reward with the highest vendor sell value."] = "自動選取有最高賣價的任務獎勵物品"
 L["Changes the transparency of all the movers."] = "改變所有定位器的透明度"
 L["Colorizes recipes, mounts & pets that are already known"] = true;
-L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
 L["Display quest levels at Quest Log."] = true;
 L["Mover Transparency"] = "定位器透明度"
 L["PvP Autorelease"] = "PVP自動釋放靈魂"
-L["Progression Info"] = true;
 L["Select Quest Reward"] = "自動選取任務獎勵"
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "聲望追蹤"
@@ -101,6 +99,18 @@ L["Location Panel"] = true;
 L["Number of digits for map location."] = "坐標顯示的小數位數"
 L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "戰鬥開始後隱藏小地圖前的延遲時間 (0=停用)"
 L["Toggle Location Panel."] = true;
+
+-- Tooltip
+L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
+L["Enable Achievements"] = true;
+L["Enable Items"] = true;
+L["Enable Spell"] = true;
+L["Progression Info"] = true;
+L["Show/Hides an Icon for Achievements on the Tooltip."] = true;
+L["Show/Hides an Icon for Items on the Tooltip."] = true;
+L["Show/Hides an Icon for Spells on the Tooltip."] = true;
+L["Show/Hides an Icon for Spells and Items on the Tooltip."] = true;
+L["Tooltip Icon"] = true;
 
 -- Misc
 L["Undress"] = "無裝備"

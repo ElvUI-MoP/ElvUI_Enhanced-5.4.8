@@ -78,11 +78,9 @@ L["Automatically release body when killed inside a battleground."] = "Libère au
 L["Automatically select the quest reward with the highest vendor sell value."] = "Sélectionne automatiquement la récompense de quête qui vaut la plus chère chez le vendeur."
 L["Changes the transparency of all the movers."] = "Change la transparence des Ancres"
 L["Colorizes recipes, mounts & pets that are already known"] = true;
-L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
 L["Display quest levels at Quest Log."] = true;
 L["Mover Transparency"] = "Transparence des Ancres"
 L["PvP Autorelease"] = "Libération automatique en PVP"
-L["Progression Info"] = true;
 L["Select Quest Reward"] = "Sélection de la récompense de quête"
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "Suivre la Réputation"
@@ -101,6 +99,18 @@ L["Location Panel"] = true;
 L["Number of digits for map location."] = "Nombre de chiffres pour l'emplacement."
 L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "Le temps à attendre avant que la minicarte s'estompe avec que le combat ait commencé. (0 = désactié)"
 L["Toggle Location Panel."] = true;
+
+-- Tooltip
+L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
+L["Enable Achievements"] = true;
+L["Enable Items"] = true;
+L["Enable Spell"] = true;
+L["Progression Info"] = true;
+L["Show/Hides an Icon for Achievements on the Tooltip."] = true;
+L["Show/Hides an Icon for Items on the Tooltip."] = true;
+L["Show/Hides an Icon for Spells on the Tooltip."] = true;
+L["Show/Hides an Icon for Spells and Items on the Tooltip."] = true;
+L["Tooltip Icon"] = true;
 
 -- Misc
 L["Undress"] = "Déshabillé"

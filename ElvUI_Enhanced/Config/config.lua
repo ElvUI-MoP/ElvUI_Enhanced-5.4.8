@@ -37,16 +37,8 @@ local function GeneralOptions()
 				get = function(info) return E.db.enhanced.general.autoRepChange; end,
 				set = function(info, value) E.db.enhanced.general.autoRepChange = value; M:WatchedFaction(); end
 			},
-			progressInfo = {
-				order = 4,
-				type = "toggle",
-				name = L["Progression Info"],
-				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
-				get = function(info) return E.db.enhanced.tooltip.progressInfo; end,
-				set = function(info, value) E.db.enhanced.tooltip.progressInfo = value; end
-			},
 			showQuestLevel = {
-				order = 5,
+				order = 4,
 				type = "toggle",
 				name = L["Show Quest Level"],
 				desc = L["Display quest levels at Quest Log."],
@@ -54,7 +46,7 @@ local function GeneralOptions()
 				set = function(info, value) E.db.general.showQuestLevel = value; end
 			},
 			selectQuestReward = {
-				order = 6,
+				order = 5,
 				type = "toggle",
 				name = L["Select Quest Reward"],
 				desc = L["Automatically select the quest reward with the highest vendor sell value."],
@@ -62,7 +54,7 @@ local function GeneralOptions()
 				set = function(info, value) E.private.general.selectQuestReward = value; end
 			},
 			moverTransparancy = {
-				order = 7,
+				order = 6,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
@@ -333,6 +325,81 @@ local function NamePlatesOptions()
 	return config;
 end
 
+-- Tooltip
+local function TooltipOptions()
+	local config = {
+		order = 7,
+		type = "group",
+		name = L["Tooltip"],
+		get = function(info) return E.db.enhanced.tooltip[info[#info]] end,
+		args = {
+			header = {
+				order = 1,
+				type = "header",
+				name = ColorizeSettingName(L["Tooltip"])
+			},
+			tooltipIcon = {
+				order = 2,
+				type = "group",
+				name = L["Tooltip Icon"],
+				guiInline = true,
+				args = {
+					tooltipIcon = {
+						order = 1,
+						type = "toggle",
+						name = L["Enable"],
+						desc = L["Show/Hides an Icon for Spells and Items on the Tooltip."],
+						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.enable; end,
+						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.enable = value; end
+					},
+					spacer = {
+						order = 2,
+						type = "description",
+						name = "",
+						width = "full"
+					},
+					tooltipIconSpells = {
+						order = 3,
+						type = "toggle",
+						name = L["Enable Spell"],
+						desc = L["Show/Hides an Icon for Spells on the Tooltip."],
+						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells; end,
+						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells = value; end,
+						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
+					},
+					tooltipIconItems = {
+						order = 4,
+						type = "toggle",
+						name = L["Enable Items"],
+						desc = L["Show/Hides an Icon for Items on the Tooltip."],
+						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems; end,
+						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems = value; end,
+						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
+					},
+					tooltipIconAchievements = {
+						order = 5,
+						type = "toggle",
+						name = L["Enable Achievements"],
+						desc = L["Show/Hides an Icon for Achievements on the Tooltip."],
+						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements; end,
+						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements = value; end,
+						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
+					}
+				}
+			},
+			progressInfo = {
+				order = 3,
+				type = "toggle",
+				name = L["Progression Info"],
+				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
+				get = function(info) return E.db.enhanced.tooltip.progressInfo; end,
+				set = function(info, value) E.db.enhanced.tooltip.progressInfo = value; end
+			},
+		}
+	};
+	return config;
+end
+
 -- WatchFrame
 local function WatchFrameOptions()
 	local WF = E:GetModule("Enhanced_WatchFrame");
@@ -344,7 +411,7 @@ local function WatchFrameOptions()
 	};
 
 	local config = {
-		order = 7,
+		order = 8,
 		type = "group",
 		name = L["Objective Frame"],
 		get = function(info) return E.db.enhanced.watchframe[info[#info]] end,
@@ -609,6 +676,7 @@ function addon:GetOptions()
 			equipmentGroup = EquipmentOptions(),
 			minimapGroup = MinimapOptions(),
 			namePlatesGroup = NamePlatesOptions(),
+			tooltipGroup = TooltipOptions(),
 			watchFrameGroup = WatchFrameOptions(),
 			farmerOptions = FarmerOptions(),
 		}
