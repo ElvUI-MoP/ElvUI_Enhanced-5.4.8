@@ -24,8 +24,19 @@ function M:AutoRelease()
 	end
 end
 
+function M:HideZone()
+	if(E.db.enhanced.general.hideZoneText) then
+		ZoneTextFrame:UnregisterAllEvents()
+	else
+		ZoneTextFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+		ZoneTextFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
+		ZoneTextFrame:RegisterEvent("ZONE_CHANGED")
+	end
+end
+
 function M:Initialize()
 	self:AutoRelease();
+	self:HideZone()
 	self:LoadQuestReward()
 	self:WatchedFaction();
 	self:LoadMoverTransparancy()

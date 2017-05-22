@@ -28,7 +28,8 @@ P.enhanced = {
 	general = {
 		pvpAutoRelease = false,
 		autoRepChange = false,
-		moverTransparancy = 0.8
+		moverTransparancy = 0.8,
+		hideZoneText = false
 	},
 	actionbars = {
 		transparentActionbars = {

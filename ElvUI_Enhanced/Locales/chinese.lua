@@ -79,6 +79,7 @@ L["Automatically select the quest reward with the highest vendor sell value."] =
 L["Changes the transparency of all the movers."] = true;
 L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display quest levels at Quest Log."] = true;
+L["Hide Zone Text"] = true;
 L["Mover Transparency"] = true;
 L["PvP Autorelease"] = "PVP自动释放灵魂"
 L["Select Quest Reward"] = true;

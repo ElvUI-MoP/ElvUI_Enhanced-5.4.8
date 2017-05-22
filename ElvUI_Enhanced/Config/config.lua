@@ -53,8 +53,15 @@ local function GeneralOptions()
 				get = function(info) return E.private.general.selectQuestReward end,
 				set = function(info, value) E.private.general.selectQuestReward = value; end
 			},
-			moverTransparancy = {
+			hideZoneText = {
 				order = 6,
+				type = "toggle",
+				name = L["Hide Zone Text"],
+				get = function(info) return E.db.enhanced.general.hideZoneText end,
+				set = function(info, value) E.db.enhanced.general.hideZoneText = value M:HideZone() end
+			},
+			moverTransparancy = {
+				order = 7,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
