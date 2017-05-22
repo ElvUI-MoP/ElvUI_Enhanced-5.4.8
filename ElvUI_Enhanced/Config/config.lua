@@ -183,27 +183,27 @@ local function EquipmentOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Equipment"])
 			},
-			intro = {
-				order = 2,
-				type = "description",
-				name = L["DURABILITY_DESC"]
-			},
 			durability = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = DURABILITY,
 				guiInline = true,
 				get = function(info) return E.private.equipment.durability[ info[#info] ] end,
 				set = function(info, value) E.private.equipment.durability[ info[#info] ] = value PD:UpdatePaperDoll() end,
 				args = {
-					enable = {
+					intro = {
 						order = 1,
+						type = "description",
+						name = L["DURABILITY_DESC"]
+					},
+					enable = {
+						order = 2,
 						type = "toggle",
 						name = L["Enable"],
 						desc = L["Enable/Disable the display of durability information on the character screen."]
 					},
 					onlydamaged = {
-						order = 2,
+						order = 3,
 						type = "toggle",
 						name = L["Damaged Only"],
 						desc = L["Only show durabitlity information for items that are damaged."],
@@ -212,7 +212,7 @@ local function EquipmentOptions()
 				}
 			},
 			itemlevel = {
-				order = 4,
+				order = 3,
 				type = "group",
 				name = STAT_AVERAGE_ITEM_LEVEL,
 				guiInline = true,
@@ -401,7 +401,7 @@ local function TooltipOptions()
 				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
 				get = function(info) return E.db.enhanced.tooltip.progressInfo; end,
 				set = function(info, value) E.db.enhanced.tooltip.progressInfo = value; end
-			},
+			}
 		}
 	};
 	return config;
@@ -487,53 +487,6 @@ end
 
 -- Unitframes
 local function UnitFramesOptions()
-	local TC = E:GetModule("TargetClass")
-
-	-- Target Class Icons
-	E.Options.args.unitframe.args.target.args.classicon = {
-		order = 1002,
-		type = "group",
-		name = ColorizeSettingName(L["Class Icons"]),
-		get = function(info) return E.db.unitframe.units["target"]["classicon"][ info[#info] ] end,
-		set = function(info, value) E.db.unitframe.units["target"]["classicon"][ info[#info] ] = value; TC:ToggleSettings() end,
-		args = {
-			enable = {
-				type = "toggle",
-				order = 1,
-				name = L["Enable"],
-				desc = L["Show class icon for units."]
-			},
-			size = {
-				order = 4,
-				type = "range",
-				name = L["Size"],
-				desc = L["Size of the indicator icon."],
-				min = 16, max = 40, step = 1
-			},
-			xOffset = {
-				order = 5,
-				type = "range",
-				name = L["xOffset"],
-				min = -100, max = 100, step = 1
-			},
-			yOffset = {
-				order = 6,
-				type = "range",
-				name = L["yOffset"],
-				min = -80, max = 40, step = 1
-			}
-		}
-	}
-
-	-- Hide Role Icon in Combat
-	E.Options.args.unitframe.args.general.args.generalGroup.args.hideroleincombat = {
-		order = 7,
-		name = ColorizeSettingName(L["Hide Role Icon in combat"]),
-		desc = L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."],
-		type = "toggle",
-		set = function(info, value) E.db.unitframe[ info[#info] ] = value; E:StaticPopup_Show("PRIVATE_RL"); end
-	};
-
 	-- Player Detached Portrait
 	E.Options.args.unitframe.args.player.args.portrait.args.spacer = {
 		order = 9,
@@ -562,7 +515,7 @@ local function UnitFramesOptions()
 	};
 
 	-- Target Detached Portrait
-	E.Options.args.unitframe.args.player.args.portrait.args.spacer = {
+	E.Options.args.unitframe.args.target.args.portrait.args.spacer = {
 		order = 9,
 		type = "description",
 		name = "",
@@ -667,6 +620,93 @@ local function FarmerOptions()
 	return config;
 end
 
+local function UnitFrameOptions()
+	local TC = E:GetModule("TargetClass")
+
+	local config = {
+		order = 9,
+		type = "group",
+		name = L["UnitFrames"],
+		childGroups = "tab",
+		args = {
+			header = {
+				order = 1,
+				type = "header",
+				name = ColorizeSettingName(L["UnitFrames"])
+			},
+			general = {
+				order = 2,
+				type = "group",
+				name = L["General"],
+				guiInline = true,
+				args = {
+					hideRoleInCombat = {
+						order = 2,
+						type = "toggle",
+						name = L["Hide Role Icon in combat"],
+						desc = L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."],
+						get = function(info) return E.db.enhanced.unitframe.hideRoleInCombat end,
+						set = function(info, value) E.db.enhanced.unitframe.hideRoleInCombat = value; E:StaticPopup_Show("PRIVATE_RL"); end
+					}
+				}
+			},
+			target = {
+				order = 3,
+				type = "group",
+				name = L["Target"],
+				args = {
+					classIcon = {
+						order = 3,
+						type = "group",
+						name = L["Class Icons"],
+						args = {
+							header = {
+								order = 1,
+								type = "header",
+								name = L["Class Icons"]
+							},
+							enable = {
+								order = 2,
+								type = "toggle",
+								name = L["Enable"],
+								desc = L["Show class icon for units."],
+								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.enable end,
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.enable = value; TC:ToggleSettings() end
+							},
+							size = {
+								order = 3,
+								type = "range",
+								name = L["Size"],
+								desc = L["Size of the indicator icon."],
+								min = 16, max = 40, step = 1,
+								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.size end,
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.size = value; TC:ToggleSettings() end
+							},
+							xOffset = {
+								order = 4,
+								type = "range",
+								name = L["xOffset"],
+								min = -100, max = 100, step = 1,
+								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.xOffset end,
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.xOffset = value; TC:ToggleSettings() end
+							},
+							yOffset = {
+								order = 5,
+								type = "range",
+								name = L["yOffset"],
+								min = -80, max = 40, step = 1,
+								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.yOffset end,
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.yOffset = value; TC:ToggleSettings() end
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return config
+end
+
 function addon:GetOptions()
 	UnitFramesOptions()
 
@@ -684,6 +724,7 @@ function addon:GetOptions()
 			minimapGroup = MinimapOptions(),
 			namePlatesGroup = NamePlatesOptions(),
 			tooltipGroup = TooltipOptions(),
+			unitframesGroup = UnitFrameOptions(), 
 			watchFrameGroup = WatchFrameOptions(),
 			farmerOptions = FarmerOptions(),
 		}

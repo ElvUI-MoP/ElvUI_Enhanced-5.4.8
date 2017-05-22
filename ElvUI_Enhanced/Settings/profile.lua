@@ -4,14 +4,6 @@ local E, L, V, P, G = unpack(ElvUI);
 P.general.minimap.locationText = "ABOVE"
 
 -- Unitframes
-P["unitframe"]["hideroleincombat"] = false
-P["unitframe"]["units"]["target"]["classicon"] = {
-	["enable"] = false,
-	["size"] = 28,
-	["xOffset"] = -58,
-	["yOffset"] = -22
-}
-
 P.unitframe.units.player.portrait.detachFromFrame = false;
 P.unitframe.units.player.portrait.detachedWidth = 54;
 P.unitframe.units.player.portrait.detachedHeight = 54;
@@ -35,7 +27,7 @@ P.enhanced = {
 		transparentActionbars = {
 			transparentBackdrops = true,
 			transparentButtons = true
-		},
+		}
 	},
 	chat = {
 		dpsLinks = false,
@@ -73,12 +65,25 @@ P.enhanced = {
 			tooltipIconAchievements  = true
 		}
 	},
+	unitframe = {
+		units = {
+			target = {
+				classicon = {
+					enable = false,
+					size = 28,
+					xOffset = -58,
+					yOffset = -22
+				}
+			}
+		},
+		hideRoleInCombat = false
+	},
 	watchframe = {
 		enable = false,
 		city = "COLLAPSED",
 		pvp = "HIDDEN",
 		arena = "HIDDEN",
 		party = "COLLAPSED",
-		raid = "COLLAPSED",
-	},
+		raid = "COLLAPSED"
+	}
 };
