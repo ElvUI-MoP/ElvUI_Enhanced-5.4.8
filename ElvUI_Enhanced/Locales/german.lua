@@ -57,10 +57,12 @@ L["Enable/Disable the battleground switch."] = "Automatische Änderung der Ausr�
 L["Enable/Disable the display of durability information on the character screen."] = "Anzeige der Haltbarkeit im Charakterfenster."
 L["Enable/Disable the display of item levels on the character screen."] = "Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
 L["Enable/Disable the specialization switch."] = "Automatische Änderung der Ausrüstung beim Talentwechsel aktivieren / deaktivieren."
+L["Equipment Set Overlay"] = "Ausrüstungssettext"
 L["Equipment Set"] = "Ausrüstungsset"
 L["Equipment"] = "Ausrüstung"
 L["No Change"] = "Keine Änderung"
 L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
+L["Show the associated equipment sets for the items in your bags (or bank)."] = "Zeige auf Gegenständen im Rucksack (oder der Bank) die zugehörigen Ausrüstungssets als Text an."
 L["Specialization"] = "Talentspezialisierung"
 L["You have equipped equipment set: "] = "Sie haben das folgende Ausrüstungsset angelegt: "
 

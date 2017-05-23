@@ -57,10 +57,12 @@ L["Enable/Disable the battleground switch."] = "開啓/關閉 戰場切換"
 L["Enable/Disable the display of durability information on the character screen."] = "開啓/關閉 人物窗口裝備耐久度顯示."
 L["Enable/Disable the display of item levels on the character screen."] = "在角色資訊上顯示各裝備裝等"
 L["Enable/Disable the specialization switch."] = "開啓/關閉 專精切換"
+L["Equipment Set Overlay"] = true;
 L["Equipment Set"] = "裝備模組"
 L["Equipment"] = "自動換裝"
 L["No Change"] = "不改變"
 L["Only show durabitlity information for items that are damaged."] = "只在裝備受損時顯示耐久度."
+L["Show the associated equipment sets for the items in your bags (or bank)."] = "在你包包或銀行中顯示相關的套裝設定"
 L["Specialization"] = "專精"
 L["You have equipped equipment set: "] = "你已裝備此模組: "
 

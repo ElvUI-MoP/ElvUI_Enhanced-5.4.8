@@ -48,7 +48,6 @@ L["Killing blow at %s%% health."] = true;
 L["Recap"] = true;
 L["You died."] = true;
 
-
 -- Equipment
 L["Choose the equipment set to use for your primary specialization."] = "选择当你使用主专精时的装备模组."
 L["Choose the equipment set to use for your secondary specialization."] = "选择当你使用副专精时的装备模组."
@@ -58,10 +57,12 @@ L["Enable/Disable the battleground switch."] = "开启/关闭 战场切换"
 L["Enable/Disable the display of durability information on the character screen."] = "开启/关闭 人物窗口装备耐久度显示."
 L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Enable/Disable the specialization switch."] = "开启/关闭 专精切换"
+L["Equipment Set Overlay"] = true;
 L["Equipment Set"] = "装备模组"
 L["Equipment"] = "自动换装"
 L["No Change"] = "不改变"
 L["Only show durabitlity information for items that are damaged."] = "只在装备受损时显示耐久度."
+L["Show the associated equipment sets for the items in your bags (or bank)."] = true;
 L["Specialization"] = "专精"
 L["You have equipped equipment set: "] = "你已装备此模组: "
 

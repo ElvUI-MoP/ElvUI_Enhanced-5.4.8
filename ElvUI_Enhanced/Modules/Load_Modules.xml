@@ -8,5 +8,6 @@
 	<Include file="Datatexts\Load_Datatexts.xml"/>
 	<Include file="Nameplates\Load_Nameplates.xml"/>
 	<Include file="Unitframes\Load_Unitframes.xml"/>
+	<Include file="Bags\Load_Bags.xml"/>
 	<Include file="Farmer\Load_Farmer.xml"/>
 </Ui>

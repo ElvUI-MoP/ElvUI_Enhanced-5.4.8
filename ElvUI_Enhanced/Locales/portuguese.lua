@@ -57,10 +57,12 @@ L["Enable/Disable the battleground switch."] = "Activar/desactivar a mudança em
 L["Enable/Disable the display of durability information on the character screen."] = "Activar/desactivar a informação de durabilidade no ecrã de informação do personagem."
 L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Enable/Disable the specialization switch."] = "Activar/desactivar a mudança com a especialização."
+L["Equipment Set Overlay"] = true;
 L["Equipment Set"] = "Conjunto de Equipamento"
 L["Equipment"] = "Equipamento"
 L["No Change"] = "Sem mudança"
 L["Only show durabitlity information for items that are damaged."] = "Só mostrar informação de durabilidade para itens danificados."
+L["Show the associated equipment sets for the items in your bags (or bank)."] = true;
 L["Specialization"] = "Especialização"
 L["You have equipped equipment set: "] = "Você tem equipado o conjunto: "
 

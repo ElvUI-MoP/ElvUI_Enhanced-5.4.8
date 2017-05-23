@@ -18,6 +18,9 @@ V.equipment = {
 	},
 	["itemlevel"] = {
 		enable = true
+	},
+	["misc"] = {
+		setoverlay = false
 	}
 }
 

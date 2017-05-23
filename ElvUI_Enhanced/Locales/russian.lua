@@ -57,10 +57,12 @@ L["Enable/Disable the battleground switch."] = true;
 L["Enable/Disable the display of durability information on the character screen."] = "Включить/Выключить отображение информации о прочности предметов в окне персонажа."
 L["Enable/Disable the display of item levels on the character screen."] = "Включить/Выключить отображение уровня предмета в окне персонажа."
 L["Enable/Disable the specialization switch."] = true;
+L["Equipment Set Overlay"] = "Название комплекта"
 L["Equipment Set"] = true;
 L["Equipment"] = "Экипировка"
 L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = "Показывать уровень прочности только на поврежденных предметах."
+L["Show the associated equipment sets for the items in your bags (or bank)."] = "Отображает название комплекта экипировки, к которому привязан предмет, на его иконке в сумках или банке."
 L["Specialization"] = true
 L["You have equipped equipment set: "] = true;
 

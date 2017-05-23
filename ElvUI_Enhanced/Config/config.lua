@@ -170,7 +170,9 @@ end
 
 -- Equipment
 local function EquipmentOptions()
+	local EQ = E:GetModule("Equipment")
 	local PD = E:GetModule("PaperDoll")
+	local BI = E:GetModule("BagInfo")
 
 	local config = {
 		order = 4,
@@ -322,9 +324,28 @@ local function EquipmentOptions()
 						desc = L["Enable/Disable the display of item levels on the character screen."]
 					}
 				}
+			},
+			misc = {
+				order = 8,
+				type = "group",
+				name = L["Equipment Set Overlay"],
+				guiInline = true,
+				get = function(info) return E.private.equipment.misc[ info[#info] ] end,
+				set = function(info, value) E.private.equipment.misc[ info[#info] ] = value end,
+				disabled = function() return not E.private.bags.enable end,
+				args = {
+					setoverlay = {
+						order = 1,
+						type = "toggle",
+						name = L["Enable"],
+						desc = L["Show the associated equipment sets for the items in your bags (or bank)."],
+						set = function(info, value) E.private.equipment.misc[ info[#info] ] = value BI:ToggleSettings() end
+					}
+				}
 			}
 		}
 	}
+	EQ:UpdateTalentConfiguration()
 
 	return config;
 end

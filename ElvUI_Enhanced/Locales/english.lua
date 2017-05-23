@@ -57,10 +57,12 @@ L["Enable/Disable the battleground switch."] = true;
 L["Enable/Disable the display of durability information on the character screen."] = true;
 L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Enable/Disable the specialization switch."] = true;
+L["Equipment Set Overlay"] = true;
 L["Equipment Set"] = true;
 L["Equipment"] = true;
 L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = true;
+L["Show the associated equipment sets for the items in your bags (or bank)."] = true;
 L["Specialization"] = true
 L["You have equipped equipment set: "] = true;
 
