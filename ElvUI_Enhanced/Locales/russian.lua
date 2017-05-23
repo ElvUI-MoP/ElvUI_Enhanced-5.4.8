@@ -4,6 +4,7 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Вы используете |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r версии %s%s|r."
+L["EQUIPMENT_DESC"] = "Adjust the settings for switching your gear set when you change specialization or enter a battleground."
 L["DURABILITY_DESC"] = "Настройка параметров информации о прочности предметов в окне персонажа."
 L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more efficiently on Sunsong Ranch."
 L["ITEMLEVEL_DESC"] = "Настройка параметров информации об уровне предмета в окне персонажа."
@@ -48,11 +49,20 @@ L["Recap"] = "Информация"
 L["You died."] = "Вы умерли."
 
 -- Equipment
+L["Choose the equipment set to use for your primary specialization."] = true;
+L["Choose the equipment set to use for your secondary specialization."] = true;
+L["Choose the equipment set to use when you enter a battleground or arena."] = true;
 L["Damaged Only"] = "Только поврежденные"
-L["Equipment"] = "Экипировка"
+L["Enable/Disable the battleground switch."] = true;
 L["Enable/Disable the display of durability information on the character screen."] = "Включить/Выключить отображение информации о прочности предметов в окне персонажа."
 L["Enable/Disable the display of item levels on the character screen."] = "Включить/Выключить отображение уровня предмета в окне персонажа."
+L["Enable/Disable the specialization switch."] = true;
+L["Equipment Set"] = true;
+L["Equipment"] = "Экипировка"
+L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = "Показывать уровень прочности только на поврежденных предметах."
+L["Specialization"] = true
+L["You have equipped equipment set: "] = true;
 
 -- Farmer
 L["Automatically drop tools from your bags when leaving the farming area."] = true;

@@ -2,6 +2,7 @@ local E, L, V, P, G = unpack(ElvUI);
 local addon = E:GetModule("ElvUI_Enhanced");
 
 local format = string.format
+local tsort = table.sort
 
 local function ColorizeSettingName(settingName)
 	return format("|cffff8000%s|r", settingName);
@@ -183,27 +184,122 @@ local function EquipmentOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Equipment"])
 			},
-			durability = {
+			intro = {
 				order = 2,
+				type = "description",
+				name = L["EQUIPMENT_DESC"],
+			},
+			specialization = {
+				order = 3,
+				type = "group",
+				name = L["Specialization"],
+				guiInline = true,
+				disabled = function() return GetNumEquipmentSets() == 0 end,
+				args = {
+					enable = {
+						order = 1,
+						type = "toggle",
+						name = L["Enable"],
+						desc = L["Enable/Disable the specialization switch."],
+						get = function(info) return E.private.equipment.specialization.enable end,
+						set = function(info, value) E.private.equipment.specialization.enable = value end
+					},
+					primary = {
+						type = "select",
+						order = 2,
+						name = TALENT_SPEC_PRIMARY,
+						desc = L["Choose the equipment set to use for your primary specialization."],
+						disabled = function() return not E.private.equipment.specialization.enable end,
+						values = function()
+							local sets = { ["none"] = L["No Change"] }
+							for i = 1, GetNumEquipmentSets() do
+								local name = GetEquipmentSetInfo(i)
+								if name then
+									sets[name] = name
+								end
+							end
+							tsort(sets, function(a, b) return a < b end)
+							return sets
+						end
+					},
+					secondary = {
+						order = 3,
+						type = "select",
+						name = TALENT_SPEC_SECONDARY,
+						desc = L["Choose the equipment set to use for your secondary specialization."],
+						disabled = function() return not E.private.equipment.specialization.enable end,
+						values = function()
+							local sets = { ["none"] = L["No Change"] }
+							for i = 1, GetNumEquipmentSets() do
+								local name, _, _, _, _, _, _, _, _ = GetEquipmentSetInfo(i)
+								if name then
+									sets[name] = name
+								end
+							end
+							tsort(sets, function(a, b) return a < b end)
+							return sets
+						end
+					}
+				}
+			},
+			battleground = {
+				order = 4,
+				type = "group",
+				name = VOICE_CHAT_BATTLEGROUND,
+				guiInline = true,
+				disabled = function() return GetNumEquipmentSets() == 0 end,
+				args = {
+					enable = {
+						order = 1,
+						type = "toggle",
+						name = L["Enable"],
+						desc = L["Enable/Disable the battleground switch."],
+						get = function(info) return E.private.equipment.battleground.enable end,
+						set = function(info, value) E.private.equipment.battleground.enable = value end
+					},
+					equipmentset = {
+						order = 2,
+						type = "select",
+						name = L["Equipment Set"],
+						desc = L["Choose the equipment set to use when you enter a battleground or arena."],
+						disabled = function() return not E.private.equipment.battleground.enable end,
+						values = function()
+							local sets = {
+								["none"] = L["No Change"],
+							}
+							for i = 1, GetNumEquipmentSets() do
+								local name = GetEquipmentSetInfo(i)
+								if name then
+									sets[name] = name
+								end
+							end
+							tsort(sets, function(a, b) return a < b end)
+							return sets
+						end
+					}
+				}
+			},
+			intro2 = {
+				order = 5,
+				type = "description",
+				name = L["DURABILITY_DESC"]
+			},
+			durability = {
+				order = 6,
 				type = "group",
 				name = DURABILITY,
 				guiInline = true,
 				get = function(info) return E.private.equipment.durability[ info[#info] ] end,
 				set = function(info, value) E.private.equipment.durability[ info[#info] ] = value PD:UpdatePaperDoll() end,
 				args = {
-					intro = {
-						order = 1,
-						type = "description",
-						name = L["DURABILITY_DESC"]
-					},
 					enable = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["Enable"],
 						desc = L["Enable/Disable the display of durability information on the character screen."]
 					},
 					onlydamaged = {
-						order = 3,
+						order = 2,
 						type = "toggle",
 						name = L["Damaged Only"],
 						desc = L["Only show durabitlity information for items that are damaged."],
@@ -212,7 +308,7 @@ local function EquipmentOptions()
 				}
 			},
 			itemlevel = {
-				order = 3,
+				order = 7,
 				type = "group",
 				name = STAT_AVERAGE_ITEM_LEVEL,
 				guiInline = true,

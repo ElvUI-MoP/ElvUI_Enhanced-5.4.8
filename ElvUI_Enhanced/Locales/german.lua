@@ -4,6 +4,7 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Sie verwenden |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r Version %s%s|r."
+L["EQUIPMENT_DESC"] = "Passen Sie die Einstellungen für das Ändern Ihrer Ausrüstung an, wenn Sie Ihre Talentspezialisierung ändern oder ein Schlachtfeld betreten."
 L["DURABILITY_DESC"] = "Passen Sie die Einstellungen für die Haltbarkeit im Charakterfenster an."
 L["FARMER_DESC"] = "Einstellungen für alle Werkzeuge, die Sie effizienter auf Gehöft Sonnensang arbeiten lassen."
 L["ITEMLEVEL_DESC"] = "Passen Sie die Einstellungen für die Anzeige von Gegenstandsstufen im Charakterfenster an."
@@ -48,11 +49,20 @@ L["Recap"] = true;
 L["You died."] = true;
 
 -- Equipment
+L["Choose the equipment set to use for your primary specialization."] = "Wählen Sie das Ausrüstungsset für Ihre primäre Talentspezialisierung."
+L["Choose the equipment set to use for your secondary specialization."] = "Wählen Sie das Ausrüstungsset für Ihre sekundäre Talentspezialisierung."
+L["Choose the equipment set to use when you enter a battleground or arena."] = "Wählen Sie Ihr Ausrüstungsset für Schlachtfelder oder die Arena."
 L["Damaged Only"] = "Nur Beschädigte"
-L["Equipment"] = "Ausrüstung"
+L["Enable/Disable the battleground switch."] = "Automatische Änderung der Ausrüstung beim Betreten eines Schlachtfelds aktivieren / deaktivieren."
 L["Enable/Disable the display of durability information on the character screen."] = "Anzeige der Haltbarkeit im Charakterfenster."
 L["Enable/Disable the display of item levels on the character screen."] = "Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
+L["Enable/Disable the specialization switch."] = "Automatische Änderung der Ausrüstung beim Talentwechsel aktivieren / deaktivieren."
+L["Equipment Set"] = "Ausrüstungsset"
+L["Equipment"] = "Ausrüstung"
+L["No Change"] = "Keine Änderung"
 L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
+L["Specialization"] = "Talentspezialisierung"
+L["You have equipped equipment set: "] = "Sie haben das folgende Ausrüstungsset angelegt: "
 
 -- Farmer
 L["Automatically drop tools from your bags when leaving the farming area."] = "Beim Verlassen der Farm automatisch die Werkzeuge zerstören."

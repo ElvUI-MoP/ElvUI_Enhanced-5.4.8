@@ -4,6 +4,7 @@ if not L then return; end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Vous utilisez |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r version %s%s|r."
+L["EQUIPMENT_DESC"] = "Ajustez les réglages pour passer d'un équipement à l'autre lorsque vous changez de spécialisation ou lorsque que vous effectuez un Champs de Bataille."
 L["DURABILITY_DESC"] = "Ajustez les réglages pour afficher la durabilité sur l'écran d'infos de personnage."
 L["FARMER_DESC"] = "Réglez les paramètres des outils qui vous aideront à pratiquer une agriculture plus efficace avec votre Ferme (Ferme Chant du Soleil)."
 L["ITEMLEVEL_DESC"] = "Réglez les paramètres pour afficher le niveau d'objet sur l'écran d'infos de personnage."
@@ -48,11 +49,20 @@ L["Recap"] = true;
 L["You died."] = true;
 
 -- Equipment
+L["Choose the equipment set to use for your primary specialization."] = "Choisissez le set d'équipement à utiliser pour votre spécialisation principale."
+L["Choose the equipment set to use for your secondary specialization."] = "Choisissez le set d'équipement à utiliser pour votre spécialisation secondaire."
+L["Choose the equipment set to use when you enter a battleground or arena."] = "Choisissez le set d'équipement à utiliser quant vous entrez dans un Champs de Bataille ou une Arène."
 L["Damaged Only"] = "Dégâts seulement"
-L["Equipment"] = "Équipement"
+L["Enable/Disable the battleground switch."] = "Activer / Désactiver la fonction du changement d'équipement lorsque vous entrez dans un Champs de Bataille ou une Arène."
 L["Enable/Disable the display of durability information on the character screen."] = "Activer / Désactiver l'affichage des informations de durabilité sur l'écran d'infos de personnage."
 L["Enable/Disable the display of item levels on the character screen."] = "Activer / Désactiver l'affichage des informations du niveau d'objet sur l'écran d'infos de personnage."
+L["Enable/Disable the specialization switch."] = "Activer / Désactiver la fonction du changement d'équipement lorsque vous changez de spécialisation."
+L["Equipment Set"] = "Set d'équipement"
+L["Equipment"] = "Équipement"
+L["No Change"] = "Ne pas changer"
 L["Only show durabitlity information for items that are damaged."] = "Afficher la durabilité seulement quand l'équipement est endommagé."
+L["Specialization"] = "Spécialisation"
+L["You have equipped equipment set: "] = "Vous avez équipez le set d'équipement: "
 
 -- Farmer
 L["Automatically drop tools from your bags when leaving the farming area."] = "Jeter automatiquement les outils de votre sac après avoir quitté la ferme."

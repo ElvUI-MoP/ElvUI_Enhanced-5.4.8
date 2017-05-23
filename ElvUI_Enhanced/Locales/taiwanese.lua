@@ -4,6 +4,7 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "您正在使用 |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r version %s%s|r."
+L["EQUIPMENT_DESC"] = "當你切換專精或進入戰場時自動更換裝備, 你可以在選項中選擇相關的裝備模組."
 L["DURABILITY_DESC"] = "調整設置人物窗口裝備耐久度顯示."
 L["FARMER_DESC"] = "調整設置以便你在日歌農莊更有效的耕作."
 L["ITEMLEVEL_DESC"] = "調整在角色資訊上顯示物品裝等的各種設定."
@@ -48,11 +49,20 @@ L["Recap"] = true;
 L["You died."] = true;
 
 -- Equipment
+L["Choose the equipment set to use for your primary specialization."] = "選擇當你使用主專精時的裝備模組."
+L["Choose the equipment set to use for your secondary specialization."] = "選擇當你使用副專精時的裝備模組."
+L["Choose the equipment set to use when you enter a battleground or arena."] = "選擇當你進入戰場時的裝備模組."
 L["Damaged Only"] = "受損顯示"
-L["Equipment"] = "自動換裝"
+L["Enable/Disable the battleground switch."] = "開啓/關閉 戰場切換"
 L["Enable/Disable the display of durability information on the character screen."] = "開啓/關閉 人物窗口裝備耐久度顯示."
 L["Enable/Disable the display of item levels on the character screen."] = "在角色資訊上顯示各裝備裝等"
+L["Enable/Disable the specialization switch."] = "開啓/關閉 專精切換"
+L["Equipment Set"] = "裝備模組"
+L["Equipment"] = "自動換裝"
+L["No Change"] = "不改變"
 L["Only show durabitlity information for items that are damaged."] = "只在裝備受損時顯示耐久度."
+L["Specialization"] = "專精"
+L["You have equipped equipment set: "] = "你已裝備此模組: "
 
 -- Farmer
 L["Automatically drop tools from your bags when leaving the farming area."] = "當你離開農莊範圍時, 自動刪除背包中的工具."

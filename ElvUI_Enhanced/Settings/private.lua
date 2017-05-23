@@ -3,6 +3,15 @@ local E, L, V, P, G = unpack(ElvUI);
 V.general.selectQuestReward = true
 
 V.equipment = {
+	["specialization"] = {
+		["enable"] = false,
+	},
+	["battleground"] = {
+		["enable"] = false,
+	},
+	["primary"] = "none",
+	["secondary"] = "none",
+	["equipmentset"] = "none",
 	["durability"] = {
 		enable = true,
 		onlydamaged = false

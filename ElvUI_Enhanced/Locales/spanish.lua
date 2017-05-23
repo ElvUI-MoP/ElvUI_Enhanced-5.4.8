@@ -4,6 +4,7 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "You are using |cff1784d1ElvUI Enhanced|r |cffff8000(MoP)|r version %s%s|r."
+L["EQUIPMENT_DESC"] = "Adjust the settings for switching your gear set when you change specialization or enter a battleground."
 L["DURABILITY_DESC"] = "Adjust the settings for the durability information on the character screen."
 L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more efficiently on Sunsong Ranch."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
@@ -48,11 +49,20 @@ L["Recap"] = true;
 L["You died."] = true;
 
 -- Equipment
+L["Choose the equipment set to use for your primary specialization."] = true;
+L["Choose the equipment set to use for your secondary specialization."] = true;
+L["Choose the equipment set to use when you enter a battleground or arena."] = true;
 L["Damaged Only"] = true;
-L["Equipment"] = true;
+L["Enable/Disable the battleground switch."] = true;
 L["Enable/Disable the display of durability information on the character screen."] = true;
 L["Enable/Disable the display of item levels on the character screen."] = true;
+L["Enable/Disable the specialization switch."] = true;
+L["Equipment Set"] = true;
+L["Equipment"] = true;
+L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = true;
+L["Specialization"] = true
+L["You have equipped equipment set: "] = true;
 
 -- Farmer
 L["Automatically drop tools from your bags when leaving the farming area."] = true;

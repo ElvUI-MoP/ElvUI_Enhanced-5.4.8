@@ -4,6 +4,7 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Você está a usar |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(MoP)|r versão %s%s|r."
+L["EQUIPMENT_DESC"] = "Ajuste os parâmetros para a mudança de equipamento quando muda de especialização ou entra num campo de batalha."
 L["DURABILITY_DESC"] = "Ajuste as opções para a informação de durabilidade no ecrã de informação do personagem."
 L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more efficiently on Sunsong Ranch."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
@@ -48,11 +49,20 @@ L["Recap"] = true;
 L["You died."] = true;
 
 -- Equipment
+L["Choose the equipment set to use for your primary specialization."] = "Escolha o conjunto de equipamento para usar com a especialização primária."
+L["Choose the equipment set to use for your secondary specialization."] = "Escolha o conjunto de equipamento para usar com a especialização secundária."
+L["Choose the equipment set to use when you enter a battleground or arena."] = "Escolha o conjunto de equipamento para usar quando entra num Campo de batalha."
 L["Damaged Only"] = "Só Danificados"
-L["Equipment"] = "Equipamento"
+L["Enable/Disable the battleground switch."] = "Activar/desactivar a mudança em Campo de batalha."
 L["Enable/Disable the display of durability information on the character screen."] = "Activar/desactivar a informação de durabilidade no ecrã de informação do personagem."
 L["Enable/Disable the display of item levels on the character screen."] = true;
+L["Enable/Disable the specialization switch."] = "Activar/desactivar a mudança com a especialização."
+L["Equipment Set"] = "Conjunto de Equipamento"
+L["Equipment"] = "Equipamento"
+L["No Change"] = "Sem mudança"
 L["Only show durabitlity information for items that are damaged."] = "Só mostrar informação de durabilidade para itens danificados."
+L["Specialization"] = "Especialização"
+L["You have equipped equipment set: "] = "Você tem equipado o conjunto: "
 
 -- Farmer
 L["Automatically drop tools from your bags when leaving the farming area."] = true;
