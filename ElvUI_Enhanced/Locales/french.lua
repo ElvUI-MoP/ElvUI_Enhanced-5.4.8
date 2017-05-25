@@ -48,6 +48,14 @@ L["Killing blow at %s%% health."] = true;
 L["Recap"] = true;
 L["You died."] = true;
 
+-- Decline Duels
+L["Auto decline all duels"] = true;
+L["Auto decline all pet duels"] = true;
+L["Decline Duel"] = true;
+L["Decline Pet Duel"] = true;
+L["Declined duel request from "] = "Décliné les invites en duel de "
+L["Declined pet duel request from "] = "Duel de familier décliné par "
+
 -- Equipment
 L["Choose the equipment set to use for your primary specialization."] = "Choisissez le set d'équipement à utiliser pour votre spécialisation principale."
 L["Choose the equipment set to use for your secondary specialization."] = "Choisissez le set d'équipement à utiliser pour votre spécialisation secondaire."

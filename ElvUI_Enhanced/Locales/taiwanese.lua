@@ -48,6 +48,14 @@ L["Killing blow at %s%% health."] = true;
 L["Recap"] = true;
 L["You died."] = true;
 
+-- Decline Duels
+L["Auto decline all duels"] = "自動拒絕決鬥請求"
+L["Auto decline all pet duels"] = true;
+L["Decline Duel"] = true;
+L["Decline Pet Duel"] = true;
+L["Declined duel request from "] = "已拒絕決鬥請求自"
+L["Declined pet duel request from "] = "拒絕寵物對戰請求 "
+
 -- Equipment
 L["Choose the equipment set to use for your primary specialization."] = "選擇當你使用主專精時的裝備模組."
 L["Choose the equipment set to use for your secondary specialization."] = "選擇當你使用副專精時的裝備模組."

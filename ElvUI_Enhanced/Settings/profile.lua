@@ -21,7 +21,9 @@ P.enhanced = {
 		pvpAutoRelease = false,
 		autoRepChange = false,
 		moverTransparancy = 0.8,
-		hideZoneText = false
+		hideZoneText = false,
+		declineduel = false,
+		declinepetduel = false
 	},
 	actionbars = {
 		transparentActionbars = {

@@ -24,6 +24,40 @@ function M:AutoRelease()
 	end
 end
 
+local DeclineDuel = CreateFrame("Frame")
+function M:LoadDeclineDuel()
+	if not E.db.enhanced.general.declineduel then
+		DeclineDuel:UnregisterAllEvents()
+		return
+	end
+
+	DeclineDuel:RegisterEvent("DUEL_REQUESTED")
+	DeclineDuel:SetScript("OnEvent", function(_, event, name)
+		if(event == "DUEL_REQUESTED") then
+			StaticPopup_Hide("DUEL_REQUESTED")
+			CancelDuel()
+			E:Print(L["Declined duel request from "]..name..".")
+		end
+	end)
+end
+
+local DeclinePetDuel = CreateFrame("Frame")
+function M:LoadDeclinePetDuel()
+	if not E.db.enhanced.general.declinepetduel then
+		DeclinePetDuel:UnregisterAllEvents()
+		return
+	end
+
+	DeclinePetDuel:RegisterEvent("PET_BATTLE_PVP_DUEL_REQUESTED")
+	DeclinePetDuel:SetScript("OnEvent", function(_, event, name)
+		if(event == "PET_BATTLE_PVP_DUEL_REQUESTED") then
+			StaticPopup_Hide("PET_BATTLE_PVP_DUEL_REQUESTED")
+			C_PetBattles.CancelPVPDuel()
+			E:Print(L["Declined pet duel request from "]..name..".")
+		end
+	end)
+end
+
 function M:HideZone()
 	if(E.db.enhanced.general.hideZoneText) then
 		ZoneTextFrame:UnregisterAllEvents()
@@ -37,6 +71,8 @@ end
 function M:Initialize()
 	self:AutoRelease();
 	self:HideZone()
+	self:LoadDeclineDuel()
+	self:LoadDeclinePetDuel()
 	self:LoadQuestReward()
 	self:WatchedFaction();
 	self:LoadMoverTransparancy()

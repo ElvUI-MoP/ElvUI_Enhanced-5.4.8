@@ -48,6 +48,14 @@ L["Killing blow at %s%% health."] = "Объем здоровья при полу
 L["Recap"] = "Информация"
 L["You died."] = "Вы умерли."
 
+-- Decline Duels
+L["Auto decline all duels"] = "Автоматически отклонять все дуэли."
+L["Auto decline all pet duels"] = true;
+L["Decline Duel"] = true;
+L["Decline Pet Duel"] = true;
+L["Declined duel request from "] = "DДуэль отклонена от "
+L["Declined pet duel request from "] = "Битва питомцев отклонена от "
+
 -- Equipment
 L["Choose the equipment set to use for your primary specialization."] = true;
 L["Choose the equipment set to use for your secondary specialization."] = true;

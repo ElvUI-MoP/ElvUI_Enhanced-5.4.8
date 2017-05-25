@@ -54,15 +54,31 @@ local function GeneralOptions()
 				get = function(info) return E.private.general.selectQuestReward end,
 				set = function(info, value) E.private.general.selectQuestReward = value; end
 			},
-			hideZoneText = {
+			declineduel = {
 				order = 6,
+				type = "toggle",
+				name = L["Decline Duel"],
+				desc = L["Auto decline all duels"],
+				get = function(info) return E.db.enhanced.general.declineduel; end,
+				set = function(info, value) E.db.enhanced.general.declineduel = value; M:LoadDeclineDuel() end
+			},
+			declinepetduel = {
+				order = 7,
+				type = "toggle",
+				name = L["Decline Pet Duel"],
+				desc = L["Auto decline all pet duels"],
+				get = function(info) return E.db.enhanced.general.declinepetduel; end,
+				set = function(info, value) E.db.enhanced.general.declinepetduel = value; M:LoadDeclinePetDuel() end
+			},
+			hideZoneText = {
+				order = 8,
 				type = "toggle",
 				name = L["Hide Zone Text"],
 				get = function(info) return E.db.enhanced.general.hideZoneText end,
 				set = function(info, value) E.db.enhanced.general.hideZoneText = value M:HideZone() end
 			},
 			moverTransparancy = {
-				order = 7,
+				order = 9,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
