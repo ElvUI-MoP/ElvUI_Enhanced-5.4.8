@@ -455,4 +455,8 @@ function F:Initialize()
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", "StartFarmBarLoader")
 end
 
-E:RegisterModule(F:GetName())
+local function InitializeCallback()
+	F:Initialize()
+end
+
+E:RegisterModule(F:GetName(), InitializeCallback)

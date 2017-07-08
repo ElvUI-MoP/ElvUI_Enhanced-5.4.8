@@ -88,4 +88,8 @@ function EQ:Initialize()
 	self:UpdateTalentConfiguration()
 end
 
-E:RegisterModule(EQ:GetName())
+local function InitializeCallback()
+	EQ:Initialize()
+end
+
+E:RegisterModule(EQ:GetName(), InitializeCallback)

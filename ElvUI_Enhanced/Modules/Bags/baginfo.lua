@@ -138,4 +138,8 @@ function BI:Initialize()
 	BI:ToggleSettings()
 end
 
-E:RegisterModule(BI:GetName())
+local function InitializeCallback()
+	BI:Initialize()
+end
+
+E:RegisterModule(BI:GetName(), InitializeCallback)
