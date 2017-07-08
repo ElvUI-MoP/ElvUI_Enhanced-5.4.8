@@ -21,6 +21,7 @@ L["Transparent Buttons"] = "Прозрачные кнопки"
 L["Replaces long reports from damage meters with a clickeble hyperlink to reduce chat spam."] = "Заменяет длинные отчеты от аддонов для измерения УВС на гиперссылку, сокращая уровень спама в чате."
 
 -- Datatext
+L["Combat Indicator"] = true;
 L["Datatext Disabled"] = true;
 L["Distance"] = true;
 L["Enhanced Time Color"] = true;
@@ -28,9 +29,9 @@ L["Equipped"] = true;
 L["In Combat"] = true;
 L["New Mail"] = "Новое письмо"
 L["No Mail"] = "Нет писем"
-L["Not Learned!"] = true;
 L["Out of Combat"] = true;
-L["Ready!"] = true;
+L["Reincarnation"] = true;
+L["Target Range"] = true;
 L["Total"] = "Всего"
 L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = true;
 
