@@ -202,122 +202,126 @@ local function EquipmentOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Equipment"])
 			},
-			intro = {
+			equipmentSwitch = {
 				order = 2,
-				type = "description",
-				name = L["EQUIPMENT_DESC"],
-			},
-			specialization = {
-				order = 3,
 				type = "group",
-				name = L["Specialization"],
+				name = PAPERDOLL_EQUIPMENTMANAGER,
 				guiInline = true,
-				disabled = function() return GetNumEquipmentSets() == 0 end,
 				args = {
-					enable = {
+					intro = {
 						order = 1,
-						type = "toggle",
-						name = L["Enable"],
-						desc = L["Enable/Disable the specialization switch."],
-						get = function(info) return E.private.equipment.specialization.enable end,
-						set = function(info, value) E.private.equipment.specialization.enable = value end
+						type = "description",
+						name = L["EQUIPMENT_DESC"],
 					},
-					primary = {
-						type = "select",
+					specialization = {
 						order = 2,
-						name = TALENT_SPEC_PRIMARY,
-						desc = L["Choose the equipment set to use for your primary specialization."],
-						disabled = function() return not E.private.equipment.specialization.enable end,
-						values = function()
-							local sets = { ["none"] = L["No Change"] }
-							for i = 1, GetNumEquipmentSets() do
-								local name = GetEquipmentSetInfo(i)
-								if name then
-									sets[name] = name
+						type = "group",
+						name = L["Specialization"],
+						disabled = function() return GetNumEquipmentSets() == 0 end,
+						args = {
+							enable = {
+								order = 1,
+								type = "toggle",
+								name = L["Enable"],
+								desc = L["Enable/Disable the specialization switch."],
+								get = function(info) return E.private.equipment.specialization.enable end,
+								set = function(info, value) E.private.equipment.specialization.enable = value end
+							},
+							primary = {
+								type = "select",
+								order = 2,
+								name = TALENT_SPEC_PRIMARY,
+								desc = L["Choose the equipment set to use for your primary specialization."],
+								disabled = function() return not E.private.equipment.specialization.enable end,
+								values = function()
+									local sets = {["none"] = L["No Change"]}
+									for i = 1, GetNumEquipmentSets() do
+										local name = GetEquipmentSetInfo(i)
+										if name then
+											sets[name] = name
+										end
+									end
+									tsort(sets, function(a, b) return a < b end)
+									return sets
 								end
-							end
-							tsort(sets, function(a, b) return a < b end)
-							return sets
-						end
-					},
-					secondary = {
-						order = 3,
-						type = "select",
-						name = TALENT_SPEC_SECONDARY,
-						desc = L["Choose the equipment set to use for your secondary specialization."],
-						disabled = function() return not E.private.equipment.specialization.enable end,
-						values = function()
-							local sets = { ["none"] = L["No Change"] }
-							for i = 1, GetNumEquipmentSets() do
-								local name, _, _, _, _, _, _, _, _ = GetEquipmentSetInfo(i)
-								if name then
-									sets[name] = name
+							},
+							secondary = {
+								order = 3,
+								type = "select",
+								name = TALENT_SPEC_SECONDARY,
+								desc = L["Choose the equipment set to use for your secondary specialization."],
+								disabled = function() return not E.private.equipment.specialization.enable end,
+								values = function()
+									local sets = {["none"] = L["No Change"]}
+										for i = 1, GetNumEquipmentSets() do
+										local name, _, _, _, _, _, _, _, _ = GetEquipmentSetInfo(i)
+										if name then
+											sets[name] = name
+										end
+									end
+									tsort(sets, function(a, b) return a < b end)
+									return sets
 								end
-							end
-							tsort(sets, function(a, b) return a < b end)
-							return sets
-						end
-					}
-				}
-			},
-			battleground = {
-				order = 4,
-				type = "group",
-				name = VOICE_CHAT_BATTLEGROUND,
-				guiInline = true,
-				disabled = function() return GetNumEquipmentSets() == 0 end,
-				args = {
-					enable = {
-						order = 1,
-						type = "toggle",
-						name = L["Enable"],
-						desc = L["Enable/Disable the battleground switch."],
-						get = function(info) return E.private.equipment.battleground.enable end,
-						set = function(info, value) E.private.equipment.battleground.enable = value end
-					},
-					equipmentset = {
-						order = 2,
-						type = "select",
-						name = L["Equipment Set"],
-						desc = L["Choose the equipment set to use when you enter a battleground or arena."],
-						disabled = function() return not E.private.equipment.battleground.enable end,
-						values = function()
-							local sets = {
-								["none"] = L["No Change"],
 							}
-							for i = 1, GetNumEquipmentSets() do
-								local name = GetEquipmentSetInfo(i)
-								if name then
-									sets[name] = name
+						}
+					},
+					battleground = {
+						order = 3,
+						type = "group",
+						name = VOICE_CHAT_BATTLEGROUND,
+						disabled = function() return GetNumEquipmentSets() == 0 end,
+						args = {
+							enable = {
+								order = 1,
+								type = "toggle",
+								name = L["Enable"],
+								desc = L["Enable/Disable the battleground switch."],
+								get = function(info) return E.private.equipment.battleground.enable end,
+								set = function(info, value) E.private.equipment.battleground.enable = value end
+							},
+							equipmentset = {
+								order = 2,
+								type = "select",
+								name = L["Equipment Set"],
+								desc = L["Choose the equipment set to use when you enter a battleground or arena."],
+								disabled = function() return not E.private.equipment.battleground.enable end,
+								values = function()
+									local sets = {["none"] = L["No Change"]}
+									for i = 1, GetNumEquipmentSets() do
+										local name = GetEquipmentSetInfo(i)
+										if name then
+											sets[name] = name
+										end
+									end
+									tsort(sets, function(a, b) return a < b end)
+									return sets
 								end
-							end
-							tsort(sets, function(a, b) return a < b end)
-							return sets
-						end
+							}
+						}
 					}
 				}
-			},
-			intro2 = {
-				order = 5,
-				type = "description",
-				name = L["DURABILITY_DESC"]
 			},
 			durability = {
-				order = 6,
+				order = 3,
 				type = "group",
 				name = DURABILITY,
 				guiInline = true,
 				get = function(info) return E.private.equipment.durability[ info[#info] ] end,
 				set = function(info, value) E.private.equipment.durability[ info[#info] ] = value PD:UpdatePaperDoll() end,
 				args = {
-					enable = {
+					info = {
 						order = 1,
+						type = "description",
+						name = L["DURABILITY_DESC"]
+					},
+					enable = {
+						order = 2,
 						type = "toggle",
 						name = L["Enable"],
 						desc = L["Enable/Disable the display of durability information on the character screen."]
 					},
 					onlydamaged = {
-						order = 2,
+						order = 3,
 						type = "toggle",
 						name = L["Damaged Only"],
 						desc = L["Only show durabitlity information for items that are damaged."],
@@ -326,15 +330,20 @@ local function EquipmentOptions()
 				}
 			},
 			itemlevel = {
-				order = 7,
+				order = 4,
 				type = "group",
 				name = STAT_AVERAGE_ITEM_LEVEL,
 				guiInline = true,
 				get = function(info) return E.private.equipment.itemlevel[ info[#info] ] end,
 				set = function(info, value) E.private.equipment.itemlevel[ info[#info] ] = value PD:UpdatePaperDoll() end,
 				args = {
+					info = {
+ 						order = 1,
+						type = "description",
+						name = L["ITEMLEVEL_DESC"]
+					},
 					enable = {
-						order = 1,
+						order = 2,
 						type = "toggle",
 						name = L["Enable"],
 						desc = L["Enable/Disable the display of item levels on the character screen."]
@@ -342,7 +351,7 @@ local function EquipmentOptions()
 				}
 			},
 			misc = {
-				order = 8,
+				order = 5,
 				type = "group",
 				name = L["Equipment Set Overlay"],
 				guiInline = true,
@@ -478,8 +487,24 @@ local function TooltipOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Tooltip"])
 			},
+			itemQualityBorderColor = {
+ 				order = 2,
+				type = "toggle",
+				name = L["Item Border Color"],
+				desc = L["Colorize the tooltip border based on item quality."],
+				get = function(info) return E.db.enhanced.tooltip.itemQualityBorderColor end,
+				set = function(info, value) E.db.enhanced.tooltip.itemQualityBorderColor = value; E:GetModule("Enhanced_ItemBorderColor"):ToggleState(); end
+			},
+			progressInfo = {
+				order = 3,
+				type = "toggle",
+				name = L["Progression Info"],
+				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
+				get = function(info) return E.db.enhanced.tooltip.progressInfo; end,
+				set = function(info, value) E.db.enhanced.tooltip.progressInfo = value; end
+			},
 			tooltipIcon = {
-				order = 2,
+				order = 4,
 				type = "group",
 				name = L["Tooltip Icon"],
 				guiInline = true,
@@ -526,14 +551,6 @@ local function TooltipOptions()
 						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
 					}
 				}
-			},
-			progressInfo = {
-				order = 3,
-				type = "toggle",
-				name = L["Progression Info"],
-				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
-				get = function(info) return E.db.enhanced.tooltip.progressInfo; end,
-				set = function(info, value) E.db.enhanced.tooltip.progressInfo = value; end
 			}
 		}
 	};
