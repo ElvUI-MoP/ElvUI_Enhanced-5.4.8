@@ -158,6 +158,7 @@ function PD:UpdatePaperDoll(inspect)
 				if itemLink then
 					itemLevel = self:GetItemLevel(unit, itemLink)
 					if itemLevel and avgEquipItemLevel then
+						frame.ItemLevel:FontTemplate(E.LSM:Fetch("font", E.db.bags.itemLevelFont), E.db.bags.itemLevelFontSize, E.db.bags.itemLevelFontOutline);
 						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel-10 and 0 or (itemLevel > avgEquipItemLevel + 10 and 1 or (2)))], itemLevel)
 					end
 				end
@@ -171,6 +172,7 @@ function PD:UpdatePaperDoll(inspect)
 				current, maximum = GetInventoryItemDurability(slot)
 				if current and maximum and (not E.private.equipment.durability.onlydamaged or current < maximum) then
 					r, g, b = E:ColorGradient((current / maximum), 1, 0, 0, 1, 1, 0, 0, 1, 0)
+					frame.DurabilityInfo:FontTemplate(E.LSM:Fetch("font", E.db.bags.itemLevelFont), E.db.bags.itemLevelFontSize, E.db.bags.itemLevelFontOutline);
 					frame.DurabilityInfo:SetFormattedText("%s%.0f%%|r", E:RGBToHex(r, g, b), (current / maximum) * 100)
 				end
 			end
