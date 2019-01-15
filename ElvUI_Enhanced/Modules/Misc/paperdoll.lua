@@ -160,6 +160,9 @@ function PD:UpdatePaperDoll(inspect)
 					if itemLevel and avgEquipItemLevel then
 						frame.ItemLevel:FontTemplate(E.LSM:Fetch("font", E.db.bags.itemLevelFont), E.db.bags.itemLevelFontSize, E.db.bags.itemLevelFontOutline);
 						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel-10 and 0 or (itemLevel > avgEquipItemLevel + 10 and 1 or (2)))], itemLevel)
+						frame.ItemLevel:SetJustifyV("BOTTOM")
+						frame.ItemLevel:SetJustifyH("RIGHT")
+						frame.ItemLevel:SetAllPoints(frame)
 					end
 				end
 			end
@@ -174,6 +177,9 @@ function PD:UpdatePaperDoll(inspect)
 					r, g, b = E:ColorGradient((current / maximum), 1, 0, 0, 1, 1, 0, 0, 1, 0)
 					frame.DurabilityInfo:FontTemplate(E.LSM:Fetch("font", E.db.bags.itemLevelFont), E.db.bags.itemLevelFontSize, E.db.bags.itemLevelFontOutline);
 					frame.DurabilityInfo:SetFormattedText("%s%.0f%%|r", E:RGBToHex(r, g, b), (current / maximum) * 100)
+					frame.DurabilityInfo:SetJustifyV("TOP")
+					frame.DurabilityInfo:SetJustifyH("LEFT")
+					frame.DurabilityInfo:SetAllPoints(frame)
 				end
 			end
 		end

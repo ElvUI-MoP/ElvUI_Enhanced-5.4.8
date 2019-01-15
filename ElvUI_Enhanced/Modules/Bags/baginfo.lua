@@ -74,8 +74,8 @@ function BI:UpdateContainerFrame(frame, bag, slot)
 		frame.equipmentinfo = frame:CreateFontString(nil, "OVERLAY")
 		frame.equipmentinfo:FontTemplate(E.LSM:Fetch("font", E.db.bags.itemLevelFont), E.db.bags.itemLevelFontSize, E.db.bags.itemLevelFontOutline);
 		frame.equipmentinfo:SetWordWrap(true)
-		frame.equipmentinfo:SetJustifyH("CENTER")
-		frame.equipmentinfo:SetJustifyV("MIDDLE")
+		frame.equipmentinfo:SetJustifyV("TOP")
+		frame.equipmentinfo:SetJustifyH("LEFT")
 	end
 
 	if (frame.equipmentinfo) then
