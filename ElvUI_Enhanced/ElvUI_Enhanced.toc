@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Author: Bunny, Apollyon
+## Author: Bunny, Apollyon, Dethius
 ## Version: 5.4.8-1.01
 ## Title: |cff00dd91E|r|cffe5e3e3lvUI|r |cff00dd91E|r|cffe5e3e3nhanced|r
 ## Notes: Plugin-Enhancements for |cffA11313E|r|cffC4C4C4lvUI|r.
@@ -12,7 +12,7 @@ Developer\Load_Developer.xml
 Libraries\Load_Libraries.xml
 Locales\Load_Locales.xml
 Media\Load_Media.xml
-ElvUI_Enhanced.lua
 Settings\Load_Settings.xml
+ElvUI_Enhanced.lua
 Config\Load_Config.xml
-Modules\load_Modules.xml
+Modules\Load_Modules.xml
