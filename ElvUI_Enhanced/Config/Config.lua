@@ -189,7 +189,8 @@ end
 -- Actionbars
 local function ActionbarOptions()
 	local AB = E:GetModule("ActionBars")
-	local EAB = E:GetModule("Enhanced_ActionBars")
+	-- TODO uncomment when Enhanced_ActionBars is implemented
+	-- local EAB = E:GetModule("Enhanced_ActionBars")
 	local ETAB = E:GetModule("Enhanced_TransparentActionbars")
 
 	local config = {
@@ -238,38 +239,39 @@ local function ActionbarOptions()
 						},
 						disabled = function() return not E.private.actionbar.enable end
 					},
-					equipped = {
-						order = 3,
-						type = "group",
-						name = L["Equipped Item Border"],
-						guiInline = true,
-						args = {
-							equipped = {
-								order = 1,
-								type = "toggle",
-								name = L["Enable"],
-								get = function(info) return E.db.enhanced.actionbars[ info[#info] ] end,
-								set = function(info, value) E.db.enhanced.actionbars[ info[#info] ] = value EAB:UpdateCallback() AB:UpdateButtonSettings() end
-							},
-							equippedColor = {
-								order = 2,
-								type = "color",
-								name = L["Border Color"],
-								get = function(info)
-									local t = E.db.enhanced.actionbars[ info[#info] ]
-									local d = P.enhanced.actionbars[ info[#info] ]
-									return t.r, t.g, t.b, t.a, d.r, d.g, d.b
-								end,
-								set = function(info, r, g, b)
-									local t = E.db.enhanced.actionbars[ info[#info] ]
-									t.r, t.g, t.b = r, g, b
-									AB:UpdateButtonSettings()
-								end,
-								disabled = function() return not E.db.enhanced.actionbars.equipped end
-							}
-						},
-						disabled = function() return not E.private.actionbar.enable end
-					}
+					-- TODO uncomment when Enhanced_ActionBars is implemented
+					-- equipped = {
+					-- 	order = 3,
+					-- 	type = "group",
+					-- 	name = L["Equipped Item Border"],
+					-- 	guiInline = true,
+					-- 	args = {
+					-- 		equipped = {
+					-- 			order = 1,
+					-- 			type = "toggle",
+					-- 			name = L["Enable"],
+					-- 			get = function(info) return E.db.enhanced.actionbars[ info[#info] ] end,
+					-- 			set = function(info, value) E.db.enhanced.actionbars[ info[#info] ] = value EAB:UpdateCallback() AB:UpdateButtonSettings() end
+					-- 		},
+					-- 		equippedColor = {
+					-- 			order = 2,
+					-- 			type = "color",
+					-- 			name = L["Border Color"],
+					-- 			get = function(info)
+					-- 				local t = E.db.enhanced.actionbars[ info[#info] ]
+					-- 				local d = P.enhanced.actionbars[ info[#info] ]
+					-- 				return t.r, t.g, t.b, t.a, d.r, d.g, d.b
+					-- 			end,
+					-- 			set = function(info, r, g, b)
+					-- 				local t = E.db.enhanced.actionbars[ info[#info] ]
+					-- 				t.r, t.g, t.b = r, g, b
+					-- 				AB:UpdateButtonSettings()
+					-- 			end,
+					-- 			disabled = function() return not E.db.enhanced.actionbars.equipped end
+					-- 		}
+					-- 	},
+					-- 	disabled = function() return not E.private.actionbar.enable end
+					-- }
 				}
 			},
 			pet = {
@@ -865,7 +867,7 @@ local function FarmerOptions()
 end
 
 local function UnitFrameOptions()
-	local TC = E:GetModule("Enhanced_TargetClass")
+	local TC = E:GetModule("TargetClass")
 
 	local config = {
 		order = 9,
@@ -1831,14 +1833,14 @@ function addon:GetOptions()
 			generalGroup = GeneralOptions(),
 			actionbarGroup = ActionbarOptions(),
 			chatGroup = ChatOptions(),
-			datatextsGroup = DataTextsOptions(),
+			-- datatextsGroup = DataTextsOptions(), -- TODO uncomment when implemented
 			minimapGroup = MinimapOptions(),
 			namePlatesGroup = NamePlatesOptions(),
 			tooltipGroup = TooltipOptions(),
 			unitframesGroup = UnitFrameOptions(),
 			watchFrameGroup = WatchFrameOptions(),
 			farmerOptions = FarmerOptions(),
-			miscGroup = MiscOptions()
+			-- miscGroup = MiscOptions() -- TODO uncomment when implemented
 		}
 	}
 end
