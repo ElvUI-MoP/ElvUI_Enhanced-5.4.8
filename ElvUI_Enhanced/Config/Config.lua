@@ -70,7 +70,7 @@ local function GeneralOptions()
 				name = L["Decline Pet Duel"],
 				desc = L["Auto decline all pet duels"],
 				get = function(info) return E.db.enhanced.general.declinepetduel; end,
-				set = function(info, value) E.db.enhanced.general.declinepetduel = value; M:LoadDeclinePetDuel() end
+				set = function(info, value) E.db.enhanced.general.declinepetduel = value; M:DeclinePetDuel() end
 			},
 			hideZoneText = {
 				order = 8,
@@ -1791,12 +1791,12 @@ function addon:GetOptions()
 		E.Options.args.elvuiPlugins = {
 			order = 50,
 			type = "group",
-			name = "|cff00b30bE|r|cffC4C4C4lvUI_|r|cff00b30bP|r|cffC4C4C4lugins|r",
+			name = "|cff00dd91E|r|cffe5e3e3lvUI|r|cff00b30bP|r|cffe5e3e3lugins|r",
 			args = {
 				header = {
 					order = 0,
 					type = "header",
-					name = "|cff00b30bE|r|cffC4C4C4lvUI_|r|cff00b30bP|r|cffC4C4C4lugins|r"
+					name = "|cff00dd91E|r|cffe5e3e3lvUI|r|cff00dd91P|r|cffe5e3e3lugins|r"
 				},
 				enhancedShortcut = {
 					type = "execute",
