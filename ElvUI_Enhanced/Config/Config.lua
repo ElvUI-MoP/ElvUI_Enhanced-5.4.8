@@ -1130,10 +1130,12 @@ end
 
 -- Misc
 local function MiscOptions()
+	-- TODO finish implementing commented features
 	local PD = E:GetModule("Enhanced_PaperDoll")
-	local RM = E:GetModule("RaidMarkerBar")
+	-- TODO local RM = E:GetModule("RaidMarkerBar")
 	local WF = E:GetModule("Enhanced_WatchFrame")
-	local B = E:GetModule("Enhanced_Blizzard")
+	-- TODO local B = E:GetModule("Enhanced_Blizzard")
+	-- TODO local CF = E:GetModule("Enhanced_CharacterFrame")
 
 	local choices = {
 		["NONE"] = L["None"],
@@ -1179,7 +1181,7 @@ local function MiscOptions()
 								get = function(info) return E.private.enhanced.character.enable end,
 								set = function(info, value) E.private.enhanced.character.enable = value E:StaticPopup_Show("PRIVATE_RL") end
 							},
-							paperdollBackgrounds = {
+							--[[ TODO paperdollBackgrounds = {
 								order = 3,
 								type = "group",
 								name = L["Paperdoll Backgrounds"],
@@ -1190,7 +1192,7 @@ local function MiscOptions()
 										type = "toggle",
 										name = L["Character"],
 										get = function(info) return E.db.enhanced.character.characterBackground end,
-										set = function(info, value) E.db.enhanced.character.characterBackground = value E:GetModule("Enhanced_CharacterFrame"):UpdateCharacterModelFrame() end,
+										set = function(info, value) E.db.enhanced.character.characterBackground = value CF:UpdateCharacterModelFrame() end,
 										disabled = function() return not E.private.enhanced.character.enable end
 									},
 									desaturateCharacter = {
@@ -1198,7 +1200,7 @@ local function MiscOptions()
 										type = "toggle",
 										name = L["Desaturate"],
 										get = function(info) return E.db.enhanced.character.desaturateCharacter end,
-										set = function(info, value) E.db.enhanced.character.desaturateCharacter = value E:GetModule("Enhanced_CharacterFrame"):UpdateCharacterModelFrame() end,
+										set = function(info, value) E.db.enhanced.character.desaturateCharacter = value CF:UpdateCharacterModelFrame() end,
 										disabled = function() return not E.private.enhanced.character.enable or not E.db.enhanced.character.characterBackground end
 									},
 									spacer = {
@@ -1211,7 +1213,7 @@ local function MiscOptions()
 										type = "toggle",
 										name = L["Pet"],
 										get = function(info) return E.db.enhanced.character.petBackground end,
-										set = function(info, value) E.db.enhanced.character.petBackground = value E:GetModule("Enhanced_CharacterFrame"):UpdatePetModelFrame() end,
+										set = function(info, value) E.db.enhanced.character.petBackground = value CF:UpdatePetModelFrame() end,
 										disabled = function() return not E.private.enhanced.character.enable end
 									},
 									desaturatePet = {
@@ -1219,7 +1221,7 @@ local function MiscOptions()
 										type = "toggle",
 										name = L["Desaturate"],
 										get = function(info) return E.db.enhanced.character.desaturatePet end,
-										set = function(info, value) E.db.enhanced.character.desaturatePet = value E:GetModule("Enhanced_CharacterFrame"):UpdatePetModelFrame() end,
+										set = function(info, value) E.db.enhanced.character.desaturatePet = value CF:UpdatePetModelFrame() end,
 										disabled = function() return not E.private.enhanced.character.enable or not E.db.enhanced.character.petBackground end
 									},
 									spacer2 = {
@@ -1244,10 +1246,10 @@ local function MiscOptions()
 										disabled = function() return not E.private.enhanced.character.enable or not E.db.enhanced.character.inspectBackground end
 									}
 								}
-							}
+							}]]
 						}
 					},
-					dressingRoom = {
+					--[[ TODO dressingRoom = {
 						order = 3,
 						type = "group",
 						name = L["Dressing Room"],
@@ -1285,7 +1287,7 @@ local function MiscOptions()
 								disabled = function() return not E.db.enhanced.blizzard.dressUpFrame.background end
 							}
 						}
-					}
+					}]]
 				}
 			},
 			equipment = {
@@ -1495,9 +1497,10 @@ local function MiscOptions()
 							}
 						}
 					}
+					-- TODO re-add equipmentset config
 				}
 			},
-			errorFrame = {
+			--[[ TODO errorFrame = {
 				order = 4,
 				type = "group",
 				name = L["Error Frame"],
@@ -1556,7 +1559,7 @@ local function MiscOptions()
 						set = function(info, value) E.db.enhanced.blizzard.errorFrame.height = value B:ErrorFrameSize() end
 					}
 				}
-			},
+			},]]
 			loseOfControl = {
 				order = 5,
 				type = "group",
@@ -1611,7 +1614,7 @@ local function MiscOptions()
 					}
 				}
 			},
-			raidMarkerBar = {
+			--[[ TODO raidMarkerBar = {
 				order = 6,
 				type = "group",
 				name = L["Raid Markers"],
@@ -1711,7 +1714,7 @@ local function MiscOptions()
 						set = function(info, value) E.db.enhanced.raidmarkerbar.customVisibility = value RM:Visibility() end
 					}
 				}
-			},
+			},]]
 			watchFrame = {
 				order = 7,
 				type = "group",
@@ -1840,7 +1843,7 @@ function addon:GetOptions()
 			unitframesGroup = UnitFrameOptions(),
 			watchFrameGroup = WatchFrameOptions(),
 			farmerOptions = FarmerOptions(),
-			-- miscGroup = MiscOptions() -- TODO uncomment when implemented
+			miscGroup = MiscOptions()
 		}
 	}
 end

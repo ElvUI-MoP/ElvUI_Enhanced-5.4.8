@@ -52,7 +52,7 @@ local spamNextLines = {
 }
 
 function EDL:FilterLine(event, source, msg, ...)
-	if not msg return end
+	if not msg then return end
 
 	for _, line in ipairs(spamNextLines) do
 		if msg:match(line) then
