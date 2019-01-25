@@ -201,17 +201,17 @@ local function OpenMailFrame_UpdateButtonPositions()
 	end
 end
 
-local function QuestFrameItems_Update(questState)
-	local numQuestRewards = questState == "QuestLog" and GetNumQuestLogRewards() or GetNumQuestRewards()
-	local numQuestChoices = questState == "QuestLog" and GetNumQuestLogChoices() or GetNumQuestChoices()
-	local numQuestSpellRewards = questState == "QuestLog" and GetQuestLogRewardSpell() or GetRewardSpell()
+local function QuestInfo_Display()
+	local numQuestRewards = QuestInfoFrame.questLog and GetNumQuestLogRewards() or GetNumQuestRewards()
+	local numQuestChoices = QuestInfoFrame.questLog and GetNumQuestLogChoices() or GetNumQuestChoices()
+	local numQuestSpellRewards = QuestInfoFrame.questLog and GetQuestLogRewardSpell() or GetRewardSpell()
 	local rewardsCount = numQuestChoices + numQuestRewards + (numQuestSpellRewards and 1 or 0)
 
 	if rewardsCount > 0 then
 		for i = 1, rewardsCount do
-			local item = _G[questState.."Item"..i]
-			local link = item.type and (questState == "QuestLog" and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
-			local _, _, _, _, isUsable = (questState == "QuestLog" and GetQuestLogChoiceInfo or GetQuestItemInfo)(questState == "QuestLog" and i or item.type, i)
+			local item = _G["QuestInfoItem"..i]
+			local link = item.type and (QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
+			local _, _, _, _, isUsable = (QuestInfoFrame.questLog and GetQuestLogChoiceInfo or GetQuestItemInfo)(QuestInfoFrame.questLog and i or item.type, i)
 
 			if isUsable and IsAlreadyKnown(link) then
 				SetItemButtonTextureVertexColor(item, knownColor.r, knownColor.g, knownColor.b)
@@ -242,9 +242,9 @@ function AK:SetHooks()
 	if not self:IsHooked("OpenMailFrame_UpdateButtonPositions") then
 		self:SecureHook("OpenMailFrame_UpdateButtonPositions", OpenMailFrame_UpdateButtonPositions)
 	end
-	-- TODO if not self:IsHooked("QuestFrameItems_Update") then
-	-- 	self:SecureHook("QuestFrameItems_Update", QuestFrameItems_Update)
-	-- end
+	if not self:IsHooked("QuestInfo_Display") then
+		self:SecureHook("QuestInfo_Display", QuestInfo_Display)
+	end
 
 	if not self.auctionHooked and IsAddOnLoaded("Blizzard_AuctionUI") then
 		if not self:IsHooked("AuctionFrameBrowse_Update") then
