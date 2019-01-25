@@ -145,11 +145,7 @@ local function GeneralOptions()
 				name = L["Quest ItemLevel"],
 				desc = L["Display the item level on the Quest frames, to change the font you have to set it in ElvUI - Bags - ItemLevel"],
 				get = function(info) return E.db.enhanced.general.questItemLevel end,
-				set = function(info, value)
-					E.db.enhanced.general.questItemLevel = value
-					M:QuestItemLevel()
-					E:StaticPopup_Show("PRIVATE_RL")
-				end
+				set = function(info, value) E.db.enhanced.general.questItemLevel = value M:QuestItemLevel() E:StaticPopup_Show("PRIVATE_RL") end
 			},
 			worldMapBlips = {
 				order = 17,
