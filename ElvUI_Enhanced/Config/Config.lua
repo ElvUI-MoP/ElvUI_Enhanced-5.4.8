@@ -1788,12 +1788,12 @@ function addon:GetOptions()
 		E.Options.args.elvuiPlugins = {
 			order = 50,
 			type = "group",
-			name = "|cff00dd91E|r|cffe5e3e3lvUI|r|cff00b30bP|r|cffe5e3e3lugins|r",
+			name = "|cff00dd91E|r|cffe5e3e3lvUI |r|cff00dd91P|r|cffe5e3e3lugins|r",
 			args = {
 				header = {
 					order = 0,
 					type = "header",
-					name = "|cff00dd91E|r|cffe5e3e3lvUI|r|cff00dd91P|r|cffe5e3e3lugins|r"
+					name = "|cff00dd91E|r|cffe5e3e3lvUI |r|cff00dd91P|r|cffe5e3e3lugins|r"
 				},
 				enhancedShortcut = {
 					type = "execute",
