@@ -133,11 +133,13 @@ function PD:UpdatePaperDoll(unit)
 	if not self.initialized then return end
 
 	if InCombatLockdown() then
-		self:RegisterEvent("PLAYER_REGEN_ENABLED", function(event) self:OnEvent(event, unit) end)
+		PD:RegisterEvent("PLAYER_REGEN_ENABLED", "UpdatePaperDoll", inspect)
 		return
-	end
+	else
+		PD:UnregisterEvent("PLAYER_REGEN_ENABLED")
+ 	end
 
-	unit = (unit ~= "player" and InspectFrame) and InspectFrame.unit or unit
+	local unit = (inspect and InspectFrame) and InspectFrame.unit or "player"
 	if not unit then return end
 	if unit and not CanInspect(unit, false) then return end
 
@@ -162,7 +164,6 @@ function PD:UpdatePaperDoll(unit)
 
 					if E.db.enhanced.equipment.itemlevel.qualityColor then
 						frame.ItemLevel:SetTextColor()
-						--local rarity = GetInventoryItemQuality(unit, slotId)
 						if rarity and rarity > 1 then
 							frame.ItemLevel:SetTextColor(GetItemQualityColor(rarity))
 						else
@@ -270,7 +271,7 @@ function PD:OnEvent(event, unit)
 	end
 end
 
-local function UpdateTalentTab()
+local function InspectFrame_UpdateTabs()
 	PD:UpdatePaperDoll(InspectFrame.unit)
 end
 
@@ -284,7 +285,8 @@ function PD:InitialUpdatePaperDoll()
 	self:BuildInfoText("Character")
 	self:BuildInfoText("Inspect")
 
-	-- self:SecureHook("InspectFrame_UpdateTalentTab", UpdateTalentTab)
+	self:SecureHook("InspectFrame_UpdateTabs", InspectFrame_UpdateTabs)
+
 	self:ScheduleTimer("UpdatePaperDoll", 5, false)
 
 	self.initialized = true
@@ -302,16 +304,16 @@ function PD:ToggleState(init)
 
 		self:UpdatePaperDoll("player")
 
-		if self.initialized and not self:IsHooked("InspectFrame_UpdateTalentTab", UpdateTalentTab) then
-			self:SecureHook("InspectFrame_UpdateTalentTab", UpdateTalentTab)
+		if self.initialized and not self:IsHooked("InspectFrame_UpdateTabs", InspectFrame_UpdateTabs) then
+			self:SecureHook("InspectFrame_UpdateTabs", InspectFrame_UpdateTabs)
 		end
 
 		self:RegisterEvent("UPDATE_INVENTORY_DURABILITY", "OnEvent")
 		self:RegisterEvent("UNIT_INVENTORY_CHANGED", "OnEvent")
-		-- PD:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "UpdatePaperDoll", false)
-		-- PD:RegisterEvent("SOCKET_INFO_UPDATE", "UpdatePaperDoll", false)
-		-- PD:RegisterEvent("COMBAT_RATING_UPDATE", "UpdatePaperDoll", false)
-		-- PD:RegisterEvent("MASTERY_UPDATE", "UpdatePaperDoll", false)
+		self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "UpdatePaperDoll", false)
+		self:RegisterEvent("SOCKET_INFO_UPDATE", "UpdatePaperDoll", false)
+		self:RegisterEvent("COMBAT_RATING_UPDATE", "UpdatePaperDoll", false)
+		self:RegisterEvent("MASTERY_UPDATE", "UpdatePaperDoll", false)
 	elseif self.initialized then
 		self:UnhookAll()
 		self:UnregisterAllEvents()
