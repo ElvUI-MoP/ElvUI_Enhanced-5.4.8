@@ -121,10 +121,7 @@ local function GeneralOptions()
 				name = L["Already Known"],
 				desc = L["Change color of item icons which already known."],
 				get = function(info) return E.db.enhanced.general.alreadyKnown end,
-				set = function(info, value)
-					E.db.enhanced.general.alreadyKnown = value
-					E:GetModule("Enhanced_AlreadyKnown"):ToggleState()
-				end
+				set = function(info, value) E.db.enhanced.general.alreadyKnown = value E:GetModule("Enhanced_AlreadyKnown"):ToggleState() end
 			},
 			altBuyMaxStack = {
 				order = 14,
