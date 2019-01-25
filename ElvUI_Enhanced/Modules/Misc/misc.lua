@@ -73,8 +73,8 @@ function M:Initialize()
 	self:WatchedFaction()
 	self:LoadMoverTransparancy()
 	self:QuestLevelToggle()
-	-- TODO self:BuyStackToggle()
-	-- TODO self:MerchantItemLevel()
+	self:BuyStackToggle()
+	self:MerchantItemLevel()
 	-- TODO self:WorldMapBlips()
 end
 

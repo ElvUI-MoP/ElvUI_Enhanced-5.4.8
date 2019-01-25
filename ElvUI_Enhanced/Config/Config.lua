@@ -132,10 +132,7 @@ local function GeneralOptions()
 				name = L["Alt-Click Merchant"],
 				desc = L["Holding Alt key while buying something from vendor will now buy an entire stack."],
 				get = function(info) return E.db.enhanced.general.altBuyMaxStack end,
-				set = function(info, value)
-					E.db.enhanced.general.altBuyMaxStack = value
-					M:BuyStackToggle()
-				end
+				set = function(info, value) E.db.enhanced.general.altBuyMaxStack = value M:BuyStackToggle() end
 			},
 			merchantItemLevel = {
 				order = 15,
@@ -143,10 +140,7 @@ local function GeneralOptions()
 				name = L["Merchant ItemLevel"],
 				desc = L["Display the item level on the MerchantFrame, to change the font you have to set it in ElvUI - Bags - ItemLevel"],
 				get = function(info) return E.db.enhanced.general.merchantItemLevel end,
-				set = function(info, value)
-					E.db.enhanced.general.merchantItemLevel = value
-					M:MerchantItemLevel()
-				end
+				set = function(info, value) E.db.enhanced.general.merchantItemLevel = value M:MerchantItemLevel() end
 			},
 			questItemLevel = {
 				order = 16,
