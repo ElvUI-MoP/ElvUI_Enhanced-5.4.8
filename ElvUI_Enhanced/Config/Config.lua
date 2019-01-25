@@ -43,10 +43,7 @@ local function GeneralOptions()
 				name = L["Show Quest Level"],
 				desc = L["Display quest levels at Quest Log."],
 				get = function(info) return E.db.enhanced.general.showQuestLevel end,
-				set = function(info, value)
-					E.db.enhanced.general.showQuestLevel = value
-					M:QuestLevelToggle()
-				end
+				set = function(info, value) E.db.enhanced.general.showQuestLevel = value M:QuestLevelToggle() end
 			},
 			selectQuestReward = {
 				order = 5,
