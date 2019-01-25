@@ -5,7 +5,7 @@
 	<Script file="movers.lua"/>
 	<Script file="addonList.lua"/>
 	<Script file="deathRecap.lua"/>
-	<!-- <Script file="targetclass.lua"/> -->
+	<Script file="targetclass.lua"/>
 	<Script file="questItemLevel.lua"/>
 	<Script file="questLevel.lua"/>
 	<Script file="questReward.lua"/>
