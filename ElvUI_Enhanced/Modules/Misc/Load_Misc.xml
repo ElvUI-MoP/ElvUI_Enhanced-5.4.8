@@ -12,5 +12,6 @@
 	<Script file="alreadyKnown.lua"/>
 	<Script file="trainAllButton.lua"/>
 	<Script file="undressButton.lua"/>
+	<Script file="originalCloseButton.lua"/>
 	<Script file="merchant.lua"/>
 </Ui>

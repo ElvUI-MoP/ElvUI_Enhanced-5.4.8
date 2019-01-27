@@ -80,11 +80,9 @@ local function GeneralOptions()
 				order = 9,
 				type = "toggle",
 				name = L["Original Close Button"],
+				desc = L["Display the original map buttons"],
 				get = function(info) return E.db.enhanced.general.originalCloseButton end,
-				set = function(info, value)
-					E.db.enhanced.general.originalCloseButton = value
-					M:UpdateCloseButtons()
-				end
+				set = function(info, value) E.db.enhanced.general.originalCloseButton = value M:UpdateCloseButtons() end
 			},
 			trainAllButton = {
 				order = 10,
