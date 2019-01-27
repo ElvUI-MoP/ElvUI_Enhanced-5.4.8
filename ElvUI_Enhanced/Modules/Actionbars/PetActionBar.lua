@@ -18,16 +18,25 @@ local function UpdatePet(event, unit)
 		local shine = _G[buttonName.."Shine"]
 		local _, _, texture, _, isActive, _, autoCastEnabled = GetPetActionInfo(i)
 
-		if E.db.enhanced.actionbars.pet.checkedBorder then button:SetChecked(false) end
-		if E.db.enhanced.actionbars.pet.autoCastBorder then shine:Hide() else shine:Show() end
-
 		local color
-		if isActive and E.db.enhanced.actionbars.pet.checkedBorder then
-			color = E.db.enhanced.actionbars.pet.checkedBorderColor
-			button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
-		elseif autoCastEnabled and E.db.enhanced.actionbars.pet.autoCastBorder then
-			color = E.db.enhanced.actionbars.pet.autoCastBorderColor
-			button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
+		if isActive then
+			if E.db.enhanced.actionbars.pet.checkedBorder then
+				color = E.db.enhanced.actionbars.pet.checkedBorderColor
+				button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
+				button:SetChecked(false)
+			else
+				button.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
+				button:SetChecked(true)
+			end
+		elseif autoCastEnabled then
+			if E.db.enhanced.actionbars.pet.autoCastBorder then
+				color = E.db.enhanced.actionbars.pet.autoCastBorderColor
+				button.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
+				shine:Hide()
+			else
+				button.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
+				shine:Show()
+			end
 		else
 			button.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
 		end
