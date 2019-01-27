@@ -1,3 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="transparentActionbars.lua"/>
+	<Script file="Actionbars.lua"/>
+	<Script file="TransparentActionbars.lua"/>
+	<Script file="PetActionBar.lua"/>
 </Ui>
