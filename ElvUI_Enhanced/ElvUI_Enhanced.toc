@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Author: Bunny, Apollyon, Dethius
-## Version: 5.4.8-1.01
+## Version: 5.4.8-1.02
 ## Title: |cff00dd91E|r|cffe5e3e3lvUI|r |cff00dd91E|r|cffe5e3e3nhanced|r
 ## Notes: Plugin-Enhancements for |cffA11313E|r|cffC4C4C4lvUI|r.
 ## SavedVariables: EnhancedDB
