@@ -1,68 +1,106 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
+local TI = E:NewModule("Enhanced_TooltipIcon", "AceHook-3.0")
 
 local _G = _G
-local select, type = select, type
-local strmatch = string.match
+local select = select
+local find = string.find
 
-local CreateFrame = CreateFrame
 local GetAchievementInfo = GetAchievementInfo
 local GetItemIcon = GetItemIcon
 local GetSpellInfo = GetSpellInfo
 
-local function AddIcon(self, icon)
-	if E.db.enhanced.tooltip.tooltipIcon.enable ~= true then return; end
+local itemTooltips = {
+	GameTooltip,
+	ItemRefTooltip,
+	ShoppingTooltip1,
+	ShoppingTooltip2
+}
 
-	if icon then
-		local title = _G[self:GetName() .. "TextLeft1"]
-		if title and not title:GetText():find("|T" .. icon) then
-			title:SetFormattedText("|T%s:20:20:0:0:64:64:5:59:5:59:%d|t %s", icon, 20, title:GetText())
-		end
+local spellTooltips = {
+	GameTooltip,
+	ItemRefTooltip
+}
+
+local function AddIcon(self, icon)
+	if not icon then return end
+
+	local title = _G[self:GetName() .. "TextLeft1"]
+	if title and not find(title:GetText(), "|T" .. icon) then
+		title:SetFormattedText("|T%s:48:48:0:0:64:64:5:59:5:59|t %s", icon, title:GetText())
 	end
 end
 
-local function hookItem(tip)
-	tip:HookScript("OnTooltipSetItem", function(self)
-		if not E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems then return end
-
-		local link = self:GetItem()
-		local icon = link and GetItemIcon(link)
-		AddIcon(self, icon)
-	end)
+local function ItemIcon(self)
+	local _, link = self:GetItem()
+	local icon = link and GetItemIcon(link)
+	AddIcon(self, icon)
 end
-hookItem(GameTooltip)
-hookItem(ItemRefTooltip)
-hookItem(ShoppingTooltip1)
-hookItem(ShoppingTooltip2)
 
-local function hookSpell(tip)
-	tip:HookScript("OnTooltipSetSpell", function(self)
-	if not  E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells then return end
-
-		local _, _, id = self:GetSpell()
-		if id then
-			AddIcon(self, select(3, GetSpellInfo(id)))
-		end
-	end)
+local function SpellIcon(self)
+	local id = self:GetSpell()
+	if id then
+		AddIcon(self, select(3, GetSpellInfo(id)))
+	end
 end
-hookSpell(GameTooltip)
-hookSpell(ItemRefTooltip)
 
-hooksecurefunc(GameTooltip, "SetHyperlink", function(self, link)
-	if not  E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements then return end
-
+local function AchievementIcon(self, link)
 	if type(link) ~= "string" then return end
 	local linkType, id = strmatch(link, "^([^:]+):(%d+)")
-	if linkType == "achievement" then
-		local _, _, _, _, _, _, _, _, _, icon, _, _, _, _ = GetAchievementInfo(id)
-		AddIcon(self, icon)
+	if id and (linkType == "achievement") then
+		AddIcon(self, select(10, GetAchievementInfo(id)))
 	end
-end)
+end
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:SetScript("OnEvent", function(_, event)
-	if event == "PLAYER_ENTERING_WORLD" then
-		AddIcon()
-		f:UnregisterEvent("PLAYER_ENTERING_WORLD")
+function TI:ToggleItemsState()
+	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems and E.db.enhanced.tooltip.tooltipIcon.enable
+
+	for _, tooltip in pairs(itemTooltips) do
+		if state then
+			if not self:IsHooked(tooltip, "OnTooltipSetItem", ItemIcon) then
+				self:SecureHookScript(tooltip, "OnTooltipSetItem", ItemIcon)
+			end
+		else
+			self:Unhook(tooltip, "OnTooltipSetItem")
+		end
 	end
-end)
+end
+
+function TI:ToggleSpellsState()
+	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells and E.db.enhanced.tooltip.tooltipIcon.enable
+
+	for _, tooltip in pairs(spellTooltips) do
+		if state then
+			if not self:IsHooked(tooltip, "OnTooltipSetSpell", SpellIcon) then
+				self:SecureHookScript(tooltip, "OnTooltipSetSpell", SpellIcon)
+			end
+		else
+			self:Unhook(tooltip, "OnTooltipSetSpell")
+		end
+	end
+end
+
+function TI:ToggleAchievementsState()
+	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements and E.db.enhanced.tooltip.tooltipIcon.enable
+
+	if state then
+		if not self:IsHooked(GameTooltip, "SetHyperlink", AchievementIcon) then
+			self:SecureHook(GameTooltip, "SetHyperlink", AchievementIcon)
+		end
+	else
+		self:Unhook(GameTooltip, "SetHyperlink")
+	end
+end
+
+function TI:Initialize()
+	if not E.db.enhanced.tooltip.tooltipIcon.enable then return end
+
+	self:ToggleItemsState()
+	self:ToggleSpellsState()
+	self:ToggleAchievementsState()
+end
+
+local function InitializeCallback()
+	TI:Initialize()
+end
+
+E:RegisterModule(TI:GetName(), InitializeCallback)

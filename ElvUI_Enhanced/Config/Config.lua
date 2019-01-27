@@ -582,6 +582,7 @@ local function TooltipOptions()
 							E.db.enhanced.tooltip.tooltipIcon.enable = value
 							E:GetModule("Enhanced_TooltipIcon"):ToggleItemsState()
 							E:GetModule("Enhanced_TooltipIcon"):ToggleSpellsState()
+							E:GetModule("Enhanced_TooltipIcon"):ToggleAchievementsState()
 						end
 					},
 					spacer = {
@@ -619,8 +620,11 @@ local function TooltipOptions()
 						type = "toggle",
 						name = ACHIEVEMENTS,
 						desc = L["Show/Hides an Icon for Achievements on the Tooltip."],
-						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements; end,
-						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements = value; end,
+						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements end,
+						set = function(info, value)
+							E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements = value
+							E:GetModule("Enhanced_TooltipIcon"):ToggleAchievementsState()
+						end,
 						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
 					}
 				}
