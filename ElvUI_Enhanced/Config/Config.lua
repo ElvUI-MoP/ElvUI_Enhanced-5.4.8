@@ -92,10 +92,7 @@ local function GeneralOptions()
 				name = L["Train All Button"],
 				desc = L["Add button to Trainer frame with ability to train all available skills in one click."],
 				get = function(info) return E.db.enhanced.general.trainAllButton end,
-				set = function(info, value)
-					E.db.enhanced.general.trainAllButton = value
-					E:GetModule("Enhanced_TrainAll"):ToggleState()
-				end
+				set = function(info, value) E.db.enhanced.general.trainAllButton = value E:GetModule("Enhanced_TrainAll"):ToggleState() end
 			},
 			undressButton = {
 				order = 11,
