@@ -75,7 +75,6 @@ function M:Initialize()
 	self:QuestLevelToggle()
 	self:BuyStackToggle()
 	self:MerchantItemLevel()
-	-- TODO self:WorldMapBlips()
 end
 
 local function InitializeCallback()

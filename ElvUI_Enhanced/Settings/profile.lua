@@ -40,8 +40,7 @@ P.enhanced = {
 		originalCloseButton = false,
 		trainAllButton = false,
 		undressButton = false,
-		alreadyKnown = false,
-		worldMapBlips = false
+		alreadyKnown = false
 	},
 	actionbars = {
 		equipped = false,
@@ -57,56 +56,8 @@ P.enhanced = {
 			autoCastBorderColor = {r = 1, g = 0, b = 0}
 		}
 	},
-	blizzard = {
-		dressUpFrame = {
-			enable = false,
-			multiplier = 1.25,
-			background = true,
-			desaturate = false
-		},
-		errorFrame = {
-			width = 300,
-			height = 60,
-			font = "PT Sans Narrow",
-			fontSize = 12,
-			fontOutline = "NONE"
-		}
-	},
 	chat = {
 		dpsLinks = false,
-	},
-	character = {
-		characterBackground = false,
-		desaturateCharacter = false,
-		petBackground = false,
-		desaturatePet = false,
-		inspectBackground = false,
-		desaturateInspect = false,
-		collapsed = false,
-		player = {
-			orderName = "",
-			collapsedName = {
-				ITEM_LEVEL = false,
-				BASE_STATS = false,
-				MELEE_COMBAT = false,
-				RANGED_COMBAT = false,
-				SPELL_COMBAT = false,
-				DEFENSES = false,
-				RESISTANCE = false
-			}
-		},
-		pet = {
-			orderName = "",
-			collapsedName = {
-				ITEM_LEVEL = false,
-				BASE_STATS = false,
-				MELEE_COMBAT = false,
-				RANGED_COMBAT = false,
-				SPELL_COMBAT = false,
-				DEFENSES = false,
-				RESISTANCE = false
-			}
-		}
 	},
 	datatexts = {
 		timeColorEnch = false,

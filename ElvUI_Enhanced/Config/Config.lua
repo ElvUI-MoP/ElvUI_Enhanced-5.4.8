@@ -139,16 +139,8 @@ local function GeneralOptions()
 				get = function(info) return E.db.enhanced.general.questItemLevel end,
 				set = function(info, value) E.db.enhanced.general.questItemLevel = value M:QuestItemLevel() E:StaticPopup_Show("PRIVATE_RL") end
 			},
-			worldMapBlips = {
-				order = 17,
-				type = "toggle",
-				name = L["WorldMap Blips"],
-				desc = L["Colorize the WorldMap party/raid icons with class colors"],
-				get = function(info) return E.db.enhanced.general.worldMapBlips end,
-				set = function(info, value) E.db.enhanced.general.worldMapBlips = value E:StaticPopup_Show("PRIVATE_RL") end
-			},
 			moverTransparancy = {
-				order = 18,
+				order = 17,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
@@ -1111,8 +1103,6 @@ local function MiscOptions()
 	-- TODO finish implementing commented features
 	local PD = E:GetModule("Enhanced_PaperDoll")
 	-- TODO local RM = E:GetModule("RaidMarkerBar")
-	-- TODO local B = E:GetModule("Enhanced_Blizzard")
-	-- TODO local CF = E:GetModule("Enhanced_CharacterFrame")
 
 	local choices = {
 		["NONE"] = L["None"],
@@ -1130,145 +1120,8 @@ local function MiscOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Miscellaneous"])
 			},
-			enhancedFrames = {
-				order = 2,
-				type = "group",
-				name = L["Enhanced Frames"],
-				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Enhanced Frames"]
-					},
-					characterFrame = {
-						order = 2,
-						type = "group",
-						name = L["Character Frame"],
-						disabled = function() return not E.private.skins.blizzard.enable or not E.private.skins.blizzard.character end,
-						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Character Frame"]
-							},
-							enable = {
-								order = 2,
-								type = "toggle",
-								name = L["Enhanced Character Frame"],
-								get = function(info) return E.private.enhanced.character.enable end,
-								set = function(info, value) E.private.enhanced.character.enable = value E:StaticPopup_Show("PRIVATE_RL") end
-							},
-							--[[ TODO paperdollBackgrounds = {
-								order = 3,
-								type = "group",
-								name = L["Paperdoll Backgrounds"],
-								guiInline = true,
-								args = {
-									characterBackground = {
-										order = 1,
-										type = "toggle",
-										name = L["Character"],
-										get = function(info) return E.db.enhanced.character.characterBackground end,
-										set = function(info, value) E.db.enhanced.character.characterBackground = value CF:UpdateCharacterModelFrame() end,
-										disabled = function() return not E.private.enhanced.character.enable end
-									},
-									desaturateCharacter = {
-										order = 2,
-										type = "toggle",
-										name = L["Desaturate"],
-										get = function(info) return E.db.enhanced.character.desaturateCharacter end,
-										set = function(info, value) E.db.enhanced.character.desaturateCharacter = value CF:UpdateCharacterModelFrame() end,
-										disabled = function() return not E.private.enhanced.character.enable or not E.db.enhanced.character.characterBackground end
-									},
-									spacer = {
-										order = 3,
-										type = "description",
-										name = " "
-									},
-									petBackground = {
-										order = 4,
-										type = "toggle",
-										name = L["Pet"],
-										get = function(info) return E.db.enhanced.character.petBackground end,
-										set = function(info, value) E.db.enhanced.character.petBackground = value CF:UpdatePetModelFrame() end,
-										disabled = function() return not E.private.enhanced.character.enable end
-									},
-									desaturatePet = {
-										order = 5,
-										type = "toggle",
-										name = L["Desaturate"],
-										get = function(info) return E.db.enhanced.character.desaturatePet end,
-										set = function(info, value) E.db.enhanced.character.desaturatePet = value CF:UpdatePetModelFrame() end,
-										disabled = function() return not E.private.enhanced.character.enable or not E.db.enhanced.character.petBackground end
-									},
-									spacer2 = {
-										order = 6,
-										type = "description",
-										name = " "
-									},
-									inspectBackground = {
-										order = 7,
-										type = "toggle",
-										name = L["Inspect"],
-										get = function(info) return E.db.enhanced.character.inspectBackground end,
-										set = function(info, value) E.db.enhanced.character.inspectBackground = value end,
-										disabled = function() return not E.private.enhanced.character.enable end
-									},
-									desaturateInspect = {
-										order = 8,
-										type = "toggle",
-										name = L["Desaturate"],
-										get = function(info) return E.db.enhanced.character.desaturateInspect end,
-										set = function(info, value) E.db.enhanced.character.desaturateInspect = value end,
-										disabled = function() return not E.private.enhanced.character.enable or not E.db.enhanced.character.inspectBackground end
-									}
-								}
-							}]]
-						}
-					},
-					--[[ TODO dressingRoom = {
-						order = 3,
-						type = "group",
-						name = L["Dressing Room"],
-						get = function(info) return E.db.enhanced.blizzard.dressUpFrame[ info[#info] ] end,
-						set = function(info, value) E.db.enhanced.blizzard.dressUpFrame[ info[#info] ] = value B:UpdateDressUpFrame() end,
-						disabled = function() return not E.private.skins.blizzard.enable or not E.private.skins.blizzard.dressingroom end,
-						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Dressing Room"]
-							},
-							enable = {
-								order = 2,
-								type = "toggle",
-								name = L["Enhanced Dressing Room"]
-							},
-							multiplier = {
-								order = 3,
-								type = "range",
-								name = L["Scale"],
-								min = 1.1, max = 2, step = 0.01,
-								isPercent = true,
-								disabled = function() return not E.db.enhanced.blizzard.dressUpFrame.enable end
-							},
-							background = {
-								order = 4,
-								type = "toggle",
-								name = L["Background"]
-							},
-							desaturate = {
-								order = 5,
-								type = "toggle",
-								name = L["Desaturate"],
-								disabled = function() return not E.db.enhanced.blizzard.dressUpFrame.background end
-							}
-						}
-					}]]
-				}
-			},
 			equipment = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = L["Equipment"],
 				childGroups = "tab",
@@ -1477,68 +1330,8 @@ local function MiscOptions()
 					-- TODO re-add equipmentset config
 				}
 			},
-			--[[ TODO errorFrame = {
-				order = 4,
-				type = "group",
-				name = L["Error Frame"],
-				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Error Frame"]
-					},
-					font = {
-						order = 1,
-						type = "select",
-						dialogControl = "LSM30_Font",
-						name = L["Font"],
-						values = AceGUIWidgetLSMlists.font,
-						get = function(info) return E.db.enhanced.blizzard.errorFrame.font end,
-						set = function(info, value) E.db.enhanced.blizzard.errorFrame.font = value B:ErrorFrameSize() end
-					},
-					fontSize = {
-						order = 2,
-						type = "range",
-						name = L["Font Size"],
-						min = 6, max = 36, step = 1,
-						get = function(info) return E.db.enhanced.blizzard.errorFrame.fontSize end,
-						set = function(info, value) E.db.enhanced.blizzard.errorFrame.fontSize = value B:ErrorFrameSize() end
-					},
-					fontOutline = {
-						order = 3,
-						type = "select",
-						name = L["Font Outline"],
-						values = {
-							["NONE"] = L["None"],
-							["OUTLINE"] = "OUTLINE",
-							["MONOCHROMEOUTLINE"] = "MONOCROMEOUTLINE",
-							["THICKOUTLINE"] = "THICKOUTLINE"
-						},
-						get = function(info) return E.db.enhanced.blizzard.errorFrame.fontOutline end,
-						set = function(info, value) E.db.enhanced.blizzard.errorFrame.fontOutline = value B:ErrorFrameSize() end
-					},
-					width = {
-						order = 4,
-						type = "range",
-						name = L["Width"],
-						desc = L["Set the width of Error Frame. Too narrow frame may cause messages to be split in several lines"],
-						min = 100, max = 1000, step = 1,
-						get = function(info) return E.db.enhanced.blizzard.errorFrame.width end,
-						set = function(info, value) E.db.enhanced.blizzard.errorFrame.width = value B:ErrorFrameSize() end
-					},
-					height = {
-						order = 5,
-						type = "range",
-						name = L["Height"],
-						desc = L["Set the height of Error Frame. Higher frame can show more lines at once."],
-						min = 30, max = 300, step = 1,
-						get = function(info) return E.db.enhanced.blizzard.errorFrame.height end,
-						set = function(info, value) E.db.enhanced.blizzard.errorFrame.height = value B:ErrorFrameSize() end
-					}
-				}
-			},]]
 			loseOfControl = {
-				order = 5,
+				order = 3,
 				type = "group",
 				name = L["Lose Control"],
 				args = {
@@ -1592,7 +1385,7 @@ local function MiscOptions()
 				}
 			},
 			--[[ TODO raidMarkerBar = {
-				order = 6,
+				order = 4,
 				type = "group",
 				name = L["Raid Markers"],
 				get = function(info) return E.db.enhanced.raidmarkerbar[ info[#info] ] end,	
