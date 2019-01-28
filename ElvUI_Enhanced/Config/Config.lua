@@ -98,10 +98,7 @@ local function GeneralOptions()
 				name = L["Undress Button"],
 				desc = L["Add button to Dressing Room frame with ability to undress model."],
 				get = function(info) return E.db.enhanced.general.undressButton end,
-				set = function(info, value)
-					E.db.enhanced.general.undressButton = value
-					E:GetModule("Enhanced_UndressButtons"):ToggleState()
-				end
+				set = function(info, value) E.db.enhanced.general.undressButton = value E:GetModule("Enhanced_UndressButtons"):ToggleState() end
 			},
 			model = {
 				order = 12,
