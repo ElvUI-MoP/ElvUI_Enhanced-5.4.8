@@ -1751,7 +1751,7 @@ function addon:GetOptions()
 			generalGroup = GeneralOptions(),
 			actionbarGroup = ActionbarOptions(),
 			chatGroup = ChatOptions(),
-			-- datatextsGroup = DataTextsOptions(), -- TODO uncomment when implemented
+			datatextsGroup = DataTextsOptions(),
 			minimapGroup = MinimapOptions(),
 			namePlatesGroup = NamePlatesOptions(),
 			tooltipGroup = TooltipOptions(),
