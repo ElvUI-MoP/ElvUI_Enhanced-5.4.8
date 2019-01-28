@@ -97,7 +97,7 @@ P.enhanced = {
 		fadeindelay = 5
 	},
 	nameplates = {
-		-- cacheUnitClass = false, -- TODO enable when implemented
+		cacheUnitClass = false,
 		smoothBars = {
 			enable = false,
 			smoothSpeed = 0.3

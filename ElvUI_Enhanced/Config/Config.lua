@@ -100,15 +100,8 @@ local function GeneralOptions()
 				get = function(info) return E.db.enhanced.general.undressButton end,
 				set = function(info, value) E.db.enhanced.general.undressButton = value E:GetModule("Enhanced_UndressButtons"):ToggleState() end
 			},
-			model = {
-				order = 12,
-				type = "toggle",
-				name = L["Model Frames"],
-				get = function(info) return E.private.enhanced.model.enable end,
-				set = function(info, value) E.private.enhanced.model.enable = value E:StaticPopup_Show("PRIVATE_RL") end
-			},
 			alreadyKnown = {
-				order = 13,
+				order = 12,
 				type = "toggle",
 				name = L["Already Known"],
 				desc = L["Change color of item icons which already known."],
@@ -116,7 +109,7 @@ local function GeneralOptions()
 				set = function(info, value) E.db.enhanced.general.alreadyKnown = value E:GetModule("Enhanced_AlreadyKnown"):ToggleState() end
 			},
 			altBuyMaxStack = {
-				order = 14,
+				order = 13,
 				type = "toggle",
 				name = L["Alt-Click Merchant"],
 				desc = L["Holding Alt key while buying something from vendor will now buy an entire stack."],
@@ -124,7 +117,7 @@ local function GeneralOptions()
 				set = function(info, value) E.db.enhanced.general.altBuyMaxStack = value M:BuyStackToggle() end
 			},
 			merchantItemLevel = {
-				order = 15,
+				order = 14,
 				type = "toggle",
 				name = L["Merchant ItemLevel"],
 				desc = L["Display the item level on the MerchantFrame, to change the font you have to set it in ElvUI - Bags - ItemLevel"],
@@ -132,7 +125,7 @@ local function GeneralOptions()
 				set = function(info, value) E.db.enhanced.general.merchantItemLevel = value M:MerchantItemLevel() end
 			},
 			questItemLevel = {
-				order = 16,
+				order = 15,
 				type = "toggle",
 				name = L["Quest ItemLevel"],
 				desc = L["Display the item level on the Quest frames, to change the font you have to set it in ElvUI - Bags - ItemLevel"],
@@ -140,7 +133,7 @@ local function GeneralOptions()
 				set = function(info, value) E.db.enhanced.general.questItemLevel = value M:QuestItemLevel() E:StaticPopup_Show("PRIVATE_RL") end
 			},
 			moverTransparancy = {
-				order = 17,
+				order = 16,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
@@ -482,19 +475,19 @@ local function NamePlatesOptions()
 		order = 6,
 		type = "group",
 		name = L["NamePlates"],
+		get = function(info) return E.db.enhanced.nameplates[info[#info]] end,
 		args = {
 			header = {
 				order = 0,
 				type = "header",
 				name = ColorizeSettingName(L["NamePlates"])
 			},
-			-- TODO uncomment once class cache is implemented
-			-- cacheUnitClass = {
-			-- 	order = 1,
-			-- 	type = "toggle",
-			-- 	name = L["Cache Unit Class"],
-			-- 	set = function(info, value) E.db.enhanced.nameplates[info[#info]] = value E:GetModule("Enhanced_NamePlates"):CacheUnitClass() E:GetModule("NamePlates"):ConfigureAll() end
-			-- },
+			cacheUnitClass = {
+				order = 1,
+				type = "toggle",
+				name = L["Cache Unit Class"],
+				set = function(info, value) E.db.enhanced.nameplates[info[#info]] = value E:GetModule("Enhanced_NamePlates"):CacheUnitClass() E:GetModule("NamePlates"):ConfigureAll() end
+			},
 			smoothBars = {
 				order = 2,
 				type = "group",
