@@ -830,7 +830,7 @@ local function FarmerOptions()
 end
 
 local function UnitFrameOptions()
-	local TC = E:GetModule("TargetClass")
+	local TC = E:GetModule("Enhanced_TargetClass")
 
 	local config = {
 		order = 9,
