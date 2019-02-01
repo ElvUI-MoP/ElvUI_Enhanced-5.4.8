@@ -1,6 +1,10 @@
 local E, L, V, P, G = unpack(ElvUI)
 local M = E:GetModule("Enhanced_Misc", "AceHook-3.0")
 
+local HybridScrollFrame_GetOffset = HybridScrollFrame_GetOffset
+local GetNumQuestLogEntries = GetNumQuestLogEntries
+local GetQuestLogTitle = GetQuestLogTitle
+
 local function ShowLevel()
 	local buttons = QuestLogScrollFrame.buttons
 	local numButtons = #buttons

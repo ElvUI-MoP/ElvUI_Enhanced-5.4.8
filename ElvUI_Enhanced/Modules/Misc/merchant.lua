@@ -1,6 +1,19 @@
 local E, L, V, P, G = unpack(ElvUI)
 local M = E:GetModule("Enhanced_Misc")
 
+local _G = _G
+local select = select
+
+local BuyMerchantItem = BuyMerchantItem
+local GetBuybackItemInfo = GetBuybackItemInfo
+local GetItemInfo = GetItemInfo
+local GetItemQualityColor = GetItemQualityColor
+local GetNumBuybackItems = GetNumBuybackItems
+local GetMerchantItemLink = GetMerchantItemLink
+local GetMerchantItemMaxStack = GetMerchantItemMaxStack
+local GetMerchantNumItems = GetMerchantNumItems
+local ARMOR, ENCHSLOT_WEAPON = ARMOR, ENCHSLOT_WEAPON
+
 function M:MerchantItemButton_OnModifiedClick(self, ...)
 	if IsAltKeyDown() then
 		local maxStack = select(8, GetItemInfo(GetMerchantItemLink(self:GetID())))

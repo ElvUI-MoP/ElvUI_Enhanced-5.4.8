@@ -1,8 +1,27 @@
 local E, L, V, P, G = unpack(ElvUI)
 local AK = E:NewModule("Enhanced_AlreadyKnown", "AceHook-3.0", "AceEvent-3.0")
 
+local _G = _G
 local match = string.match
 local ceil, fmod = math.ceil, math.fmod
+
+local FauxScrollFrame_GetOffset = FauxScrollFrame_GetOffset
+local GetAuctionItemInfo = GetAuctionItemInfo
+local GetAuctionItemLink = GetAuctionItemLink
+local GetCurrentGuildBankTab = GetCurrentGuildBankTab
+local GetGuildBankItemInfo = GetGuildBankItemInfo
+local GetGuildBankItemLink = GetGuildBankItemLink
+local GetInboxItem = GetInboxItem
+local GetItemInfo = GetItemInfo
+local GetMerchantNumItems = GetMerchantNumItems
+local GetNumAuctionItems = GetNumAuctionItems
+local GetNumBuybackItems = GetNumBuybackItems
+local IsAddOnLoaded = IsAddOnLoaded
+local SetItemButtonTextureVertexColor = SetItemButtonTextureVertexColor
+
+local BUYBACK_ITEMS_PER_PAGE = BUYBACK_ITEMS_PER_PAGE
+local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
+local MERCHANT_ITEMS_PER_PAGE = MERCHANT_ITEMS_PER_PAGE
 
 local IsAlreadyKnown = IsAlreadyKnown;
 

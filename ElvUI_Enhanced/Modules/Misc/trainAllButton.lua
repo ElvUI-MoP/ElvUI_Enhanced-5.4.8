@@ -2,6 +2,14 @@ local E, L, V, P, G = unpack(ElvUI)
 local TA = E:NewModule("Enhanced_TrainAll", "AceHook-3.0", "AceEvent-3.0")
 local S = E:GetModule("Skins")
 
+local select = select
+
+local BuyTrainerService = BuyTrainerService
+local GetNumTrainerServices = GetNumTrainerServices
+local GetTrainerServiceCost = GetTrainerServiceCost
+local GetTrainerServiceInfo = GetTrainerServiceInfo
+local ALL, TRAIN = ALL, TRAIN
+
 function TA:ButtonCreate()
 	self.button = CreateFrame("Button", "ElvUI_TrainAllButton", ClassTrainerFrame, "UIPanelButtonTemplate")
 	self.button:Size(80, 22)

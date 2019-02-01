@@ -3,8 +3,15 @@ local AL = E:NewModule("AddOnList", "AceHook-3.0");
 
 local floor = math.floor;
 
-local IsAddOnLoaded = IsAddOnLoaded;
-local IsShiftKeyDown = IsShiftKeyDown;
+local CreateFrame = CreateFrame
+local DisableAddOn = DisableAddOn
+local EnableAddOn = EnableAddOn
+local GetAddOnDependencies = GetAddOnDependencies
+local GetAddOnInfo = GetAddOnInfo
+local GetNumAddOns = GetNumAddOns
+local IsAddOnLoaded = IsAddOnLoaded
+local IsShiftKeyDown = IsShiftKeyDown
+local LoadAddOn = LoadAddOn
 
 function AL:HasAnyChanged()
 	for i = 1, GetNumAddOns() do

@@ -1,6 +1,20 @@
 local E, L, V, P, G = unpack(ElvUI)
 local M = E:GetModule("Enhanced_Misc")
 
+local _G = _G
+
+local GetItemInfo = GetItemInfo
+local GetItemQualityColor = GetItemQualityColor
+local GetNumQuestChoices = GetNumQuestChoices
+local GetNumQuestLogChoices = GetNumQuestLogChoices
+local GetNumQuestLogRewards = GetNumQuestLogRewards
+local GetNumQuestRewards = GetNumQuestRewards
+local GetQuestItemLink = GetQuestItemLink
+local GetQuestLogItemLink = GetQuestLogItemLink
+local GetQuestLogRewardSpell = GetQuestLogRewardSpell
+local GetRewardSpell = GetRewardSpell
+local ARMOR, ENCHSLOT_WEAPON = ARMOR, ENCHSLOT_WEAPON
+
 function M:QuestInfo_Display()
 	local numQuestRewards = QuestInfoFrame.questLog and GetNumQuestLogRewards() or GetNumQuestRewards()
 	local numQuestChoices = QuestInfoFrame.questLog and GetNumQuestLogChoices() or GetNumQuestChoices()
