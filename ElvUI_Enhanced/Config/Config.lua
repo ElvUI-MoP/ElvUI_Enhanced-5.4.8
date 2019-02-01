@@ -1057,9 +1057,8 @@ end
 
 -- Misc
 local function MiscOptions()
-	-- TODO finish implementing commented features
 	local PD = E:GetModule("Enhanced_PaperDoll")
-	-- TODO local RM = E:GetModule("RaidMarkerBar")
+	local RM = E:GetModule("RaidMarkerBar")
 
 	local choices = {
 		["NONE"] = L["None"],
@@ -1341,7 +1340,7 @@ local function MiscOptions()
 					}
 				}
 			},
-			--[[ TODO raidMarkerBar = {
+			raidMarkerBar = {
 				order = 4,
 				type = "group",
 				name = L["Raid Markers"],
@@ -1441,7 +1440,7 @@ local function MiscOptions()
 						set = function(info, value) E.db.enhanced.raidmarkerbar.customVisibility = value RM:Visibility() end
 					}
 				}
-			}]]
+			}
 		}
 	}
 
