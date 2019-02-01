@@ -943,42 +943,6 @@ local function UnitFrameOptions()
 								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							}
 						}
-					},
-					energyTick = {
-						order = 4,
-						type = "group",
-						name = L["Energy Tick"],
-						get = function(info) return E.db.unitframe.units.player.power[ info[#info] ] end,
-						set = function(info, value) E.db.unitframe.units.player.power[ info[#info] ] = value E:GetModule("UnitFrames"):CreateAndUpdateUF("player") end,
-						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Energy Tick"]
-							},
-							energyTickEnable = {
-								order = 2,
-								type = "toggle",
-								name = L["Enable"],
-								disabled = function() return not E.db.unitframe.units.player.power.enable end
-							},
-							energyTickColor = {
-								order = 3,
-								type = "color",
-								name = L["Color"],
-								get = function(info)
-									local t = E.db.unitframe.units.player.power[ info[#info] ]
-									local d = P.unitframe.units.player.power[ info[#info] ]
-									return t.r, t.g, t.b, t.a, d.r, d.g, d.b
-								end,
-								set = function(info, r, g, b)
-									local t = E.db.unitframe.units.player.power[ info[#info] ]
-									t.r, t.g, t.b = r, g, b
-									E:GetModule("UnitFrames"):CreateAndUpdateUF("player")
-								end,
-								disabled = function() return not E.db.unitframe.units.player.power.enable or not E.db.unitframe.units.player.power.energyTickEnable end
-							}
-						}
 					}
 				}
 			},
