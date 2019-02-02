@@ -24,8 +24,8 @@ local spellTooltips = {
 local function AddIcon(self, icon)
 	if not icon then return end
 
-	local title = _G[self:GetName() .. "TextLeft1"]
-	if title and not find(title:GetText(), "|T" .. icon) then
+	local title = _G[self:GetName().."TextLeft1"]
+	if title and not find(title:GetText(), "|T"..icon) then
 		title:SetFormattedText("|T%s:48:48:0:0:64:64:5:59:5:59|t %s", icon, title:GetText())
 	end
 end
@@ -33,11 +33,13 @@ end
 local function ItemIcon(self)
 	local _, link = self:GetItem()
 	local icon = link and GetItemIcon(link)
+
 	AddIcon(self, icon)
 end
 
 local function SpellIcon(self)
 	local id = self:GetSpell()
+
 	if id then
 		AddIcon(self, select(3, GetSpellInfo(id)))
 	end
@@ -45,7 +47,9 @@ end
 
 local function AchievementIcon(self, link)
 	if type(link) ~= "string" then return end
+
 	local linkType, id = strmatch(link, "^([^:]+):(%d+)")
+
 	if id and (linkType == "achievement") then
 		AddIcon(self, select(10, GetAchievementInfo(id)))
 	end

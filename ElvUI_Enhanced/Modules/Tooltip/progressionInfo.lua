@@ -1,4 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
 local TT = E:GetModule("Tooltip")
 
 local find, format = string.find, string.format
@@ -59,7 +59,7 @@ local bosses = {
 
 local playerGUID = UnitGUID("player")
 local progressCache = {}
-local highest = { 0, 0 }
+local highest = {0, 0}
 
 local function GetProgression(guid)
 	local kills, complete, pos = 0, false, 0
@@ -69,6 +69,7 @@ local function GetProgression(guid)
 		for level = 1, 4 do
 			for bracket = 1, (level < 3 and 2 or 1) do
 				highest[bracket] = 0
+
 				for statInfo = 1, #bosses[tier][level][bracket] do
 					kills = tonumber((statFunc(bosses[tier][level][bracket][statInfo])))
 					if kills and kills > 0 then
@@ -76,10 +77,12 @@ local function GetProgression(guid)
 					end
 				end
 			end
+
 			pos = highest[1] > highest[2] and 1 or 2
-			if (highest[pos] > 0) then
-				progressCache[guid].header = ("%s [%s]:"):format(levels[level][pos], tiers[tier])
-				progressCache[guid].info = ("%d/%d"):format(highest[pos], #bosses[tier][level][pos])
+
+			if highest[pos] > 0 then
+				progressCache[guid].header = format("%s [%s]:", levels[level][pos], tiers[tier])
+				progressCache[guid].info = format("%d/%d", highest[pos], #bosses[tier][level][pos])
 				complete = true
 				break
 			end
@@ -100,12 +103,14 @@ local function SetProgressionInfo(guid, tt)
 	if progressCache[guid] then
 		for i = 1, tt:NumLines() do
 			local leftTipText = _G["GameTooltipTextLeft"..i]
+
 			for tier = 1, 2 do
-				if (leftTipText:GetText() and leftTipText:GetText():find(tiers[tier])) then
+				if leftTipText:GetText() and leftTipText:GetText():find(tiers[tier]) then
 
 					local rightTipText = _G["GameTooltipTextRight"..i]
 					leftTipText:SetText(progressCache[guid].header)
 					rightTipText:SetText(progressCache[guid].info)
+
 					return
 				end
 			end
@@ -116,7 +121,7 @@ local function SetProgressionInfo(guid, tt)
 end
 
 function TT:INSPECT_ACHIEVEMENT_READY(event, GUID)
-	if (self.compareGUID ~= GUID) then return end
+	if self.compareGUID ~= GUID then return end
 
 	local unit = "mouseover"
 	if UnitExists(unit) then
@@ -130,7 +135,7 @@ end
 hooksecurefunc(TT, "ShowInspectInfo", function(self, tt, unit, level)
 	if not E.db.enhanced.tooltip.progressInfo then return end
 	if not level or level < MAX_PLAYER_LEVEL then return end
-	if not (unit and CanInspect(unit)) then return end
+	if not unit and CanInspect(unit) then return end
 
 	local guid = UnitGUID(unit)
 	if not progressCache[guid] or (GetTime() - progressCache[guid].timer) > 600 then
@@ -151,6 +156,7 @@ hooksecurefunc(TT, "ShowInspectInfo", function(self, tt, unit, level)
 			if SetAchievementComparisonUnit(unit) then
 				self:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 			end
+
 			return
 		end
 	end

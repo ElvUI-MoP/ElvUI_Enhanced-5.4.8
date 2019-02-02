@@ -1,26 +1,25 @@
 local E, L, V, P, G = unpack(ElvUI)
 local mod = E:NewModule("DeathRecap", "AceHook-3.0", "AceEvent-3.0")
--- local CC = E:GetModule("ClassCache")
 
-local _G = _G
-local tonumber, strsub = tonumber, strsub
-local format, upper, join = string.format, string.upper, string.join
+local format, upper = string.format, string.upper
+local floor = math.floor
 local tsort, twipe = table.sort, table.wipe
 local band = bit.band
-local floor = math.floor
+local tonumber, strsub = tonumber, strsub
 
 local UnitHealth = UnitHealth
 local UnitHealthMax = UnitHealthMax
 local COMBATLOG_FILTER_ME = COMBATLOG_FILTER_ME
 local GetReleaseTimeRemaining = GetReleaseTimeRemaining
 local RepopMe = RepopMe
+local IsShiftKeyDown = IsShiftKeyDown
 
 local lastDeathEvents
 local index = 0
 local deathList = {}
 local eventList = {}
 
-function mod:AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical, crushing)
+function mod:AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
 	if (index > 0) and (eventList[index].timestamp + 10 <= timestamp) then
 		index = 0
 		twipe(eventList)
@@ -32,7 +31,7 @@ function mod:AddEvent(timestamp, event, sourceName, spellId, spellName, environm
 		index = 1
 	end
 
-	if not eventList[index] then
+	if(not eventList[index]) then
 		eventList[index] = {}
 	else
 		twipe(eventList[index])
@@ -51,7 +50,6 @@ function mod:AddEvent(timestamp, event, sourceName, spellId, spellName, environm
 	eventList[index].blocked = blocked
 	eventList[index].absorbed = absorbed
 	eventList[index].critical = critical
-	eventList[index].crushing = crushing
 	eventList[index].currentHP = UnitHealth("player")
 	eventList[index].maxHP = UnitHealthMax("player")
 end
@@ -157,13 +155,12 @@ function mod:OpenRecap(recapID)
 			local resiStr = (evtData.resisted and evtData.resisted > 0) and format(L["(%d Resisted)"], evtData.resisted, " ") or ""
 			local blckStr = (evtData.blocked and evtData.blocked > 0) and format(L["(%d Blocked)"], evtData.blocked, " ") or ""
 			local critStr = (evtData.critical and evtData.critical > 0) and L["Critical"] or ""
-			local crusStr = (evtData.crushing and evtData.crushing > 0) and L["Crushing"] or ""
 
 			local absoDmg = (evtData.absorbed and evtData.absorbed > 0) and evtData.absorbed or 0
 			local resiDmg = (evtData.resisted and evtData.resisted > 0) and evtData.resisted or 0
 			local blckDmg = (evtData.blocked and evtData.blocked > 0) and evtData.blocked or 0
 
-			dmgInfo.dmgExtraStr = join("", dmgInfo.dmgExtraStr, " ", ovrkStr, absoStr, resiStr, blckStr, critStr, crusStr)
+			dmgInfo.dmgExtraStr = join("", dmgInfo.dmgExtraStr, " ", ovrkStr, absoStr, resiStr, blckStr, critStr)
 			dmgInfo.amount = evtData.amount - (absoDmg + resiDmg + blckDmg)
 
 			if evtData.amount > highestDmgAmount then
@@ -196,15 +193,6 @@ function mod:OpenRecap(recapID)
 		dmgInfo.school = evtData.school
 
 		entry.SpellInfo.Caster:SetText(dmgInfo.caster)
-
-		-- TODO uncomment once ClassCache is available
-		-- local class = CC:GetClassByName(dmgInfo.caster)
-		-- if class then
-		-- 	local textColor = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-		-- 	entry.SpellInfo.Caster:SetTextColor(textColor.r, textColor.g, textColor.b)
-		-- else
-			entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
-		-- end
 
 		entry.SpellInfo.Name:SetText(spellName)
 		entry.SpellInfo.Icon:SetTexture(texture)
@@ -249,7 +237,7 @@ function mod:Amount_OnEnter()
 
 	local seconds = DeathRecapFrame.DeathTimeStamp - self.timestamp
 	if seconds > 0 then
-		GameTooltip:AddLine(format(L["%s sec before death at %s%% health."], format("%.1f", seconds), self.hpPercent), 1, 0.824, 0, true)
+		GameTooltip:AddLine(format(L["%s sec before death at %s%% health."], format("%.1F", seconds), self.hpPercent), 1, 0.824, 0, true)
 	else
 		GameTooltip:AddLine(format(L["Killing blow at %s%% health."], self.hpPercent), 1, 0.824, 0, true)
 	end
@@ -311,30 +299,30 @@ function mod:GetTableInfo(data)
 end
 
 function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, ...)
-	if band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME or band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME then return end
-	if event ~= "ENVIRONMENTAL_DAMAGE"
-	and event ~= "RANGE_DAMAGE"
-	and event ~= "SPELL_DAMAGE"
-	and event ~= "SPELL_EXTRA_ATTACKS"
-	and event ~= "SPELL_INSTAKILL"
-	and event ~= "SPELL_PERIODIC_DAMAGE"
-	and event ~= "SWING_DAMAGE"
+	if (band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME) or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME) then return end
+	if (event ~= "ENVIRONMENTAL_DAMAGE")
+	and (event ~= "RANGE_DAMAGE")
+	and (event ~= "SPELL_DAMAGE")
+	and (event ~= "SPELL_EXTRA_ATTACKS")
+	and (event ~= "SPELL_INSTAKILL")
+	and (event ~= "SPELL_PERIODIC_DAMAGE")
+	and (event ~= "SWING_DAMAGE")
 	then return end
 
 	local subVal = strsub(event, 1, 5)
-	local environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed, critical, crushing
+	local environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
 
 	if event == "SWING_DAMAGE" then
-		amount, overkill, school, resisted, blocked, absorbed, critical, _, crushing = ...
-	elseif subVal == "SPELL" or event == "RANGE_DAMAGE" then
-		spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical, _, crushing = ...
+		amount, overkill, school, resisted, blocked, absorbed, critical = ...
+	elseif subVal == "SPELL" then
+		spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	elseif event == "ENVIRONMENTAL_DAMAGE" then
-		environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical, _, crushing = ...
+		environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	end
 
 	if not tonumber(amount) then return end
 
-	self:AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical, crushing)
+	self:AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
 end
 
 function mod:SetItemRef(link, ...)
@@ -367,8 +355,8 @@ function mod:Initialize()
 	frame.Unavailable:Point("CENTER")
 	frame.Unavailable:SetText(L["Death Recap unavailable."])
 
-	frame.CloseXButton = CreateFrame("Button", "$parentCloseXButton", frame)
-	frame.CloseXButton:Size(32, 32)
+	frame.CloseXButton = CreateFrame("Button", "$parentCloseXButton", frame, "UIPanelCloseButton")
+	frame.CloseXButton:Size(32)
 	frame.CloseXButton:Point("TOPRIGHT", 2, 1)
 	frame.CloseXButton:SetScript("OnClick", function(self) HideUIPanel(self:GetParent()) end)
 	S:HandleCloseButton(frame.CloseXButton)
@@ -395,16 +383,16 @@ function mod:Initialize()
 		button.DamageInfo:Point("TOPLEFT", 0, 0)
 		button.DamageInfo:Point("BOTTOMRIGHT", button, "BOTTOMLEFT", 80, 0)
 		button.DamageInfo:SetScript("OnEnter", self.Amount_OnEnter)
-		button.DamageInfo:SetScript("OnLeave", function() GameTooltip:Hide() end)
+		button.DamageInfo:SetScript("OnLeave", GameTooltip_Hide)
 
-		button.DamageInfo.Amount = button.DamageInfo:CreateFontString("ARTWORK", nil, "GameFontNormal")
+		button.DamageInfo.Amount = button.DamageInfo:CreateFontString("ARTWORK", nil, "GameFontNormalRight")
 		button.DamageInfo.Amount:SetJustifyH("RIGHT")
 		button.DamageInfo.Amount:SetJustifyV("CENTER")
 		button.DamageInfo.Amount:Size(0, 32)
 		button.DamageInfo.Amount:Point("TOPRIGHT", 0, 0)
 		button.DamageInfo.Amount:SetTextColor(0.75, 0.05, 0.05, 1)
 
-		button.DamageInfo.AmountLarge = button.DamageInfo:CreateFontString("ARTWORK", nil, "NumberFontNormalLarge")
+		button.DamageInfo.AmountLarge = button.DamageInfo:CreateFontString("ARTWORK", nil, "NumberFont_Outline_Large")
 		button.DamageInfo.AmountLarge:SetJustifyH("RIGHT")
 		button.DamageInfo.AmountLarge:SetJustifyV("CENTER")
 		button.DamageInfo.AmountLarge:Size(0, 32)
@@ -415,7 +403,7 @@ function mod:Initialize()
 		button.SpellInfo:Point("TOPLEFT", button.DamageInfo, "TOPRIGHT", 16, 0)
 		button.SpellInfo:Point("BOTTOMRIGHT", 0, 0)
 		button.SpellInfo:SetScript("OnEnter", self.Spell_OnEnter)
-		button.SpellInfo:SetScript("OnLeave", function() GameTooltip:Hide() end)
+		button.SpellInfo:SetScript("OnLeave", GameTooltip_Hide)
 
 		button.SpellInfo.FrameIcom = CreateFrame("Button", nil, button.SpellInfo)
 		button.SpellInfo.FrameIcom:Size(34)
@@ -433,7 +421,7 @@ function mod:Initialize()
 		button.SpellInfo.Name:Point("BOTTOMLEFT", button.SpellInfo.Icon, "RIGHT", 8, 1)
 		button.SpellInfo.Name:Point("TOPRIGHT", 0, 0)
 
-		button.SpellInfo.Caster = button.SpellInfo:CreateFontString("ARTWORK", nil, "GameFontNormalSmall")
+		button.SpellInfo.Caster = button.SpellInfo:CreateFontString("ARTWORK", nil, "SystemFont_Shadow_Small")
 		button.SpellInfo.Caster:SetJustifyH("LEFT")
 		button.SpellInfo.Caster:SetJustifyV("TOP")
 		button.SpellInfo.Caster:Point("TOPLEFT", button.SpellInfo.Icon, "RIGHT", 8, -2)
@@ -447,7 +435,7 @@ function mod:Initialize()
 			button.tombstone:Size(15, 20)
 			button.tombstone:Point("LEFT", button.DamageInfo, "LEFT", 10, 0)
 			button.tombstone:SetTexCoord(0.658203125, 0.6875, 0.00390625, 0.08203125)
-			button.tombstone:SetTexture("Interface\\AddOns\\ElvUI_Enhanced\\Media\\Textures\\DeathRecap")
+			button.tombstone:SetTexture("Interface\\AddOns\\ElvUI_Enhanced\\media\\textures\\DeathRecap")
 		else
 			button:Point("BOTTOM", frame.DeathRecapEntry[i - 1], "TOP", 0, 14)
 		end
@@ -465,6 +453,7 @@ function mod:Initialize()
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", "HidePopup")
 	self:RegisterEvent("RESURRECT_REQUEST", "HidePopup")
 	self:RegisterEvent("PLAYER_ALIVE", "HidePopup")
+	self:RegisterEvent("RAISED_AS_GHOUL", "HidePopup")
 
 	self:RawHook("SetItemRef", true)
 
@@ -500,6 +489,9 @@ function mod:Initialize()
 				DEFAULT_CHAT_FRAME:AddMessage(ARENA_SPECTATOR, info.r, info.g, info.b, info.id)
 			end
 			RepopMe()
+			if CannotBeResurrected() then
+				return 1
+			end
 		end,
 		OnCancel = function(_, _, reason)
 			if reason == "override" then
@@ -514,6 +506,9 @@ function mod:Initialize()
 					UseSoulstone()
 				else
 					RepopMe()
+				end
+				if CannotBeResurrected() then
+					return 1
 				end
 			end
 		end,

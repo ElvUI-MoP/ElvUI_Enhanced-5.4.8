@@ -31,7 +31,7 @@ end
 local function ValueColorUpdate(hex)
 	displayNumberString = join("", hex, "%1|r")
 
-	if(lastPanel ~= nil) then
+	if lastPanel ~= nil then
 		OnUpdate(lastPanel, 20000)
 	end
 end

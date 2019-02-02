@@ -1,5 +1,5 @@
-local E, L, V, P, G = unpack(ElvUI);
-local F = E:NewModule("Farmer", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0");
+local E, L, V, P, G = unpack(ElvUI)
+local F = E:NewModule("Farmer", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 
 local _G = _G
 local pairs, ipairs, select = pairs, ipairs, select
@@ -135,10 +135,11 @@ end
 function F:InSeedZone()
 	local subzone = GetSubZoneText()
 	for i, zone in ipairs(activezones) do
-		if (zone == subzone) then
+		if zone == subzone then
 			return true
 		end
 	end
+
 	return false
 end
 
@@ -147,9 +148,10 @@ function F:InFarmZone()
 end
 
 function F:IsInTable(group, itemId)
-	for i, v in pairs(group) do
+	for i in pairs(group) do
 		if i == itemId then return true end
 	end
+
 	return false
 end
 
@@ -159,6 +161,7 @@ function F:FindButton(group, itemId)
 			return button
 		end
 	end
+
 	return nil
 end
 
@@ -174,9 +177,11 @@ end
 
 function F:UpdateButtonInformation(button)
 	button.items = GetItemCount(button.itemId)
+
 	if button.text then
 		button.text:SetText(button.items)
 	end
+
 	button.icon:SetDesaturated(button.items == 0)
 	button.icon:SetAlpha(button.items == 0 and .25 or 1)
 end
@@ -211,7 +216,7 @@ function F:UpdateBarLayout(bar, anchor, buttons)
 	bar:ClearAllPoints()
 	bar:Point("LEFT", anchor, "LEFT", 0, 0)
 
-	for i, button in ipairs(buttons) do
+	for _, button in ipairs(buttons) do
 		button:ClearAllPoints()
 		if not E.private.farmer.farmbars.onlyactive or button.items > 0 then
 			button:Point("TOPLEFT", bar, "TOPLEFT", (count * 32) + 2, -2)
@@ -255,7 +260,7 @@ function F:UpdateSeedBarLayout(seedBar, anchor, buttons, category)
 	seedBar:ClearAllPoints()
 	seedBar:Point("TOPLEFT", anchor, "TOPLEFT", horizontal and 0 or (category - 1)* 34, horizontal and -((category - 1)* 34) or 0)
 
-	for i, button in ipairs(buttons) do
+	for _, button in ipairs(buttons) do
 		button:ClearAllPoints()
 		if not E.private.farmer.farmbars.onlyactive or button.items > 0 then
 			button:Point("TOPLEFT", seedBar, "TOPLEFT", horizontal and (count * 32) + 2 or 2, horizontal and - 2 or -(count * 32) - 2)
@@ -268,18 +273,20 @@ function F:UpdateSeedBarLayout(seedBar, anchor, buttons, category)
 
 	seedBar:Width(horizontal and (count * 32) + 2 or 32)
 	seedBar:Height(horizontal and 32 or (count * 32) + 2)
+
 	return count
 end
 
 function F:UpdateBar(bar, layoutfunc, zonecheck, anchor, buttons, position)
 	local count = layoutfunc(self, bar, anchor, buttons, position)
 	bar:SetShown(E.private.farmer.farmbars.enable and count > 0 and zonecheck(self) and not InCombatLockdown())
+
 	return count > 0
 end
 
 function F:ZoneChanged()
 	if not F:InSeedZone() and E.private.farmer.farmbars.droptools then
-		for k, v in pairs(tools) do
+		for k in pairs(tools) do
 			local container, slot = F:FindItemInBags(k)
 			if container and slot then
 				PickupContainerItem(container, slot)
@@ -301,11 +308,13 @@ end
 
 function F:UpdateLayout()
  	local position = 1
+
 	for i = 1, NUM_SEED_BARS do
-		if F:UpdateBar(_G[("FarmSeedBar%d"):format(i)], F.UpdateSeedBarLayout, F.InSeedZone, farmSeedBarAnchor, seedButtons[i], position) then
+		if F:UpdateBar(_G[format("FarmSeedBar%d", i)], F.UpdateSeedBarLayout, F.InSeedZone, farmSeedBarAnchor, seedButtons[i], position) then
 			position = position + 1
 		end
 	end
+
 	F:UpdateBar(_G["FarmToolBar"], F.UpdateBarLayout, F.InFarmZone, farmToolBarAnchor, toolButtons)
 	F:UpdateBar(_G["FarmPortalBar"], F.UpdateBarLayout, F.InFarmZone, farmPortalBarAnchor, portalButtons)
 
@@ -317,10 +326,10 @@ function F:UpdateLayout()
 end
 
 function F:CreateFarmButton(index, owner, buttonType, name, texture, allowDrop, showCount)
-	local button = CreateFrame("Button", ("FarmerButton%d"):format(index), owner, "SecureActionButtonTemplate")
-	button:StyleButton();
-	button:SetTemplate("Default", true);
-	button:SetNormalTexture(nil);
+	local button = CreateFrame("Button", format("FarmerButton%d", index), owner, "SecureActionButtonTemplate")
+	button:StyleButton()
+	button:SetTemplate("Default", true)
+	button:SetNormalTexture(nil)
 
 	button:Size(30, 30)
 
@@ -340,7 +349,7 @@ function F:CreateFarmButton(index, owner, buttonType, name, texture, allowDrop, 
 		button.text:SetPoint("BOTTOMRIGHT", button, 1, 2)
 	end
 
-	button.cooldown = CreateFrame("Cooldown", ("FarmerButton%dCooldown"):format(index), button)
+	button.cooldown = CreateFrame("Cooldown", format("FarmerButton%dCooldown", index), button)
 	button.cooldown:SetAllPoints(button)
 
 	button:SetScript("OnEnter", onEnter)
@@ -385,7 +394,7 @@ function F:CreateFrames()
 	end
 
 	for i = 1, NUM_SEED_BARS do
-		local seedBar = CreateFrame("Frame", ("FarmSeedBar%d"):format(i), UIParent)
+		local seedBar = CreateFrame("Frame", format("FarmSeedBar%d", i), UIParent)
 		seedBar:SetFrameStrata("BACKGROUND")
 		seedBar:SetPoint("CENTER", farmSeedBarAnchor, "CENTER", 0, 0)
 
@@ -428,15 +437,15 @@ function F:StartFarmBarLoader()
 
 	local itemError = false
 
-	for k, v in pairs(seeds) do
+	for k in pairs(seeds) do
 		if select(2, GetItemInfo(k)) == nil then itemError = true end
 	end
 
-	for k, v in pairs(tools) do
+	for k in pairs(tools) do
 		if select(2, GetItemInfo(k)) == nil then itemError = true end
 	end
 
-	for k, v in pairs(portals) do
+	for k in pairs(portals) do
 		if select(2, GetItemInfo(k)) == nil then itemError = true end
 	end
 

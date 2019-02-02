@@ -1,4 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
 local ETAB = E:NewModule("Enhanced_TransparentActionbars")
 
 local _G = _G
