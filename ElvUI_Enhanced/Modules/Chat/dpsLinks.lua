@@ -52,6 +52,8 @@ local spamNextLines = {
 }
 
 function EDL:FilterLine(event, source, msg, ...)
+	if not msg then return end
+
 	for _, line in ipairs(spamNextLines) do
 		if msg:match(line) then
 			local curTime = GetTime()
@@ -78,7 +80,7 @@ function EDL:FilterLine(event, source, msg, ...)
 		end
 	end
 
-	for i, line in ipairs(spamFirstLines) do
+	for _, line in ipairs(spamFirstLines) do
 		local newID = 0
 
 		if msg:match(line) then
