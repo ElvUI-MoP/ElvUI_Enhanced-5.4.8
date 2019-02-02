@@ -85,6 +85,15 @@ P.enhanced = {
 			fontSize = 10,
 			fontOutline = "MONOCHROMEOUTLINE"
 		},
+		equipmentSet = {
+			enable = false,
+			position = "CENTER",
+			xOffset = 2,
+			yOffset = 1,
+			font = "Homespun",
+			fontSize = 10,
+			fontOutline = "MONOCHROMEOUTLINE"
+		}
 	},
 	minimap = {
 		location = false,
