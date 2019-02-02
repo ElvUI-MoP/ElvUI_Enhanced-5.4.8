@@ -8,6 +8,7 @@ L["EQUIPMENT_DESC"] = "Adjust the settings for switching your gear set when you 
 L["DURABILITY_DESC"] = "Adjust the settings for the durability information on the character screen."
 L["FARMER_DESC"] = "Adjust the settings for the tools that help you farm more efficiently on Sunsong Ranch."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
+L["EQUIPMENTSET_DESC"] = "Adjust the settings for the equipment set information for the items in your bags (or bank).."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
 -- Actionbars

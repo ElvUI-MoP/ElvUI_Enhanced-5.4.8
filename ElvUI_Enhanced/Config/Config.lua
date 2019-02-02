@@ -1058,6 +1058,7 @@ end
 -- Misc
 local function MiscOptions()
 	local PD = E:GetModule("Enhanced_PaperDoll")
+	local BI = E:GetModule("Enhanced_BagInfo")
 	local RM = E:GetModule("RaidMarkerBar")
 
 	local choices = {
@@ -1273,8 +1274,89 @@ local function MiscOptions()
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable end
 							}
 						}
+					},
+					equipmentSet = {
+						order = 4,
+						type = "group",
+						name = L["Equipment Set"],
+						get = function(info) return E.db.enhanced.equipment.equipmentSet[info[#info]] end,
+						set = function(info, value) E.db.enhanced.equipment.equipmentSet[info[#info]] = value BI:ToggleSettings() end,
+						args = {
+							header = {
+								order = 1,
+								type = "header",
+								name = L["Equipment Set"]
+							},
+							info = {
+								order = 2,
+								type = "description",
+								name = L["EQUIPMENTSET_DESC"]
+							},
+							enable = {
+								order = 3,
+								type = "toggle",
+								name = L["Enable"],
+								desc = L["Show the associated equipment sets for the items in your bags (or bank)."],
+							},
+							spacer = {
+								order = 4,
+								type = "description",
+								name = " "
+							},
+							position = {
+								order = 6,
+								type = "select",
+								name = L["Position"],
+								values = {
+									["TOP"] = "TOP",
+									["CENTER"] = "CENTER",
+									["BOTTOM"] = "BOTTOM"
+								},
+								disabled = function() return not E.db.enhanced.equipment.equipmentSet.enable end
+							},
+							xOffset = {
+								order = 7,
+								type = "range",
+								name = L["X-Offset"],
+								min = -50, max = 50, step = 1,
+								disabled = function() return not E.db.enhanced.equipment.equipmentSet.enable end
+							},
+							yOffset = {
+								order = 8,
+								type = "range",
+								name = L["Y-Offset"],
+								min = -50, max = 50, step = 1,
+								disabled = function() return not E.db.enhanced.equipment.equipmentSet.enable end
+							},
+							font = {
+								order = 9,
+								type = "select",
+								dialogControl = "LSM30_Font",
+								name = L["Font"],
+								values = AceGUIWidgetLSMlists.font,
+								disabled = function() return not E.db.enhanced.equipment.equipmentSet.enable end
+							},
+							fontSize = {
+								order = 10,
+								type = "range",
+								name = L["Font Size"],
+								min = 6, max = 36, step = 1,
+								disabled = function() return not E.db.enhanced.equipment.equipmentSet.enable end
+							},
+							fontOutline = {
+								order = 11,
+								type = "select",
+								name = L["Font Outline"],
+								values = {
+									["NONE"] = L["None"],
+									["OUTLINE"] = "OUTLINE",
+									["MONOCHROMEOUTLINE"] = "MONOCROMEOUTLINE",
+									["THICKOUTLINE"] = "THICKOUTLINE"
+								},
+								disabled = function() return not E.db.enhanced.equipment.equipmentSet.enable end
+							}
+						}
 					}
-					-- TODO re-add equipmentset config
 				}
 			},
 			raidMarkerBar = {
