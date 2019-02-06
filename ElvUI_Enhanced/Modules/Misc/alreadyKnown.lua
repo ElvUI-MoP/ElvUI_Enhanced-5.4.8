@@ -19,6 +19,17 @@ local GetNumBuybackItems = GetNumBuybackItems
 local IsAddOnLoaded = IsAddOnLoaded
 local SetItemButtonTextureVertexColor = SetItemButtonTextureVertexColor
 
+local GetNumQuestLogRewards = GetNumQuestLogRewards
+local GetNumQuestRewards = GetNumQuestRewards
+local GetNumQuestLogChoices = GetNumQuestLogChoices
+local GetNumQuestChoices = GetNumQuestChoices
+local GetQuestLogRewardSpell = GetQuestLogRewardSpell
+local GetRewardSpell = GetRewardSpell
+local GetQuestLogItemLink = GetQuestLogItemLink
+local GetQuestItemLink = GetQuestItemLink
+local GetQuestLogChoiceInfo = GetQuestLogChoiceInfo
+local GetQuestItemInfo = GetQuestItemInfo
+
 local BUYBACK_ITEMS_PER_PAGE = BUYBACK_ITEMS_PER_PAGE
 local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
 local MERCHANT_ITEMS_PER_PAGE = MERCHANT_ITEMS_PER_PAGE
@@ -215,13 +226,20 @@ local function OpenMailFrame_UpdateButtonPositions()
 end
 
 local function QuestInfo_Display()
-	for i = 1, MAX_NUM_ITEMS do
-		local item = _G["QuestInfoItem"..i]
-		local link = item.type and (QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
-		local _, _, _, _, isUsable = (QuestInfoFrame.questLog and GetQuestLogChoiceInfo or GetQuestItemInfo)(QuestInfoFrame.questLog and i or item.type, i)
+	local numQuestRewards = QuestInfoFrame.questLog and GetNumQuestLogRewards() or GetNumQuestRewards()
+	local numQuestChoices = QuestInfoFrame.questLog and GetNumQuestLogChoices() or GetNumQuestChoices()
+	local numQuestSpellRewards = QuestInfoFrame.questLog and GetQuestLogRewardSpell() or GetRewardSpell()
+	local rewardsCount = numQuestChoices + numQuestRewards + (numQuestSpellRewards and 1 or 0)
 
-		if isUsable and IsAlreadyKnown(link) then
-			SetItemButtonTextureVertexColor(item, knownColor.r, knownColor.g, knownColor.b)
+	if rewardsCount > 0 then
+		for i = 1, rewardsCount do
+			local item = _G["QuestInfoItem"..i]
+			local link = item.type and (QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
+			local _, _, _, _, isUsable = (QuestInfoFrame.questLog and GetQuestLogChoiceInfo or GetQuestItemInfo)(QuestInfoFrame.questLog and i or item.type, i)
+
+			if isUsable and IsAlreadyKnown(link) then
+				SetItemButtonTextureVertexColor(item, knownColor.r, knownColor.g, knownColor.b)
+			end
 		end
 	end
 end
