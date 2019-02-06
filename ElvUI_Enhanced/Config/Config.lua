@@ -1111,8 +1111,7 @@ local function MiscOptions()
 								order = 3,
 								type = "toggle",
 								name = L["Enable"],
-								desc = L["Enable/Disable the display of durability information on the character screen."],
-								disabled = function() return not E.db.enhanced.equipment.enable end
+								desc = L["Enable/Disable the display of durability information on the character screen."]
 							},
 							onlydamaged = {
 								order = 4,
@@ -1204,8 +1203,7 @@ local function MiscOptions()
 								order = 3,
 								type = "toggle",
 								name = L["Enable"],
-								desc = L["Enable/Disable the display of item levels on the character screen."],
-								disabled = function() return not E.db.enhanced.equipment.enable end
+								desc = L["Enable/Disable the display of item levels on the character screen."]
 							},
 							qualityColor = {
 								order = 4,
