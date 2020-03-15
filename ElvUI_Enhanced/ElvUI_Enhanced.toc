@@ -1,17 +1,15 @@
 ## Interface: 50400
 ## Author: Bunny, Apollyon, Dethius
 ## Version: 1.02
-## Title: |cff00dd91E|r|cffe5e3e3lvUI|r |cff00dd91E|r|cffe5e3e3nhanced|r
-## Notes: Plugin-Enhancements for |cffA11313E|r|cffC4C4C4lvUI|r.
+## Title: |cff00fcceE|r|cffe5e3e3lvUI|r |cff00fcceE|r|cffe5e3e3nhanced|r
 ## SavedVariables: EnhancedDB
 ## RequiredDeps: ElvUI
 ## DefaultState: Enabled
 
 Developer\Load_Developer.xml
-Libraries\Load_Libraries.xml
 Locales\Load_Locales.xml
 Media\Load_Media.xml
-Settings\Load_Settings.xml
 ElvUI_Enhanced.lua
-Config\Load_Config.xml
+Settings\Load_Settings.xml
 Modules\Load_Modules.xml
+Config\Load_Config.xml

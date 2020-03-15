@@ -13,12 +13,6 @@ local GetGuildBankItemInfo = GetGuildBankItemInfo
 local GetGuildBankItemLink = GetGuildBankItemLink
 local GetInboxItem = GetInboxItem
 local GetItemInfo = GetItemInfo
-local GetMerchantNumItems = GetMerchantNumItems
-local GetNumAuctionItems = GetNumAuctionItems
-local GetNumBuybackItems = GetNumBuybackItems
-local IsAddOnLoaded = IsAddOnLoaded
-local SetItemButtonTextureVertexColor = SetItemButtonTextureVertexColor
-
 local GetNumQuestLogRewards = GetNumQuestLogRewards
 local GetNumQuestRewards = GetNumQuestRewards
 local GetNumQuestLogChoices = GetNumQuestLogChoices
@@ -29,60 +23,26 @@ local GetQuestLogItemLink = GetQuestLogItemLink
 local GetQuestItemLink = GetQuestItemLink
 local GetQuestLogChoiceInfo = GetQuestLogChoiceInfo
 local GetQuestItemInfo = GetQuestItemInfo
+local GetMerchantNumItems = GetMerchantNumItems
+local GetNumAuctionItems = GetNumAuctionItems
+local GetAuctionItemClasses = GetAuctionItemClasses
+local GetNumBuybackItems = GetNumBuybackItems
+local GetMerchantItemInfo = GetMerchantItemInfo
+local GetBuybackItemInfo = GetBuybackItemInfo
+local GetBuybackItemLink = GetBuybackItemLink
+local IsAddOnLoaded = IsAddOnLoaded
+local SetItemButtonTextureVertexColor = SetItemButtonTextureVertexColor
 
 local BUYBACK_ITEMS_PER_PAGE = BUYBACK_ITEMS_PER_PAGE
 local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
 local MERCHANT_ITEMS_PER_PAGE = MERCHANT_ITEMS_PER_PAGE
 
 local knownColor = {r = 0.1, g = 1.0, b = 0.2}
-local tooltip = CreateFrame("GameTooltip")
-tooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 
-local IsAlreadyKnown
-do
-	local knowns = {}
-	local _, _, _, consumable, glyph, _, recipe, _, miscallaneous = GetAuctionItemClasses()
-	local knowables = { 
-		[consumable] = true,
-		[glyph] = true,
-		[recipe] = true,
-		[miscallaneous] = true
-	}
-
-	local lines = {}
-	for i = 1, 40 do
-		lines[i] = tooltip:CreateFontString()
-		tooltip:AddFontStrings(lines[i], tooltip:CreateFontString())
-	end
-
-	function IsAlreadyKnown (itemLink)
-		if not itemLink then return end
-
-		local itemID = itemLink:match("item:(%d+):")
-		if knowns[itemID] then
-			return true
-		end
-
-		local _, _, _, _, _, itemType = GetItemInfo(itemLink)
-		if not knowables[itemType] then return end
-
-		tooltip:ClearLines()
-		tooltip:SetHyperlink(itemLink)
-
-		for i = 1, tooltip:NumLines() do
-			if lines[i]:GetText() == ITEM_SPELL_KNOWN then
-				knowns[itemID] = true
-				return true
-			end
-		end
-	end
-end
-
--- Merchant
 local function MerchantFrame_UpdateMerchantInfo()
 	local numItems = GetMerchantNumItems()
 
-	for i = 1, MERCHANT_ITEMS_PER_PAGE do
+	for i = 1, BUYBACK_ITEMS_PER_PAGE do
 		local index = (MerchantFrame.page - 1) * MERCHANT_ITEMS_PER_PAGE + i
 		if index > numItems then return end
 
@@ -91,7 +51,7 @@ local function MerchantFrame_UpdateMerchantInfo()
 		if button and button:IsShown() then
 			local _, _, _, _, numAvailable, isUsable = GetMerchantItemInfo(index)
 
-			if isUsable and IsAlreadyKnown(GetMerchantItemLink(index)) then
+			if isUsable and AK:IsAlreadyKnown(GetMerchantItemLink(index)) then
 				local r, g, b = knownColor.r, knownColor.g, knownColor.b
 
 				if numAvailable == 0 then
@@ -115,37 +75,13 @@ local function MerchantFrame_UpdateBuybackInfo()
 		if button and button:IsShown() then
 			local _, _, _, _, _, isUsable = GetBuybackItemInfo(i)
 
-			if isUsable and IsAlreadyKnown(GetBuybackItemLink(i)) then
+			if isUsable and AK:IsAlreadyKnown(GetBuybackItemLink(i)) then
 				SetItemButtonTextureVertexColor(button, knownColor.r, knownColor.g, knownColor.b)
 			end
 		end
 	end
 end
 
--- Guild Bank
-local function GuildBankFrame_Update()
-	if GuildBankFrame.mode ~= "bank" then return end
-
-	local tab = GetCurrentGuildBankTab()
-
-	for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
-		local button = _G["GuildBankColumn"..ceil((i - 0.5) / NUM_SLOTS_PER_GUILDBANK_GROUP).."Button"..fmod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)]
-
-		if button and button:IsShown() then
-			local texture, _, locked = GetGuildBankItemInfo(tab, i)
-
-			if texture and not locked then
-				if IsAlreadyKnown(GetGuildBankItemLink(tab, i)) then
-					SetItemButtonTextureVertexColor(button, knownColor.r, knownColor.g, knownColor.b)
-				else
-					SetItemButtonTextureVertexColor(button, 1, 1, 1)
-				end
-			end
-		end
-	end
-end
-
--- Auction House
 local function AuctionFrameBrowse_Update()
 	local numItems = GetNumAuctionItems("list")
 	local offset = FauxScrollFrame_GetOffset(BrowseScrollFrame)
@@ -159,7 +95,7 @@ local function AuctionFrameBrowse_Update()
 		if texture and texture:IsShown() then
 			local _, _, _, _, canUse = GetAuctionItemInfo("list", index)
 
-			if canUse and IsAlreadyKnown(GetAuctionItemLink("list", index)) then
+			if canUse and AK:IsAlreadyKnown(GetAuctionItemLink("list", index)) then
 				texture:SetVertexColor(knownColor.r, knownColor.g, knownColor.b)
 			end
 		end
@@ -179,7 +115,7 @@ local function AuctionFrameBid_Update()
 		if texture and texture:IsShown() then
 			local _, _, _, _, canUse = GetAuctionItemInfo("bidder", index)
 
-			if canUse and IsAlreadyKnown(GetAuctionItemLink("bidder", index)) then
+			if canUse and AK:IsAlreadyKnown(GetAuctionItemLink("bidder", index)) then
 				texture:SetVertexColor(knownColor.r, knownColor.g, knownColor.b)
 			end
 		end
@@ -199,13 +135,35 @@ local function AuctionFrameAuctions_Update()
 		if texture and texture:IsShown() then
 			local _, _, _, _, canUse, _, _, _, _, _, _, _, saleStatus = GetAuctionItemInfo("owner", index)
 
-			if canUse and IsAlreadyKnown(GetAuctionItemLink("owner", index)) then
+			if canUse and AK:IsAlreadyKnown(GetAuctionItemLink("owner", index)) then
 				local r, g, b = knownColor.r, knownColor.g, knownColor.b
 				if saleStatus == 1 then
 					r, g, b = r * 0.5, g * 0.5, b * 0.5
 				end
 
 				texture:SetVertexColor(r, g, b)
+			end
+		end
+	end
+end
+
+local function GuildBankFrame_Update()
+	if GuildBankFrame.mode ~= "bank" then return end
+
+	local tab = GetCurrentGuildBankTab()
+
+	for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
+		local button = _G["GuildBankColumn"..ceil((i - 0.5) / NUM_SLOTS_PER_GUILDBANK_GROUP).."Button"..fmod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)]
+
+		if button and button:IsShown() then
+			local texture, _, locked = GetGuildBankItemInfo(tab, i)
+
+			if texture and not locked then
+				if AK:IsAlreadyKnown(GetGuildBankItemLink(tab, i)) then
+					SetItemButtonTextureVertexColor(button, knownColor.r, knownColor.g, knownColor.b)
+				else
+					SetItemButtonTextureVertexColor(button, 1, 1, 1)
+				end
 			end
 		end
 	end
@@ -218,7 +176,7 @@ local function OpenMailFrame_UpdateButtonPositions()
 		if button then
 			local name, _, _, _, canUse = GetInboxItem(InboxFrame.openMailID, i)
 
-			if name and canUse and IsAlreadyKnown(GetInboxItemLink(InboxFrame.openMailID, i)) then
+			if name and canUse and AK:IsAlreadyKnown(GetInboxItemLink(InboxFrame.openMailID, i)) then
 				SetItemButtonTextureVertexColor(button, knownColor.r, knownColor.g, knownColor.b)
 			end
 		end
@@ -237,11 +195,39 @@ local function QuestInfo_Display()
 			local link = item.type and (QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
 			local _, _, _, _, isUsable = (QuestInfoFrame.questLog and GetQuestLogChoiceInfo or GetQuestItemInfo)(QuestInfoFrame.questLog and i or item.type, i)
 
-			if isUsable and IsAlreadyKnown(link) then
+			if isUsable and AK:IsAlreadyKnown(link) then
 				SetItemButtonTextureVertexColor(item, knownColor.r, knownColor.g, knownColor.b)
 			end
 		end
 	end
+end
+
+function AK:IsAlreadyKnown(itemLink)
+	if not itemLink then return end
+
+	local itemID = match(itemLink, "item:(%d+):")
+	if self.knownTable[itemID] then return true end
+
+	local _, _, _, _, _, itemType = GetItemInfo(itemLink)
+	if not self.knowableTypes[itemType] then return end
+
+	E.ScanTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+	E.ScanTooltip:ClearLines()
+	E.ScanTooltip:SetHyperlink(itemLink)
+	E.ScanTooltip:Show()
+
+	local bindTypeLines = GetCVarBool("colorblindmode") and 8 or 7
+	for i = 2, bindTypeLines do
+		local line = _G["ElvUI_ScanTooltipTextLeft"..i]:GetText()
+
+		if line == ITEM_SPELL_KNOWN then
+			self.knownTable[itemID] = true
+
+			return true
+		end
+	end
+
+	E.ScanTooltip:Hide()
 end
 
 function AK:ADDON_LOADED(_, addon)
@@ -301,14 +287,12 @@ function AK:ToggleState()
 	if not self:IsLoadeble() then return end
 
 	if not self.initialized then
-		self.scantip = CreateFrame("GameTooltip", "ElvUI_MerchantAlreadyKnown", nil, "GameTooltipTemplate")
-		self.scantip:SetOwner(UIParent, "ANCHOR_NONE")
-
 		self.knownTable = {}
 
-		local _, _, _, consumable, _, _, _, recipe, _, miscallaneous = GetAuctionItemClasses()
+		local _, _, _, consumable, glyph, _, recipe, _, miscallaneous = GetAuctionItemClasses()
 		self.knowableTypes = {
 			[consumable] = true,
+			[glyph] = true,
 			[recipe] = true,
 			[miscallaneous] = true
 		}

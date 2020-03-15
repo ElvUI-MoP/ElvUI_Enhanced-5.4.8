@@ -1,21 +1,21 @@
 local E, L, V, P, G = unpack(ElvUI)
 local DT = E:GetModule("DataTexts")
+local PD = E:GetModule("Enhanced_PaperDoll")
+local EE = E:GetModule("ElvUI_Enhanced")
 
 local floor = math.floor
-local format, join = string.format, string.join
+local join = string.join
 
 local GetInventoryItemLink = GetInventoryItemLink
 local GetInventorySlotInfo = GetInventorySlotInfo
+local GetAverageItemLevel = GetAverageItemLevel
 local GetItemInfo = GetItemInfo
 local ITEM_LEVEL_ABBR = ITEM_LEVEL_ABBR
 local STAT_AVERAGE_ITEM_LEVEL = STAT_AVERAGE_ITEM_LEVEL
 
-local displayNumberString = ""
-local lastPanel
+local displayString = ""
 
-local function ColorizeSettingName(settingName)
-	return format("|cffff8000%s|r", settingName)
-end
+local lastPanel
 
 local slots = {
 	{"HeadSlot", HEADSLOT},
@@ -39,13 +39,21 @@ local slots = {
 local levelColors = {
 	[0] = {1, 0, 0},
 	[1] = {0, 1, 0},
-	[2] = {1, 1, .5}
+	[2] = {1, 1, 0.5}
 }
 
-local function OnEvent(self)
+local function OnEvent(self, event)
+	if event == "PLAYER_ENTERING_WORLD" then
+		PD:ScheduleTimer("UpdateDataTextItemLevel", 5, self)
+		return
+	end
+	PD:UpdateDataTextItemLevel(self)
+end
+
+function PD:UpdateDataTextItemLevel(self)
 	local total, equipped = GetAverageItemLevel()
 
-	self.text:SetFormattedText(displayNumberString, ITEM_LEVEL_ABBR, floor(equipped), floor(total))
+	self.text:SetFormattedText(displayString, ITEM_LEVEL_ABBR, floor(equipped), floor(total))
 end
 
 local function OnEnter(self)
@@ -53,8 +61,9 @@ local function OnEnter(self)
 	local color
 
 	DT:SetupTooltip(self)
-	DT.tooltip:AddDoubleLine(L["Equipped"], floor(equipped), 1, 1, 1, 1, 1, 0)
-	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1, 1, 1, 0)
+	DT.tooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL)
+	DT.tooltip:AddDoubleLine(L["Equipped"], floor(equipped), 1, 1, 1)
+	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1)
 	DT.tooltip:AddLine(" ")
 
 	for i = 1, #slots do
@@ -80,7 +89,7 @@ local function OnClick(self, btn)
 end
 
 local function ValueColorUpdate(hex)
-	displayNumberString = join("", "%s: ", hex, "%d/%d|r")
+	displayString = join("", "%s: ", hex, "%d/%d|r")
 
 	if lastPanel ~= nil then
 		OnEvent(lastPanel)
@@ -88,4 +97,4 @@ local function ValueColorUpdate(hex)
 end
 E.valueColorUpdateFuncs[ValueColorUpdate] = true
 
-DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter, nil, ColorizeSettingName(STAT_AVERAGE_ITEM_LEVEL))
+DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter, nil, EE:ColorizeSettingName(STAT_AVERAGE_ITEM_LEVEL))

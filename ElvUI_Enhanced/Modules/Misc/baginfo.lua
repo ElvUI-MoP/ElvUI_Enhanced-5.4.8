@@ -1,4 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
 local BI = E:NewModule("Enhanced_BagInfo", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 local B = E:GetModule("Bags")
 
@@ -76,7 +76,7 @@ function BI:BuildEquipmentMap(clear)
 end
 
 function BI:UpdateContainerFrame(frame, bag, slot)
-	local db = E.db.enhanced.equipment.equipmentSet
+	local db = E.db.enhanced.equipmentSet
 
 	if not frame.equipmentinfo then
 		frame.equipmentinfo = frame:CreateFontString(nil, "OVERLAY")
@@ -120,7 +120,7 @@ function BI:ToggleSettings()
 		self:CancelTimer(updateTimer)
 	end
 
-	if E.db.enhanced.equipment.equipmentSet.enable then
+	if E.db.enhanced.equipmentSet.enable then
 		self:RegisterEvent("EQUIPMENT_SETS_CHANGED", "DelayUpdateBagInformation")
 		self:RegisterEvent("BAG_UPDATE", "DelayUpdateBagInformation")
 		self:RegisterEvent("PLAYERBANKSLOTS_CHANGED", "DelayUpdateBagInformation")

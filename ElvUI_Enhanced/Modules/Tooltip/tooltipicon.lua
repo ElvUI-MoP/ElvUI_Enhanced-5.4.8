@@ -2,8 +2,8 @@ local E, L, V, P, G = unpack(ElvUI)
 local TI = E:NewModule("Enhanced_TooltipIcon", "AceHook-3.0")
 
 local _G = _G
-local select = select
-local find = string.find
+local select, type = select, type
+local find, match = string.find, string.match
 
 local GetAchievementInfo = GetAchievementInfo
 local GetItemIcon = GetItemIcon
@@ -25,21 +25,21 @@ local function AddIcon(self, icon)
 	if not icon then return end
 
 	local title = _G[self:GetName().."TextLeft1"]
-	if title and not find(title:GetText(), "|T"..icon) then
-		title:SetFormattedText("|T%s:48:48:0:0:64:64:5:59:5:59|t %s", icon, title:GetText())
+	local text = title and title:GetText()
+
+	if text and not find(text, "|T"..icon) then
+		title:SetFormattedText("|T%s:30:30:0:0:64:64:5:59:5:59|t %s", icon, text)
 	end
 end
 
 local function ItemIcon(self)
 	local _, link = self:GetItem()
 	local icon = link and GetItemIcon(link)
-
 	AddIcon(self, icon)
 end
 
 local function SpellIcon(self)
 	local id = self:GetSpell()
-
 	if id then
 		AddIcon(self, select(3, GetSpellInfo(id)))
 	end
@@ -48,8 +48,7 @@ end
 local function AchievementIcon(self, link)
 	if type(link) ~= "string" then return end
 
-	local linkType, id = strmatch(link, "^([^:]+):(%d+)")
-
+	local linkType, id = match(link, "^([^:]+):(%d+)")
 	if id and (linkType == "achievement") then
 		AddIcon(self, select(10, GetAchievementInfo(id)))
 	end
@@ -58,7 +57,7 @@ end
 function TI:ToggleItemsState()
 	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems and E.db.enhanced.tooltip.tooltipIcon.enable
 
-	for _, tooltip in pairs(itemTooltips) do
+	for _, tooltip in ipairs(itemTooltips) do
 		if state then
 			if not self:IsHooked(tooltip, "OnTooltipSetItem", ItemIcon) then
 				self:SecureHookScript(tooltip, "OnTooltipSetItem", ItemIcon)
@@ -72,7 +71,7 @@ end
 function TI:ToggleSpellsState()
 	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells and E.db.enhanced.tooltip.tooltipIcon.enable
 
-	for _, tooltip in pairs(spellTooltips) do
+	for _, tooltip in ipairs(spellTooltips) do
 		if state then
 			if not self:IsHooked(tooltip, "OnTooltipSetSpell", SpellIcon) then
 				self:SecureHookScript(tooltip, "OnTooltipSetSpell", SpellIcon)

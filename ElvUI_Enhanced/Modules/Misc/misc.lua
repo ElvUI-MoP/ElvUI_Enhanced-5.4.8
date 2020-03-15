@@ -1,16 +1,18 @@
 local E, L, V, P, G = unpack(ElvUI)
 local M = E:NewModule("Enhanced_Misc", "AceHook-3.0", "AceEvent-3.0")
 
-E.Enhanced_Misc = M
-
 local CancelDuel = CancelDuel
 local IsInInstance = IsInInstance
 local RepopMe = RepopMe
 
+local soulstone
 function M:PLAYER_DEAD()
 	local inInstance, instanceType = IsInInstance()
 	if inInstance and (instanceType == "pvp") then
-		local soulstone = GetSpellInfo(20707)
+		if not soulstone then
+			soulstone = GetSpellInfo(20707)
+		end
+
 		if E.myclass ~= "SHAMAN" and not (soulstone and UnitBuff("player", soulstone)) then
 			RepopMe()
 		end
@@ -32,7 +34,7 @@ function M:DUEL_REQUESTED(_, name)
 end
 
 function M:DeclineDuel()
-	if E.db.enhanced.general.declineduel then
+	if E.db.enhanced.general.declineDuel then
 		self:RegisterEvent("DUEL_REQUESTED")
 	else
 		self:UnregisterEvent("DUEL_REQUESTED")
@@ -46,10 +48,24 @@ function M:PET_BATTLE_PVP_DUEL_REQUESTED(_, name)
 end
 
 function M:DeclinePetDuel()
-	if E.db.enhanced.general.declinepetduel then
+	if E.db.enhanced.general.declinePetDuel then
 		self:RegisterEvent("PET_BATTLE_PVP_DUEL_REQUESTED")
 	else
 		self:UnregisterEvent("PET_BATTLE_PVP_DUEL_REQUESTED")
+	end
+end
+
+function M:PARTY_INVITE_REQUEST(_, name)
+	StaticPopup_Hide("PARTY_INVITE")
+	DeclineGroup()
+	E:Print(L["Declined party request from "]..name..".")
+end
+
+function M:DeclineParty()
+	if E.db.enhanced.general.declineParty then
+		self:RegisterEvent("PARTY_INVITE_REQUEST")
+	else
+		self:UnregisterEvent("PARTY_INVITE_REQUEST")
 	end
 end
 
@@ -65,16 +81,16 @@ end
 
 function M:Initialize()
 	self:AutoRelease()
-	self:HideZone()
 	self:DeclineDuel()
+	self:HideZone()
 	self:DeclinePetDuel()
 	self:QuestItemLevel()
-	self:LoadQuestReward()
+	self:ToggleQuestReward()
 	self:WatchedFaction()
-	self:LoadMoverTransparancy()
 	self:QuestLevelToggle()
 	self:BuyStackToggle()
 	self:MerchantItemLevel()
+	self:DeclineParty()
 end
 
 local function InitializeCallback()
