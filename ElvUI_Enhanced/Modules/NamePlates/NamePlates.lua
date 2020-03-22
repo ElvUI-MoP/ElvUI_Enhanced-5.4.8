@@ -100,7 +100,9 @@ end
 -- Class Cache
 local grenColorToClass = {}
 for class, color in pairs(RAID_CLASS_COLORS) do
-	grenColorToClass[color.g] = class
+	local monkColorB = class == "MONK" and 0.01 or 0
+
+	grenColorToClass[color.b + monkColorB] = class
 end
 
 local function UnitClassHook(self, frame, unitType)
@@ -118,8 +120,9 @@ local function UnitClassHook(self, frame, unitType)
 			return NP:GetUnitClassByGUID(frame)
 		end
 	elseif unitType == "ENEMY_PLAYER" then
-		local _, g = frame.oldHealthBar:GetStatusBarColor()
-		return grenColorToClass[floor(g*100 + 0.5) / 100]
+		local _, _, b = frame.oldHealthBar:GetStatusBarColor()
+
+		return grenColorToClass[floor(b * 100 + 0.5) / 100]
 	end
 end
 
