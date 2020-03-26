@@ -29,11 +29,11 @@ P.enhanced = {
 		backgrounds = {
 			characterBackground = true,
 			characterBackdrop = true,
-			characterDesaturate = true,
+			characterDesaturate = false,
 
-			inspectBackground = false,
+			inspectBackground = true,
 			inspectBackdrop = true,
-			inspectDesaturate = true
+			inspectDesaturate = false
 		}
 	},
 	chat = {
