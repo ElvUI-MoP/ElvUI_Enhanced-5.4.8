@@ -25,6 +25,15 @@ P.enhanced = {
 			font = "PT Sans Narrow",
 			fontSize = 12,
 			fontOutline = "NONE"
+		},
+		backgrounds = {
+			characterBackground = true,
+			characterBackdrop = true,
+			characterDesaturate = true,
+
+			inspectBackground = false,
+			inspectBackdrop = true,
+			inspectDesaturate = true
 		}
 	},
 	chat = {

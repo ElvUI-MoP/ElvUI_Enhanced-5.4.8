@@ -192,6 +192,8 @@ local function QuestInfo_Display()
 	if rewardsCount > 0 then
 		for i = 1, rewardsCount do
 			local item = _G["QuestInfoItem"..i]
+			if item.objectType ~= "item" then return end
+
 			local link = item.type and (QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
 			local _, _, _, _, isUsable = (QuestInfoFrame.questLog and GetQuestLogChoiceInfo or GetQuestItemInfo)(QuestInfoFrame.questLog and i or item.type, i)
 
