@@ -423,6 +423,7 @@ local addonFixes = {
 
 function MBG:Initialize()
 	if not E.private.enhanced.minimapButtonGrabber then return end
+
 	local db = E.db.enhanced.minimap.buttonGrabber
 	local spacing = (db.backdrop and (E.Border + db.backdropSpacing) or E.Spacing)
 
@@ -432,7 +433,7 @@ function MBG:Initialize()
 	self.frame = CreateFrame("Frame", "ElvUI_MinimapButtonGrabber", UIParent)
 	self.frame:Size(db.buttonSize + (spacing * 2))
 	self.frame:Point("TOPRIGHT", MMHolder, "BOTTOMRIGHT", 0, 1)
-	self.frame:SetFrameStrata("LOW")
+	self.frame:SetFrameStrata("HIGH")
 	self.frame:SetClampedToScreen(true)
 	self.frame:CreateBackdrop()
 
@@ -446,8 +447,6 @@ function MBG:Initialize()
 		self.frame.mover:SetScript("OnSizeChanged", nil)
 	end
 
-	self.initialized = true
-
 	self:ToggleMouseover()
 	self:UpdateAlpha()
 	self:UpdatePosition()
@@ -460,6 +459,8 @@ function MBG:Initialize()
 	for addon, func in pairs(addonFixes) do
 		AddonsCompat:AddAddon(addon, func)
 	end
+
+	self.initialized = true
 end
 
 local function InitializeCallback()
