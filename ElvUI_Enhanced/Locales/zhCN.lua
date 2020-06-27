@@ -101,6 +101,7 @@ L["Out of Combat"] = true
 L["Overlay Color"] = true
 L["Paperdolls"] = true
 L["Player Portrait"] = true
+L["Progress Info"] = true
 L["PvP Autorelease"] = "PVP自动释放灵魂"
 L["Quality Color"] = true
 L["Quest ItemLevel"] = true

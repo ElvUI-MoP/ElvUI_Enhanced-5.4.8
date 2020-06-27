@@ -21,8 +21,18 @@ function EE:TooltipOptions()
 					EIBC:ToggleState()
 				end
 			},
-			tooltipIcon = {
+			progressInfo = {
 				order = 2,
+				type = "toggle",
+				name = L["Progress Info"],
+				desc = L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."],
+				get = function(info) return E.db.enhanced.tooltip.progressInfo end,
+				set = function(info, value)
+					E.db.enhanced.tooltip.progressInfo = value
+				end
+			},
+			tooltipIcon = {
+				order = 3,
 				type = "group",
 				name = L["Tooltip Icon"],
 				guiInline = true,
