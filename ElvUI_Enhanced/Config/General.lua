@@ -22,17 +22,6 @@ function EE:GeneralOptions()
 					M:AutoRelease()
 				end
 			},
-			autoRepChange = {
-				order = 2,
-				type = "toggle",
-				name = L["Track Reputation"],
-				desc = L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."],
-				get = function(info) return E.db.enhanced.general.autoRepChange end,
-				set = function(info, value)
-					E.db.enhanced.general.autoRepChange = value
-					M:WatchedFaction()
-				end
-			},
 			showQuestLevel = {
 				order = 3,
 				type = "toggle",
