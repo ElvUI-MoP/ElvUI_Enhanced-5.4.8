@@ -110,10 +110,13 @@ end
 hooksecurefunc(TT, "AddInspectInfo", function(self, tt, unit)
 	if not E.db.enhanced.tooltip.progressInfo then return end
 	if not unit and CanInspect(unit) then return end
+
 	local level = UnitLevel(unit)
 	if not level or level < MAX_PLAYER_LEVEL then return end
 
 	local guid = UnitGUID(unit)
+	if not guid then return end
+
 	if not progressCache[guid] or (GetTime() - progressCache[guid].timer) > 600 then
 		if guid == E.myguid then
 			UpdateProgression(guid)
