@@ -98,10 +98,10 @@ function EE:MinimapOptions()
 						type = "select",
 						name = L["Grow direction"],
 						values = {
-							["TOPLEFT"] = "DOWN -> RIGHT",
-							["TOPRIGHT"] = "DOWN -> LEFT",
-							["BOTTOMLEFT"] = "UP -> RIGHT",
-							["BOTTOMRIGHT"] = "UP -> LEFT"
+							["TOPLEFT"] = format(L["%s and then %s"], L["Down"], L["Right"]),
+							["TOPRIGHT"] = format(L["%s and then %s"], L["Down"], L["Left"]),
+							["BOTTOMLEFT"] = format(L["%s and then %s"], L["Up"], L["Right"]),
+							["BOTTOMRIGHT"] = format(L["%s and then %s"], L["Up"], L["Left"])
 						}
 					},
 					buttonsPerRow = {
