@@ -192,7 +192,8 @@ local function OpenRecap(recapID)
 		self.DeathTimeStamp = self.DeathTimeStamp or evtData.timestamp
 
 		if evtData.amount then
-			local amountStr = -evtData.amount
+			local amountStr = E:GetFormattedText("CURRENT", -evtData.amount)
+
 			dmgInfo.Amount:SetText(amountStr)
 			dmgInfo.AmountLarge:SetText(amountStr)
 
@@ -217,7 +218,7 @@ local function OpenRecap(recapID)
 				blckSpacer = " "
 			end
 			local critStr = (evtData.critical and evtData.critical > 0) and L["Critical"] or ""
-			dmgInfo.dmgExtraStr = join("", dmgInfo.dmgExtraStr, " ", ovrkStr, ovrkSpacer, absoStr, absoSpacer, resiStr, resiSpacer, blckStr, blckSpacer, critStr)
+			dmgInfo.dmgExtraStr = join("", dmgInfo.dmgExtraStr, "", ovrkStr, ovrkSpacer, absoStr, absoSpacer, resiStr, resiSpacer, blckStr, blckSpacer, critStr)
 
 			local absoDmg = (evtData.absorbed and evtData.absorbed > 0) and evtData.absorbed or 0
 			local resiDmg = (evtData.resisted and evtData.resisted > 0) and evtData.resisted or 0
@@ -327,24 +328,17 @@ end
 
 function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, sourceFlags, _, _, _, destFlags, ...)
 	if (band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME) or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME) then return end
-	if event ~= "ENVIRONMENTAL_DAMAGE"
-	and event ~= "RANGE_DAMAGE"
-	and event ~= "SPELL_DAMAGE"
-	and event ~= "SPELL_EXTRA_ATTACKS"
-	and event ~= "SPELL_INSTAKILL"
-	and event ~= "SPELL_PERIODIC_DAMAGE"
-	and event ~= "SWING_DAMAGE"
-	then return end
+	if event ~= "ENVIRONMENTAL_DAMAGE" and event ~= "RANGE_DAMAGE" and event ~= "SPELL_DAMAGE" and event ~= "SPELL_EXTRA_ATTACKS" and event ~= "SPELL_INSTAKILL" and event ~= "SPELL_PERIODIC_DAMAGE" and event ~= "SWING_DAMAGE" then return end
 
 	local subVal = sub(event, 1, 5)
-	local environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
+	local _, environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
 
 	if event == "SWING_DAMAGE" then
-		amount, overkill, school, resisted, blocked, absorbed, critical = ...
+		_, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	elseif subVal == "SPELL" then
-		spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical = ...
+		_, spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	elseif event == "ENVIRONMENTAL_DAMAGE" then
-		environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical = ...
+		_, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	end
 
 	if not tonumber(amount) then return end
@@ -377,7 +371,7 @@ function mod:DeathRecap()
 	tinsert(UISpecialFrames, frame:GetName())
 
 	frame.Title = frame:CreateFontString("ARTWORK", nil, "GameFontNormal")
-	frame.Title:Point("TOPLEFT", 12, -9)
+	frame.Title:Point("TOP", 0, -9)
 	frame.Title:SetText(L["Death Recap"])
 
 	frame.Unavailable = frame:CreateFontString("ARTWORK", nil, "GameFontNormal")
@@ -410,27 +404,27 @@ function mod:DeathRecap()
 
 		button.DamageInfo = CreateFrame("Button", nil, button)
 		button.DamageInfo:Point("TOPLEFT", 0, 0)
-		button.DamageInfo:Point("BOTTOMRIGHT", button, "BOTTOMLEFT", 80, 0)
+		button.DamageInfo:Point("BOTTOMRIGHT", button, "BOTTOMLEFT", 90, 0)
 		button.DamageInfo:SetScript("OnEnter", Amount_OnEnter)
 		button.DamageInfo:SetScript("OnLeave", GameTooltip_Hide)
 
 		button.DamageInfo.Amount = button.DamageInfo:CreateFontString("ARTWORK", nil, "GameFontNormalRight")
-		button.DamageInfo.Amount:SetJustifyH("RIGHT")
-		button.DamageInfo.Amount:SetJustifyV("CENTER")
 		button.DamageInfo.Amount:Size(0, 32)
-		button.DamageInfo.Amount:Point("TOPRIGHT", 0, 0)
 		button.DamageInfo.Amount:SetTextColor(0.75, 0.05, 0.05, 1)
+		button.DamageInfo.Amount:Point("TOPRIGHT", -6, -1)
+		button.DamageInfo.Amount:SetJustifyH("LEFT")
+		button.DamageInfo.Amount:SetJustifyV("CENTER")
 
 		button.DamageInfo.AmountLarge = button.DamageInfo:CreateFontString("ARTWORK", nil, "NumberFont_Outline_Large")
-		button.DamageInfo.AmountLarge:SetJustifyH("RIGHT")
-		button.DamageInfo.AmountLarge:SetJustifyV("CENTER")
 		button.DamageInfo.AmountLarge:Size(0, 32)
-		button.DamageInfo.AmountLarge:Point("TOPRIGHT", 0, 0)
 		button.DamageInfo.AmountLarge:SetTextColor(1, 0.07, 0.07, 1)
+		button.DamageInfo.AmountLarge:Point("TOPRIGHT", -6, -1)
+		button.DamageInfo.AmountLarge:SetJustifyH("LEFT")
+		button.DamageInfo.AmountLarge:SetJustifyV("CENTER")
 
 		button.SpellInfo = CreateFrame("Button", nil, button)
-		button.SpellInfo:Point("TOPLEFT", button.DamageInfo, "TOPRIGHT", 16, 0)
-		button.SpellInfo:Point("BOTTOMRIGHT", 0, 0)
+		button.SpellInfo:Point("TOPLEFT", button.DamageInfo, "TOPRIGHT", 2, 0)
+		button.SpellInfo:Point("BOTTOMRIGHT", 2, 0)
 		button.SpellInfo:SetScript("OnEnter", Spell_OnEnter)
 		button.SpellInfo:SetScript("OnLeave", GameTooltip_Hide)
 
@@ -447,13 +441,13 @@ function mod:DeathRecap()
 		button.SpellInfo.Name = button.SpellInfo:CreateFontString("ARTWORK", nil, "GameFontNormal")
 		button.SpellInfo.Name:SetJustifyH("LEFT")
 		button.SpellInfo.Name:SetJustifyV("BOTTOM")
-		button.SpellInfo.Name:Point("BOTTOMLEFT", button.SpellInfo.Icon, "RIGHT", 8, 1)
+		button.SpellInfo.Name:Point("BOTTOMLEFT", button.SpellInfo.Icon, "RIGHT", 6, 1)
 		button.SpellInfo.Name:Point("TOPRIGHT", 0, 0)
 
 		button.SpellInfo.Caster = button.SpellInfo:CreateFontString("ARTWORK", nil, "SystemFont_Shadow_Small")
 		button.SpellInfo.Caster:SetJustifyH("LEFT")
 		button.SpellInfo.Caster:SetJustifyV("TOP")
-		button.SpellInfo.Caster:Point("TOPLEFT", button.SpellInfo.Icon, "RIGHT", 8, -2)
+		button.SpellInfo.Caster:Point("TOPLEFT", button.SpellInfo.Icon, "RIGHT", 6, -2)
 		button.SpellInfo.Caster:Point("BOTTOMRIGHT", 0, 0)
 		button.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5, 1)
 
@@ -462,7 +456,7 @@ function mod:DeathRecap()
 
 			button.tombstone = button:CreateTexture("ARTWORK")
 			button.tombstone:Size(15, 20)
-			button.tombstone:Point("LEFT", button.DamageInfo, "LEFT", 10, 0)
+			button.tombstone:Point("LEFT", button.DamageInfo, "LEFT", 8, 0)
 			button.tombstone:SetTexCoord(0.658203125, 0.6875, 0.00390625, 0.08203125)
 			button.tombstone:SetTexture(E.EnhancedMedia.Textures.DeathRecap)
 		else
