@@ -33,9 +33,14 @@ local GetBuybackItemLink = GetBuybackItemLink
 local IsAddOnLoaded = IsAddOnLoaded
 local SetItemButtonTextureVertexColor = SetItemButtonTextureVertexColor
 
+local C_PetJournal_GetNumCollectedInfo = C_PetJournal.GetNumCollectedInfo
+
 local BUYBACK_ITEMS_PER_PAGE = BUYBACK_ITEMS_PER_PAGE
+local ITEM_PET_KNOWN = ITEM_PET_KNOWN
 local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
 local MERCHANT_ITEMS_PER_PAGE = MERCHANT_ITEMS_PER_PAGE
+
+local battlePetString = gsub(gsub(ITEM_PET_KNOWN, "%(", "%%("), "%)", "%%)")
 
 local knownColor = {r = 0.1, g = 1.0, b = 0.2}
 
@@ -207,11 +212,14 @@ end
 function AK:IsAlreadyKnown(itemLink)
 	if not itemLink then return end
 
+	local speciesID = match(itemLink, "battlepet:(%d+):")
+	if speciesID then return C_PetJournal_GetNumCollectedInfo(speciesID) > 0 and true end
+
 	local itemID = match(itemLink, "item:(%d+):")
 	if self.knownTable[itemID] then return true end
 
-	local _, _, _, _, _, itemType = GetItemInfo(itemLink)
-	if not self.knowableTypes[itemType] then return end
+	local _, _, _, _, _, itemType, itemSubType = GetItemInfo(itemLink)
+	if not (self.knowableTypes[itemType] or self.knowableTypes[itemSubType]) then return end
 
 	E.ScanTooltip:SetOwner(UIParent, "ANCHOR_NONE")
 	E.ScanTooltip:ClearLines()
@@ -221,7 +229,7 @@ function AK:IsAlreadyKnown(itemLink)
 	for i = 2, E.ScanTooltip:NumLines() do
 		local line = _G["ElvUI_ScanTooltipTextLeft"..i]:GetText()
 
-		if line == ITEM_SPELL_KNOWN then
+		if line == ITEM_SPELL_KNOWN or match(line, battlePetString) then
 			self.knownTable[itemID] = true
 
 			return true
@@ -291,11 +299,14 @@ function AK:ToggleState()
 		self.knownTable = {}
 
 		local _, _, _, consumable, glyph, _, recipe, _, miscallaneous = GetAuctionItemClasses()
+		local _, _, pet, _, _, mount = GetAuctionItemSubClasses(9)
 		self.knowableTypes = {
 			[consumable] = true,
 			[glyph] = true,
 			[recipe] = true,
-			[miscallaneous] = true
+			[miscallaneous] = true,
+			[pet] = true,
+			[mount] = true
 		}
 
 		self.initialized = true
