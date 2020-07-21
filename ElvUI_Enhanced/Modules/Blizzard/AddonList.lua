@@ -360,7 +360,9 @@ function mod:AddonList()
 	end
 
 	local buttonAddons = CreateFrame("Button", "ElvUI_ButtonAddons", GameMenuFrame, "GameMenuButtonTemplate")
-	S:HandleButton(buttonAddons)
+	if E.private.skins.blizzard.enable and E.private.skins.blizzard.misc then
+		S:HandleButton(buttonAddons)
+	end
 	buttonAddons:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0, -1)
 	buttonAddons:SetText(ADDONS)
 	buttonAddons:SetScript("OnClick", function()
