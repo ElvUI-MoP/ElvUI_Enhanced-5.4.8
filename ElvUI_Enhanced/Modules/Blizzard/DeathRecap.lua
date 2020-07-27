@@ -7,10 +7,12 @@ local band = bit.band
 local ceil, floor = math.ceil, math.floor
 local format, upper, sub, join = string.format, string.upper, string.sub, string.join
 local tsort, twipe = table.sort, table.wipe
+local pcall = pcall
 local tonumber = tonumber
 
 local CannotBeResurrected = CannotBeResurrected
 local CopyTable = CopyTable
+local GetPlayerInfoByGUID = GetPlayerInfoByGUID
 local GetReleaseTimeRemaining = GetReleaseTimeRemaining
 local GetSpellInfo = GetSpellInfo
 local GetSpellLink = GetSpellLink
@@ -38,7 +40,7 @@ local index = 0
 local deathList = {}
 local eventList = {}
 
-local function AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
+local function AddEvent(timestamp, event, sourceGUID, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
 	if index > 0 and eventList[index].timestamp + 10 <= timestamp then
 		index = 0
 		twipe(eventList)
@@ -58,6 +60,7 @@ local function AddEvent(timestamp, event, sourceName, spellId, spellName, enviro
 
 	eventList[index].timestamp = timestamp
 	eventList[index].event = event
+	eventList[index].sourceGUID = sourceGUID
 	eventList[index].sourceName = sourceName
 	eventList[index].spellId = spellId
 	eventList[index].spellName = spellName
@@ -118,7 +121,7 @@ local function GetTableInfo(data)
 	local spellName = data.spellName
 
 	if event == "SWING_DAMAGE" then
-		spellId = 6603
+		spellId = 88163
 		spellName = ACTION_SWING
 
 		nameIsNotSpell = true
@@ -244,7 +247,17 @@ local function OpenRecap(recapID)
 		dmgInfo.hpPercent = floor(evtData.currentHP / evtData.maxHP * 100)
 
 		dmgInfo.spellName = spellName
+
 		dmgInfo.caster = evtData.sourceName or COMBATLOG_UNKNOWN_UNIT
+		entry.SpellInfo.Caster:SetText(dmgInfo.caster)
+
+		local class = select(3, pcall(GetPlayerInfoByGUID, evtData.sourceGUID))
+		if class then
+			local classColor = E:ClassColor(class)
+			entry.SpellInfo.Caster:SetTextColor(classColor.r, classColor.g, classColor.b)
+		else
+			entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
+		end
 
 		if evtData.school and evtData.school > 1 then
 			local colorArray = CombatLog_Color_ColorArrayBySchool(evtData.school)
@@ -254,9 +267,6 @@ local function OpenRecap(recapID)
 		end
 
 		dmgInfo.school = evtData.school
-
-		entry.SpellInfo.Caster:SetText(dmgInfo.caster)
-		entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
 
 		entry.SpellInfo.Name:SetText(spellName)
 		entry.SpellInfo.Icon:SetTexture(texture)
@@ -326,7 +336,7 @@ function mod:PLAYER_DEAD()
 	end
 end
 
-function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, sourceFlags, _, _, _, destFlags, ...)
+function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, sourceGUID, sourceName, sourceFlags, _, _, _, destFlags, ...)
 	if (band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME) or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME) then return end
 	if event ~= "ENVIRONMENTAL_DAMAGE" and event ~= "RANGE_DAMAGE" and event ~= "SPELL_DAMAGE" and event ~= "SPELL_EXTRA_ATTACKS" and event ~= "SPELL_INSTAKILL" and event ~= "SPELL_PERIODIC_DAMAGE" and event ~= "SWING_DAMAGE" then return end
 
@@ -335,7 +345,7 @@ function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, 
 
 	if event == "SWING_DAMAGE" then
 		_, amount, overkill, school, resisted, blocked, absorbed, critical = ...
-	elseif subVal == "SPELL" then
+	elseif subVal == "SPELL" or event == "RANGE_DAMAGE" then
 		_, spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	elseif event == "ENVIRONMENTAL_DAMAGE" then
 		_, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical = ...
@@ -343,7 +353,7 @@ function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, 
 
 	if not tonumber(amount) then return end
 
-	AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
+	AddEvent(timestamp, event, sourceGUID, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
 end
 
 function mod:SetItemRef(link, ...)
@@ -431,7 +441,7 @@ function mod:DeathRecap()
 		button.SpellInfo.FrameIcon = CreateFrame("Button", nil, button.SpellInfo)
 		button.SpellInfo.FrameIcon:Size(34)
 		button.SpellInfo.FrameIcon:Point("LEFT", 0, 0)
-		button.SpellInfo.FrameIcon:SetTemplate("Default")
+		button.SpellInfo.FrameIcon:SetTemplate()
 
 		button.SpellInfo.Icon = button.SpellInfo:CreateTexture("ARTWORK")
 		button.SpellInfo.Icon:SetParent(button.SpellInfo.FrameIcon)
