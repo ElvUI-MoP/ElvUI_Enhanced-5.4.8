@@ -139,7 +139,7 @@ L["Undress"] = "無裝備"
 L["You died."] = true
 L["You have equipped equipment set: "] = "你已裝備此模組: "
 
-L["ENH_LOGIN_MSG"] = "您正在使用 |cff00fcceE|r|cffe5e3e3lvUI|r |cff00fcceE|r|cffe5e3e3nhanced|r version %s%s|r."
+L["ENH_LOGIN_MSG"] = "您正在使用 |cff00fcceElvUI Enhanced|r version %s%s|r."
 L["DURABILITY_DESC"] = "調整設置人物窗口裝備耐久度顯示."
 L["EQUIPMENT_DESC"] = "當你切換專精或進入戰場時自動更換裝備, 你可以在選項中選擇相關的裝備模組."
 L["EQUIPMENTSET_DESC"] = "Adjust the settings for the equipment set information for the items in your bags (or bank).."

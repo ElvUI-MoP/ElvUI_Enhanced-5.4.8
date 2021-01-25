@@ -316,11 +316,13 @@ function MBG:UpdatePosition()
 		self.frame:ClearAllPoints()
 		self.frame:Point(db.position, Minimap, db.position, db.xOffset, db.yOffset)
 
+		E.FrameLocks[self.frame] = nil
 		E:DisableMover(self.frame.mover:GetName())
 	else
 		self.frame:ClearAllPoints()
 		self.frame:SetAllPoints(self.frame.mover)
 
+		E.FrameLocks[self.frame] = true
 		E:EnableMover(self.frame.mover:GetName())
 	end
 end

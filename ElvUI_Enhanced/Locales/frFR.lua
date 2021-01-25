@@ -139,7 +139,7 @@ L["Undress"] = "Déshabillé"
 L["You died."] = true
 L["You have equipped equipment set: "] = "Vous avez équipez le set d'équipement: "
 
-L["ENH_LOGIN_MSG"] = "Vous utilisez |cff00fcceE|r|cffe5e3e3lvUI|r |cff00fcceE|r|cffe5e3e3nhanced|r version %s%s|r."
+L["ENH_LOGIN_MSG"] = "Vous utilisez |cff00fcceElvUI Enhanced|r version %s%s|r."
 L["DURABILITY_DESC"] = "Ajustez les réglages pour afficher la durabilité sur l'écran d'infos de personnage."
 L["EQUIPMENT_DESC"] = "Ajustez les réglages pour passer d'un équipement à l'autre lorsque vous changez de spécialisation ou lorsque que vous effectuez un Champs de Bataille."
 L["EQUIPMENTSET_DESC"] = "Adjust the settings for the equipment set information for the items in your bags (or bank).."

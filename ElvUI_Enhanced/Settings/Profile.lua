@@ -120,7 +120,7 @@ P.enhanced = {
 			font = "PT Sans Narrow",
 			fontSize = 11,
 			fontOutline = "OUTLINE",
-			separator = " ",
+			separator = "NONE",
 			colors = {
 				raid = {r = 1, g = 0.50, b = 0},
 				party = {r = 0.46, g = 0.78, b = 1},
@@ -141,7 +141,7 @@ P.enhanced = {
 			fontOutline = "OUTLINE",
 			reactionColor = false,
 			color = {r = 1, g = 1, b = 1},
-			separator = " "
+			separator = "NONE"
 		}
 	},
 	tooltip = {

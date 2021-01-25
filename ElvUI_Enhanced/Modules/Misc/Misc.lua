@@ -5,6 +5,8 @@ local CancelDuel = CancelDuel
 local IsInInstance = IsInInstance
 local RepopMe = RepopMe
 
+local C_PetBattles_CancelPVPDuel = C_PetBattles.CancelPVPDuel
+
 local soulstone
 function M:PLAYER_DEAD()
 	local inInstance, instanceType = IsInInstance()
@@ -43,7 +45,7 @@ end
 
 function M:PET_BATTLE_PVP_DUEL_REQUESTED(_, name)
 	StaticPopup_Hide("PET_BATTLE_PVP_DUEL_REQUESTED")
-	C_PetBattles.CancelPVPDuel()
+	C_PetBattles_CancelPVPDuel()
 	E:Print(L["Declined pet duel request from "]..name..".")
 end
 

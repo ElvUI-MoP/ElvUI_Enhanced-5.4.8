@@ -139,7 +139,7 @@ L["Undress"] = true
 L["You died."] = true
 L["You have equipped equipment set: "] = true
 
-L["ENH_LOGIN_MSG"] = "You are using |cff00fcceE|r|cffe5e3e3lvUI|r |cff00fcceE|r|cffe5e3e3nhanced|r version %s%s|r."
+L["ENH_LOGIN_MSG"] = "You are using |cff00fcceElvUI Enhanced|r version %s%s|r."
 L["DURABILITY_DESC"] = "Adjust the settings for the durability information on the character screen."
 L["EQUIPMENT_DESC"] = "Adjust the settings for switching your gear set when you change specialization or enter a battleground."
 L["EQUIPMENTSET_DESC"] = "Adjust the settings for the equipment set information for the items in your bags (or bank).."
