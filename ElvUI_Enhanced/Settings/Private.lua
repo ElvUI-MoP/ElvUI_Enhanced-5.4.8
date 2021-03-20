@@ -5,6 +5,6 @@ V.enhanced = {
 	datatextColors = false,
 	deathRecap = false,
 	farmer = {
-		enabled = true
+		enabled = false
 	}
 }

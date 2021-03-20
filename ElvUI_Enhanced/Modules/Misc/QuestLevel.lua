@@ -16,6 +16,7 @@ local function ShowLevel()
 
 		if questIndex <= numEntries then
 			title, level, _, _, isHeader = GetQuestLogTitle(questIndex)
+
 			if not isHeader then
 				if questLogTitle.groupMates:IsShown() then
 					questLogTitle.groupMates:Hide()

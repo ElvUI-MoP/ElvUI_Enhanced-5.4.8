@@ -41,8 +41,9 @@ function EE:BlizzardOptions()
 						order = 1,
 						type = "toggle",
 						name = L["Character Background"],
-						set = function(info, value)
+						set = function(_, value)
 							E.db.enhanced.blizzard.backgrounds.characterBackground = value
+							E.db.enhanced.blizzard.backgrounds.characterBackdrop = true
 							B:UpdateCharacterModelFrame()
 						end
 					},
@@ -50,20 +51,17 @@ function EE:BlizzardOptions()
 						order = 2,
 						type = "toggle",
 						name = L["Character Backdrop"],
-						set = function(info, value)
+						set = function(_, value)
 							E.db.enhanced.blizzard.backgrounds.characterBackdrop = value
 							B:UpdateCharacterModelFrame()
 						end,
-						disabled = function()
-							E.db.enhanced.blizzard.backgrounds.characterBackdrop = true
-							return E.db.enhanced.blizzard.backgrounds.characterBackground
-						end
+						disabled = function() return E.db.enhanced.blizzard.backgrounds.characterBackground end
 					},
 					characterDesaturate = {
 						order = 3,
 						type = "toggle",
 						name = L["Desaturate"],
-						set = function(info, value)
+						set = function(_, value)
 							E.db.enhanced.blizzard.backgrounds.characterDesaturate = value
 							B:UpdateCharacterModelFrame()
 						end,
@@ -78,8 +76,9 @@ function EE:BlizzardOptions()
 						order = 5,
 						type = "toggle",
 						name = L["Inspect Background"],
-						set = function(info, value)
+						set = function(_, value)
 							E.db.enhanced.blizzard.backgrounds.inspectBackground = value
+							E.db.enhanced.blizzard.backgrounds.inspectBackdrop = true
 							B:UpdateInspectModelFrame()
 						end
 					},
@@ -87,20 +86,17 @@ function EE:BlizzardOptions()
 						order = 6,
 						type = "toggle",
 						name = L["Inspect Backdrop"],
-						set = function(info, value)
+						set = function(_, value)
 							E.db.enhanced.blizzard.backgrounds.inspectBackdrop = value
 							B:UpdateInspectModelFrame()
 						end,
-						disabled = function()
-							E.db.enhanced.blizzard.backgrounds.inspectBackdrop = true
-							return E.db.enhanced.blizzard.backgrounds.inspectBackground
-						end
+						disabled = function() return E.db.enhanced.blizzard.backgrounds.inspectBackground end
 					},
 					inspectDesaturate = {
 						order = 7,
 						type = "toggle",
 						name = L["Desaturate"],
-						set = function(info, value)
+						set = function(_, value)
 							E.db.enhanced.blizzard.backgrounds.inspectDesaturate = value
 							B:UpdateInspectModelFrame()
 						end,
