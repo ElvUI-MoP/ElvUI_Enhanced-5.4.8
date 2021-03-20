@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Author: Bunny, Apollyon, Dethius
-## Version: 1.4
+## Version: 1.5
 ## Title: |cff00fcceE|r|cffe5e3e3lvUI|r |cff00fcceE|r|cffe5e3e3nhanced|r
 ## SavedVariables: EnhancedDB
 ## RequiredDeps: ElvUI
